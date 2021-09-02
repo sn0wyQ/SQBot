@@ -5,4 +5,4 @@ class Message {
 
 };
 
-#endif  // MESSAGE_H
+#endif  // MESSAGE_H_

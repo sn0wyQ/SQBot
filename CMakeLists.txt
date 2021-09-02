@@ -8,16 +8,14 @@ add_compile_options(
 )
 
 # libcurl
-if (WIN32)
-    set(CURL_LIBRARY "C:/curl/lib/libcurl.a")
-    set(CURL_INCLUDE_DIR "C:/curl/include/curl")
-endif()
 find_package(CURL REQUIRED)
-add_definitions(-DCURL_STATICLIB)
 
 set(SOURCES
         include/SQBot/Bot/bot.cpp
-        include/SQBot/Message/message.cpp)
+        include/SQBot/Message/message.cpp
+        include/SQBot/User/user.cpp
+        include/SQBot/Utils/utils.h
+        )
 
 set(LIBS
         ${CURL_LIBRARY})
