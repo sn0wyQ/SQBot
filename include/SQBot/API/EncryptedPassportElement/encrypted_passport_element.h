@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_ENCRYPTEDPASSPORTELEMENT_ENCRYPTED_PASSPORT_ELEMENT_H_
 #define INCLUDE_SQBOT_API_ENCRYPTEDPASSPORTELEMENT_ENCRYPTED_PASSPORT_ELEMENT_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -47,19 +48,19 @@ class EncryptedPassportElement {
   // provided by the user. Available for “passport”, “driver_license”,
   // “identity_card” and “internal_passport”. The file can be decrypted
   // and verified using the accompanying EncryptedCredentials
-  PassportFile front_side;
+  std::shared_ptr<PassportFile> front_side;
 
   // OPTIONAL. Encrypted file with the reverse side of the document,
   // provided by the user. Available for “driver_license” and “identity_card”.
   // The file can be decrypted and verified using
   // the accompanying EncryptedCredentials.
-  PassportFile reverse_side;
+  std::shared_ptr<PassportFile> reverse_side;
 
   // OPTIONAL. Encrypted file with the selfie of the user holding a document,
   // provided by the user; available for “passport”, “driver_license”,
   // “identity_card” and “internal_passport”. The file can be decrypted
   // and verified using the accompanying EncryptedCredentials
-  PassportFile selfie;
+  std::shared_ptr<PassportFile> selfie;
 
   // OPTIONAL. Array of encrypted files with translated versions of documents
   // provided by the user. Available if requested for “passport”,
@@ -67,7 +68,7 @@ class EncryptedPassportElement {
   // “bank_statement”, “rental_agreement”, “passport_registration”
   // and “temporary_registration” types. Files can be decrypted
   // and verified using the accompanying EncryptedCredentials
-  std::vector<PassportFile> translation;
+  std::vector<std::shared_ptr<PassportFile>> translation;
 
   // Base64-encoded element hash for using in PassportElementErrorUnspecified
   std::string hash;

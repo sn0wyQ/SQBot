@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_GAME_GAME_H_
 #define INCLUDE_SQBOT_API_GAME_GAME_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -26,7 +27,7 @@ class Game {
   std::string description;
 
   // Photo that will be displayed in the game message in chats
-  std::vector<PhotoSize> photo;
+  std::vector<std::shared_ptr<PhotoSize>> photo;
 
   // OPTIONAL. Brief description of the game or high scores included
   // in the game message. Can be automatically edited to include current
@@ -36,11 +37,11 @@ class Game {
 
   // OPTIONAL. Special entities that appear in text, such as usernames,
   // URLs, bot commands, etc.
-  std::vector<MessageEntity> text_entities;
+  std::vector<std::shared_ptr<MessageEntity>> text_entities;
 
   // OPTIONAL. Animation that will be displayed in the game message in chats.
   // Upload via BotFather
-  Animation animation;
+  std::shared_ptr<Animation> animation;
 };
 
 #endif  // INCLUDE_SQBOT_API_GAME_GAME_H_

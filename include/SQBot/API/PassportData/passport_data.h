@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
 #define INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
 
+#include <memory>
 #include <vector>
 
 #include "json.h"
@@ -19,10 +20,10 @@ class PassportData {
 
   // Array with information about documents and other Telegram Passport elements
   // that was shared with the bot
-  std::vector<EncryptedPassportElement> data;
+  std::vector<std::shared_ptr<EncryptedPassportElement>> data;
 
   // Encrypted credentials required to decrypt the data
-  EncryptedCredentials credentials;
+  std::shared_ptr<EncryptedCredentials> credentials;
 };
 
 #endif  // INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_

@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
 #define INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -37,7 +38,7 @@ class MessageEntity {
   std::string url;
 
   // OPTIONAL. For “text_mention” only, the mentioned user
-  User user;
+  std::shared_ptr<User> user;
 
   // OPTIONAL. For “pre” only, the programming language of the entity text
   std::string language;

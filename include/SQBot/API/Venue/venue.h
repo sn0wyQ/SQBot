@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_VENUE_VENUE_H_
 #define INCLUDE_SQBOT_API_VENUE_VENUE_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -16,7 +17,7 @@ class Venue {
   explicit Venue(const Json& venue);
 
   // Venue location. Can't be a live location
-  Location location;
+  std::shared_ptr<Location> location;
 
   // Name of the venue
   std::string title;

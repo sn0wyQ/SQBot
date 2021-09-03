@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
 #define INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -25,7 +26,7 @@ class Document {
   std::string file_unique_id;
 
   // OPTIONAL. Document thumbnail as defined by sender
-  PhotoSize thumb;
+  std::shared_ptr<PhotoSize> thumb;
 
   // OPTIONAL. Original filename as defined by sender
   std::string file_name;

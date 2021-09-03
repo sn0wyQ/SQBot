@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
 #define INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -33,7 +34,7 @@ class Video {
   int32_t duration{};
 
   // OPTIONAL. Video thumbnail
-  PhotoSize thumb;
+  std::shared_ptr<PhotoSize> thumb;
 
   // OPTIONAL. Original filename as defined by sender
   std::string file_name;

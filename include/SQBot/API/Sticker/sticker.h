@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_STICKER_STICKER_H_
 #define INCLUDE_SQBOT_API_STICKER_STICKER_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -43,7 +44,7 @@ class Sticker {
   std::string set_name;
 
   // OPTIONAL. For mask stickers, the position where the mask should be placed
-  MaskPosition mask_position;
+  std::shared_ptr<MaskPosition> mask_position;
 
   // OPTIONAL. File size
   int32_t file_size{};

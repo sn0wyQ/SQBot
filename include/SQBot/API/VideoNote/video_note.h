@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
 #define INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -31,7 +32,7 @@ class VideoNote {
   int32_t duration{};
 
   // OPTIONAL. Video thumbnail
-  PhotoSize thumb{};
+  std::shared_ptr<PhotoSize> thumb{};
 
   // OPTIONAL. File size
   int32_t file_size{};

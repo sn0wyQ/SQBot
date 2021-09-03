@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
 #define INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -25,7 +26,7 @@ class OrderInfo {
   std::string email;
 
   // Optional. User's shipping address
-  ShippingAddress shipping_address;
+  std::shared_ptr<ShippingAddress> shipping_address;
 };
 
 #endif  // INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_

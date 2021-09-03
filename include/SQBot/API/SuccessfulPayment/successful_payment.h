@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_SUCCESSFULPAYMENT_SUCCESSFUL_PAYMENT_H_
 #define INCLUDE_SQBOT_API_SUCCESSFULPAYMENT_SUCCESSFUL_PAYMENT_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -35,7 +36,7 @@ class SuccessfulPayment {
   std::string shipping_option_id;
 
   // OPTIONAL. Order info provided by the user
-  OrderInfo order_info;
+  std::shared_ptr<OrderInfo> order_info;
 
   // Telegram payment identifier
   std::string telegram_payment_charge_id;

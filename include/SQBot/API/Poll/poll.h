@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_POLL_POLL_H_
 #define INCLUDE_SQBOT_API_POLL_POLL_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -24,7 +25,7 @@ class Poll {
   std::string question;
 
   // List of poll options
-  std::vector<PollOption> options;
+  std::vector<std::shared_ptr<PollOption>> options;
 
   // Total number of users that voted in the poll
   int32_t total_voter_count{};
@@ -52,7 +53,7 @@ class Poll {
 
   // OPTIONAL. Special entities like usernames, URLs, bot commands, etc.
   // that appear in the explanation
-  std::vector<MessageEntity> explanation_entities;
+  std::vector<std::shared_ptr<MessageEntity>> explanation_entities;
 
   // OPTIONAL. Amount of time in seconds the poll will be active after creation
   int32_t open_period{};
