@@ -1,5 +1,5 @@
-#ifndef CONTACT_H_
-#define CONTACT_H_
+#ifndef INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
+#define INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
 
 #include <string>
 
@@ -24,4 +24,4 @@ class Contact {
   std::string vcard;
 };
 
-#endif  // CONTACT_H_
+#endif  // INCLUDE_SQBOT_API_CONTACT_CONTACT_H_

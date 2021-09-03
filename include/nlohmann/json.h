@@ -1,8 +1,8 @@
-#ifndef JSON_H_
-#define JSON_H_
+#ifndef INCLUDE_NLOHMANN_JSON_H_
+#define INCLUDE_NLOHMANN_JSON_H_
 
 #include "json_internal.hpp"
 
 using Json = nlohmann::json;
 
-#endif // JSON_H_
+#endif  // INCLUDE_NLOHMANN_JSON_H_

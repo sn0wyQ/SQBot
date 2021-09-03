@@ -1,5 +1,5 @@
-#ifndef VIDEO_NOTE_H_
-#define VIDEO_NOTE_H_
+#ifndef INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
+#define INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
 
 #include <string>
 
@@ -37,4 +37,4 @@ class VideoNote {
   int32_t file_size{};
 };
 
-#endif  // VIDEO_NOTE_H_
+#endif  // INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_

@@ -1,5 +1,5 @@
-#ifndef DOCUMENT_H_
-#define DOCUMENT_H_
+#ifndef INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
+#define INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
 
 #include <string>
 
@@ -37,4 +37,4 @@ class Document {
   int32_t file_size{};
 };
 
-#endif  // DOCUMENT_H_
+#endif  // INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_

@@ -1,5 +1,5 @@
-#ifndef CHAT_H_
-#define CHAT_H_
+#ifndef INCLUDE_SQBOT_API_CHAT_CHAT_H_
+#define INCLUDE_SQBOT_API_CHAT_CHAT_H_
 
 #include <memory>
 #include <string>
@@ -88,4 +88,4 @@ class Chat {
   std::shared_ptr<ChatLocation> location;
 };
 
-#endif  // CHAT_H_
+#endif  // INCLUDE_SQBOT_API_CHAT_CHAT_H_

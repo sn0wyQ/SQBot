@@ -1,5 +1,5 @@
-#ifndef MASK_POSITION_H_
-#define MASK_POSITION_H_
+#ifndef INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
+#define INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
 
 #include <string>
 
@@ -31,4 +31,4 @@ class MaskPosition {
   float scale{};
 };
 
-#endif  // MASK_POSITION_H_
+#endif  // INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_

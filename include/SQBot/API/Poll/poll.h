@@ -1,5 +1,5 @@
-#ifndef POLL_H_
-#define POLL_H_
+#ifndef INCLUDE_SQBOT_API_POLL_POLL_H_
+#define INCLUDE_SQBOT_API_POLL_POLL_H_
 
 #include <string>
 #include <vector>
@@ -62,4 +62,4 @@ class Poll {
   int32_t close_date{};
 };
 
-#endif  // POLL_H_
+#endif  // INCLUDE_SQBOT_API_POLL_POLL_H_

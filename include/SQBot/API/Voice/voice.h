@@ -1,5 +1,5 @@
-#ifndef VOICE_H_
-#define VOICE_H_
+#ifndef INCLUDE_SQBOT_API_VOICE_VOICE_H_
+#define INCLUDE_SQBOT_API_VOICE_VOICE_H_
 
 #include <string>
 
@@ -31,4 +31,4 @@ class Voice {
   int32_t file_size{};
 };
 
-#endif  // VOICE_H_
+#endif  // INCLUDE_SQBOT_API_VOICE_VOICE_H_

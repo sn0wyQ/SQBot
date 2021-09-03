@@ -1,5 +1,5 @@
-#ifndef ORDER_INFO_H_
-#define ORDER_INFO_H_
+#ifndef INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
+#define INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
 
 #include <string>
 
@@ -28,4 +28,4 @@ class OrderInfo {
   ShippingAddress shipping_address;
 };
 
-#endif  // ORDER_INFO_H_
+#endif  // INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_

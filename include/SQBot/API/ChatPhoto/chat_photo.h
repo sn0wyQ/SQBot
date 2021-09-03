@@ -1,5 +1,5 @@
-#ifndef CHAT_PHOTO_H_
-#define CHAT_PHOTO_H_
+#ifndef INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
+#define INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
 
 #include <string>
 
@@ -34,4 +34,4 @@ class ChatPhoto {
   std::string big_file_unique_id;
 };
 
-#endif  // CHAT_PHOTO_H_
+#endif  // INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_

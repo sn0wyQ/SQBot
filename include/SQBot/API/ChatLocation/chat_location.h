@@ -1,6 +1,7 @@
-#ifndef CHAT_LOCATION_H_
-#define CHAT_LOCATION_H_
+#ifndef INCLUDE_SQBOT_API_CHATLOCATION_CHAT_LOCATION_H_
+#define INCLUDE_SQBOT_API_CHATLOCATION_CHAT_LOCATION_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -22,4 +23,4 @@ class ChatLocation {
   std::string address;
 };
 
-#endif  // CHAT_LOCATION_H_
+#endif  // INCLUDE_SQBOT_API_CHATLOCATION_CHAT_LOCATION_H_

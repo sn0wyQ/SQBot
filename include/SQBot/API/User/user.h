@@ -1,5 +1,5 @@
-#ifndef USER_H_
-#define USER_H_
+#ifndef INCLUDE_SQBOT_API_USER_USER_H_
+#define INCLUDE_SQBOT_API_USER_USER_H_
 
 #include <string>
 
@@ -41,4 +41,4 @@ class User {
   bool supports_inline_queries{};
 };
 
-#endif  // USER_H_
+#endif  // INCLUDE_SQBOT_API_USER_USER_H_

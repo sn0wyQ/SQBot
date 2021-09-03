@@ -1,5 +1,5 @@
-#ifndef PASSPORT_FILE_H_
-#define PASSPORT_FILE_H_
+#ifndef INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_
+#define INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_
 
 #include <string>
 
@@ -30,4 +30,4 @@ class PassportFile {
   int32_t file_date{};
 };
 
-#endif  // PASSPORT_FILE_H_
+#endif  // INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_

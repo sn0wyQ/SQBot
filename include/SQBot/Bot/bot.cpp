@@ -18,7 +18,7 @@ void Bot::ProcessUpdates() {
 }
 
 size_t WriteFunction(void* ptr, size_t size, size_t n, std::string* data) {
-  data->append((char*)ptr, size * n);
+  data->append(reinterpret_cast<char*>(ptr), size * n);
   return size * n;
 }
 

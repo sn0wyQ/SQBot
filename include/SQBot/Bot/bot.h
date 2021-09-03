@@ -1,5 +1,5 @@
-#ifndef BOT_H_
-#define BOT_H_
+#ifndef INCLUDE_SQBOT_BOT_BOT_H_
+#define INCLUDE_SQBOT_BOT_BOT_H_
 
 #include <exception>
 #include <iostream>
@@ -36,4 +36,4 @@ class Bot {
 
 }  // namespace SQBot
 
-#endif  // BOT_H_
+#endif  // INCLUDE_SQBOT_BOT_BOT_H_

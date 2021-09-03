@@ -1,5 +1,5 @@
-#ifndef GAME_H_
-#define GAME_H_
+#ifndef INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
+#define INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
 
 #include <string>
 #include <vector>
@@ -43,4 +43,4 @@ class Game {
   Animation animation;
 };
 
-#endif  // GAME_H_
+#endif  // INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_

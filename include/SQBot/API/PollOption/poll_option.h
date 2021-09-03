@@ -1,5 +1,5 @@
-#ifndef POLL_OPTION_H_
-#define POLL_OPTION_H_
+#ifndef INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
+#define INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
 
 #include <string>
 
@@ -20,4 +20,4 @@ class PollOption {
   int32_t voter_count{};
 };
 
-#endif  // POLL_OPTION_H_
+#endif  // INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_

@@ -1,5 +1,5 @@
-#ifndef VOICE_CHAT_ENDED_H_
-#define VOICE_CHAT_ENDED_H_
+#ifndef INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_
+#define INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_
 
 #include "json.h"
 
@@ -15,4 +15,4 @@ class VoiceChatEnded {
   int32_t duration;
 };
 
-#endif  // VOICE_CHAT_ENDED_H_
+#endif  // INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_

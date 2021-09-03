@@ -1,5 +1,5 @@
-#ifndef VIDEO_H_
-#define VIDEO_H_
+#ifndef INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
+#define INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
 
 #include <string>
 
@@ -45,4 +45,4 @@ class Video {
   int32_t file_size{};
 };
 
-#endif  // VIDEO_H_
+#endif  // INCLUDE_SQBOT_API_VIDEO_VIDEO_H_

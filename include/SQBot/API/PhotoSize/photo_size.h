@@ -1,5 +1,5 @@
-#ifndef PHOTO_SIZE_H_
-#define PHOTO_SIZE_H_
+#ifndef INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
+#define INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
 
 #include <string>
 
@@ -31,4 +31,4 @@ class PhotoSize {
   int32_t file_size{};
 };
 
-#endif  // PHOTO_SIZE_H_
+#endif  // INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_

@@ -1,5 +1,5 @@
-#ifndef LOCATION_H_
-#define LOCATION_H_
+#ifndef INCLUDE_SQBOT_API_LOCATION_LOCATION_H_
+#define INCLUDE_SQBOT_API_LOCATION_LOCATION_H_
 
 #include "json.h"
 
@@ -35,4 +35,4 @@ class Location {
   int32_t proximity_alert_radius{};
 };
 
-#endif  // LOCATION_H_
+#endif  // INCLUDE_SQBOT_API_LOCATION_LOCATION_H_

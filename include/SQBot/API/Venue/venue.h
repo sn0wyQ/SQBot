@@ -1,5 +1,5 @@
-#ifndef VENUE_H_
-#define VENUE_H_
+#ifndef INCLUDE_SQBOT_API_VENUE_VENUE_H_
+#define INCLUDE_SQBOT_API_VENUE_VENUE_H_
 
 #include <string>
 
@@ -40,4 +40,4 @@ class Venue {
   std::string google_place_type;
 };
 
-#endif  // VENUE_H_
+#endif  // INCLUDE_SQBOT_API_VENUE_VENUE_H_

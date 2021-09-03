@@ -1,5 +1,5 @@
-#ifndef STICKER_H_
-#define STICKER_H_
+#ifndef INCLUDE_SQBOT_API_STICKER_STICKER_H_
+#define INCLUDE_SQBOT_API_STICKER_STICKER_H_
 
 #include <string>
 
@@ -49,4 +49,4 @@ class Sticker {
   int32_t file_size{};
 };
 
-#endif  // STICKER_H_
+#endif  // INCLUDE_SQBOT_API_STICKER_STICKER_H_

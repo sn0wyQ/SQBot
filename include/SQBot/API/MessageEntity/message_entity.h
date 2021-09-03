@@ -1,5 +1,5 @@
-#ifndef MESSAGE_ENTITY_H_
-#define MESSAGE_ENTITY_H_
+#ifndef INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
+#define INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
 
 #include <string>
 
@@ -42,4 +42,4 @@ class MessageEntity {
   std::string language;
 };
 
-#endif  // MESSAGE_ENTITY_H_
+#endif  // INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_

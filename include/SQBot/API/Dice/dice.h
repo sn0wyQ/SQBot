@@ -1,5 +1,5 @@
-#ifndef DICE_H_
-#define DICE_H_
+#ifndef INCLUDE_SQBOT_API_DICE_DICE_H_
+#define INCLUDE_SQBOT_API_DICE_DICE_H_
 
 #include <string>
 
@@ -21,4 +21,4 @@ class Dice {
   int32_t value{};
 };
 
-#endif  // DICE_H_
+#endif  // INCLUDE_SQBOT_API_DICE_DICE_H_

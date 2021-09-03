@@ -1,5 +1,5 @@
-#ifndef INVOICE_H_
-#define INVOICE_H_
+#ifndef INCLUDE_SQBOT_API_INVOICE_INVOICE_H_
+#define INCLUDE_SQBOT_API_INVOICE_INVOICE_H_
 
 #include <string>
 
@@ -36,4 +36,4 @@ class Invoice {
   int32_t total_amount{};
 };
 
-#endif  // INVOICE_H_
+#endif  // INCLUDE_SQBOT_API_INVOICE_INVOICE_H_

@@ -1,5 +1,5 @@
-#ifndef MESSAGE_H_
-#define MESSAGE_H_
+#ifndef INCLUDE_SQBOT_API_MESSAGE_MESSAGE_H_
+#define INCLUDE_SQBOT_API_MESSAGE_MESSAGE_H_
 
 #include <memory>
 #include <string>
@@ -254,4 +254,4 @@ class Message {
   std::shared_ptr<InlineKeyboardMarkup> reply_markup;
 };
 
-#endif  // MESSAGE_H_
+#endif  // INCLUDE_SQBOT_API_MESSAGE_MESSAGE_H_

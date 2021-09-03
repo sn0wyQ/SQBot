@@ -1,5 +1,5 @@
-#ifndef VOICE_CHAT_STARTED_H_
-#define VOICE_CHAT_STARTED_H_
+#ifndef INCLUDE_SQBOT_API_VOICECHATSTARTED_VOICE_CHAT_STARTED_H_
+#define INCLUDE_SQBOT_API_VOICECHATSTARTED_VOICE_CHAT_STARTED_H_
 
 #include "json.h"
 
@@ -11,4 +11,4 @@ class VoiceChatStarted {
   explicit VoiceChatStarted(const Json& voice_chat_started);
 };
 
-#endif  // VOICE_CHAT_STARTED_H_
+#endif  // INCLUDE_SQBOT_API_VOICECHATSTARTED_VOICE_CHAT_STARTED_H_

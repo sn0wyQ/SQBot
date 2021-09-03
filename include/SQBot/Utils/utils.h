@@ -1,5 +1,5 @@
-#ifndef UTILS_H_
-#define UTILS_H_
+#ifndef INCLUDE_SQBOT_UTILS_UTILS_H_
+#define INCLUDE_SQBOT_UTILS_UTILS_H_
 
 #include "json.h"
 
@@ -20,4 +20,4 @@ T GetValue(const Json& sender, const std::string& key) {
 
 }  // namespace Utils
 
-#endif  // UTILS_H_
+#endif  // INCLUDE_SQBOT_UTILS_UTILS_H_

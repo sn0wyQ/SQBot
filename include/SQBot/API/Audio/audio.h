@@ -1,6 +1,7 @@
-#ifndef AUDIO_H_
-#define AUDIO_H_
+#ifndef INCLUDE_SQBOT_API_AUDIO_AUDIO_H_
+#define INCLUDE_SQBOT_API_AUDIO_AUDIO_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -46,4 +47,4 @@ class Audio {
   std::shared_ptr<PhotoSize> thumb;
 };
 
-#endif  // AUDIO_H_
+#endif  // INCLUDE_SQBOT_API_AUDIO_AUDIO_H_

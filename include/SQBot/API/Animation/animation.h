@@ -1,5 +1,5 @@
-#ifndef ANIMATION_H_
-#define ANIMATION_H_
+#ifndef INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_
+#define INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_
 
 #include <memory>
 #include <string>
@@ -47,4 +47,4 @@ class Animation {
   int32_t file_size{};
 };
 
-#endif  // ANIMATION_H_
+#endif  // INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_

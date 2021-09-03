@@ -1,5 +1,5 @@
-#ifndef PASSPORT_DATA_H_
-#define PASSPORT_DATA_H_
+#ifndef INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
+#define INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
 
 #include <vector>
 
@@ -25,4 +25,4 @@ class PassportData {
   EncryptedCredentials credentials;
 };
 
-#endif  // PASSPORT_DATA_H_
+#endif  // INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_

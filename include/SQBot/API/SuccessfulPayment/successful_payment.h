@@ -1,5 +1,5 @@
-#ifndef SUCCESSFUL_PAYMENT_H_
-#define SUCCESSFUL_PAYMENT_H_
+#ifndef INCLUDE_SQBOT_API_SUCCESSFULPAYMENT_SUCCESSFUL_PAYMENT_H_
+#define INCLUDE_SQBOT_API_SUCCESSFULPAYMENT_SUCCESSFUL_PAYMENT_H_
 
 #include <string>
 
@@ -44,4 +44,4 @@ class SuccessfulPayment {
   std::string provider_payment_charge_id;
 };
 
-#endif  // SUCCESSFUL_PAYMENT_H_
+#endif  // INCLUDE_SQBOT_API_SUCCESSFULPAYMENT_SUCCESSFUL_PAYMENT_H_
