@@ -3,7 +3,7 @@
 #include "Bot/bot.h"
 
 int main() {
-  SQBot::Bot bot("1288397319:AAGFIVRIRteHLIIF8X95kPTjz8uNHVJmHA4");
+  SQBot::Bot bot("INSERT_YOUR_TOKEN_HERE");
   auto info = bot.GetMe();
   std::cout << info.id << std::endl;
 
