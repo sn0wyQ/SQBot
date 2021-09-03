@@ -34,7 +34,8 @@ class User {
   // OPTIONAL. True, if the bot can be invited to groups. Returned only in getMe
   bool can_join_groups{};
 
-  // OPTIONAL. True, if privacy mode is disabled for the bot. Returned only in getMe
+  // OPTIONAL. True, if privacy mode is disabled for the bot.
+  // Returned only in getMe
   bool can_read_all_group_messages{};
 
   // OPTIONAL. True, if the bot supports inline queries. Returned only in getMe

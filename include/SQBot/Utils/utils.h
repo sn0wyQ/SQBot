@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SQBOT_UTILS_UTILS_H_
 #define INCLUDE_SQBOT_UTILS_UTILS_H_
 
+#include <string>
+
 #include "json.h"
 
 namespace Utils {

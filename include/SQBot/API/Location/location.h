@@ -26,7 +26,8 @@ class Location {
   // For active live locations only
   int32_t live_period{};
 
-  // OPTIONAL. The direction in which user is moving, in degrees; 1-360. For active live locations only.
+  // OPTIONAL. The direction in which user is moving, in degrees; 1-360.
+  // For active live locations only
   int32_t heading{};
 
   // OPTIONAL. Maximum distance for proximity alerts about approaching

@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
-#define INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
+#ifndef INCLUDE_SQBOT_API_ENCRYPTEDPASSPORTELEMENT_ENCRYPTED_PASSPORT_ELEMENT_H_
+#define INCLUDE_SQBOT_API_ENCRYPTEDPASSPORTELEMENT_ENCRYPTED_PASSPORT_ELEMENT_H_
 
 #include <string>
 #include <vector>
@@ -29,7 +29,8 @@ class EncryptedPassportElement {
   // Can be decrypted and verified using the accompanying EncryptedCredentials
   std::string data;
 
-  // OPTIONAL. User's verified phone number, available only for “phone_number” type
+  // OPTIONAL. User's verified phone number,
+  // available only for “phone_number” type
   std::string phone_number;
 
   // OPTIONAL. User's verified email address, available only for “email” type
@@ -72,4 +73,4 @@ class EncryptedPassportElement {
   std::string hash;
 };
 
-#endif  // INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
+#endif  // INCLUDE_SQBOT_API_ENCRYPTEDPASSPORTELEMENT_ENCRYPTED_PASSPORT_ELEMENT_H_

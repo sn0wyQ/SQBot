@@ -45,7 +45,7 @@ set(SOURCES
         include/SQBot/API/User/user.cpp
         include/SQBot/API/Video/video.cpp
         include/SQBot/API/VideoNote/video_note.cpp
-        include/SQBot/API/VoiceChatEnded/voice_chat_scheduled.cpp
+        include/SQBot/API/VoiceChatEnded/voice_chat_ended.cpp
         include/SQBot/API/VoiceChatParticipantsInvited/voice_chat_participants_invited.cpp
         include/SQBot/API/VoiceChatScheduled/voice_chat_scheduled.cpp
         include/SQBot/API/VoiceChatStarted/voice_chat_started.cpp

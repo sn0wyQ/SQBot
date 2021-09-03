@@ -32,7 +32,8 @@ class MessageEntity {
   // Length of the entity in UTF-16 code units
   int32_t length{};
 
-  // OPTIONAL. For “text_link” only, url that will be opened after user taps on the text
+  // OPTIONAL. For “text_link” only, url that
+  // will be opened after user taps on the text
   std::string url;
 
   // OPTIONAL. For “text_mention” only, the mentioned user
