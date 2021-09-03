@@ -9,8 +9,8 @@
 #include "curl/curl.h"
 #include "json.h"
 
-#include "../Message/message.h"
-#include "../User/user.h"
+#include "../API/Message/message.h"
+#include "../API/User/user.h"
 
 namespace SQBot {
 

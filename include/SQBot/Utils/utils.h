@@ -6,19 +6,16 @@
 namespace Utils {
 
 template<typename T>
-bool GetValue(T* receiver, const Json& sender, const std::string& key) {
+T GetValue(const Json& sender, const std::string& key) {
   if (!sender.contains(key)) {
-    *receiver = T();
-    return false;
+    return T();
   }
 
   try {
-    *receiver = sender.at(key);
+    return sender.at(key);
   } catch (std::exception& e) {
     throw e;
   }
-
-  return true;
 }
 
 }  // namespace Utils
