@@ -48,7 +48,7 @@ jobs:
       run: sudo apt install build-essential libssl-dev curl -y
 
     - name: Install CMake
-      run: sudo snap install cmake
+      run: sudo snap install cmake --classic
 
     - name: Create Makefile
       working-directory: ${{runner.workspace}}/${{github.event.repository.name}}
