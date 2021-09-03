@@ -48,29 +48,30 @@ class Message {
   int32_t message_id{};
 
   // OPTIONAL. Sender, empty for messages sent to channels
-  User from;
+  std::shared_ptr<User> from;
 
   // OPTIONAL. Sender of the message, sent on behalf of a chat.
   // The channel itself for channel messages.
   // The supergroup itself for messages from anonymous group administrators.
   // The linked channel for messages automatically
   // forwarded to the discussion group
-  Chat sender_chat;
+  std::shared_ptr<Chat> sender_chat;
 
   // Date the message was sent in Unix time
   int32_t date{};
 
   // Conversation the message belongs to
-  Chat chat;
+  std::shared_ptr<Chat> chat;
 
   // OPTIONAL. For forwarded messages, sender of the original message
-  User forward_from;
+  std::shared_ptr<User> forward_from;
 
   // OPTIONAL. For messages forwarded from channels or
   // from anonymous administrators, information about the original sender chat
-  Chat forward_from_chat;
+  std::shared_ptr<Chat> forward_from_chat;
 
-  // OPTIONAL. For messages forwarded from channels, identifier of the original message in the channel
+  // OPTIONAL. For messages forwarded from channels, identifier of the original
+  // message in the channel
   int32_t forward_from_message_id{};
 
   // OPTIONAL. For messages forwarded from channels,
@@ -85,11 +86,13 @@ class Message {
   // in Unix time
   int32_t forward_date{};
 
-  // OPTIONAL. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.
+  // OPTIONAL. For replies, the original message.
+  // Note that the Message object in this field will not contain further
+  // reply_to_message fields even if it itself is a reply
   std::shared_ptr<Message> reply_to_message;
 
   // OPTIONAL. Bot through which the message was sent
-  User via_bot;
+  std::shared_ptr<User> via_bot;
 
   // OPTIONAL. Date the message was last edited in Unix time
   int32_t edit_date{};
@@ -113,28 +116,28 @@ class Message {
   // OPTIONAL. Message is an animation, information about the animation.
   // For backward compatibility, when this field is set,
   // the document field will also be set
-  Animation animation;
+  std::shared_ptr<Animation> animation;
 
   // OPTIONAL. Message is an audio file, information about the file
-  Audio audio;
+  std::shared_ptr<Audio> audio;
 
   // OPTIONAL. Message is a general file, information about the file
-  Document document;
+  std::shared_ptr<Document> document;
 
   // OPTIONAL. Message is a photo, available sizes of the photo
-  std::vector<PhotoSize> photo;
+  std::vector<std::shared_ptr<PhotoSize>> photo;
 
   // OPTIONAL. Message is a sticker, information about the sticker
-  Sticker sticker;
+  std::shared_ptr<Sticker> sticker;
 
   // OPTIONAL. Message is a video, information about the video
-  Video video;
+  std::shared_ptr<Video> video;
 
   // OPTIONAL. Message is a video note, information about the video message
-  VideoNote video_note;
+  std::shared_ptr<VideoNote> video_note;
 
   // OPTIONAL. Message is a voice message, information about the file
-  Voice voice;
+  std::shared_ptr<Voice> voice;
 
   // OPTIONAL. Caption for the animation, audio, document, photo,
   // video or voice, 0-1024 characters
@@ -142,42 +145,42 @@ class Message {
 
   // OPTIONAL. For messages with a caption, special entities like
   // usernames, URLs, bot commands, etc. that appear in the caption
-  std::vector<MessageEntity> caption_entities;
+  std::vector<std::shared_ptr<MessageEntity>> caption_entities;
 
   // OPTIONAL. Message is a shared contact, information about the contact
-  Contact contact;
+  std::shared_ptr<Contact> contact;
 
   // OPTIONAL. Message is a dice with random value
-  Dice dice;
+  std::shared_ptr<Dice> dice;
 
   // OPTIONAL. Message is a game, information about the game
-  Game game;
+  std::shared_ptr<Game> game;
 
   // OPTIONAL. Message is a native poll, information about the poll
-  Poll poll;
+  std::shared_ptr<Poll> poll;
 
   // OPTIONAL. Message is a venue, information about the venue.
   // For backward compatibility, when this field is set,
   // the location field will also be set
-  Venue venue;
+  std::shared_ptr<Venue> venue;
 
   // OPTIONAL. Message is a shared location, information about the location
-  Location location;
+  std::shared_ptr<Location> location;
 
   // OPTIONAL. New members that were added to the group or
   // supergroup and information about them
   // (the bot itself may be one of these members)
-  std::vector<User> new_chat_members;
+  std::vector<std::shared_ptr<User>> new_chat_members;
 
   // OPTIONAL. A member was removed from the group, information about them
   // (this member may be the bot itself)
-  User left_chat_member;
+  std::shared_ptr<User> left_chat_member;
 
   // OPTIONAL. A chat title was changed to this value
   std::string new_chat_title;
 
   // OPTIONAL. A chat photo was change to this value
-  std::vector<PhotoSize> new_chat_photo;
+  std::vector<std::shared_ptr<PhotoSize>> new_chat_photo;
 
   // OPTIONAL. Service message: the chat photo was deleted
   bool delete_chat_photo{false};
@@ -200,7 +203,8 @@ class Message {
   bool channel_chat_created{false};
 
   // OPTIONAL. Service message: auto-delete timer settings changed in the chat
-  MessageAutoDeleteTimerChanged message_auto_delete_timer_changed;
+  std::shared_ptr<MessageAutoDeleteTimerChanged>
+      message_auto_delete_timer_changed;
 
   // OPTIONAL. The group has been migrated to a supergroup
   // with the specified identifier
@@ -217,37 +221,37 @@ class Message {
 
   // OPTIONAL. Message is an invoice for a payment,
   // information about the invoice
-  Invoice invoice;
+  std::shared_ptr<Invoice> invoice;
 
   // OPTIONAL. Message is a service message about a successful payment,
   // information about the payment
-  SuccessfulPayment successful_payment;
+  std::shared_ptr<SuccessfulPayment> successful_payment;
 
   // OPTIONAL. The domain name of the website on which the user has logged in
   std::string connected_website;
 
   // OPTIONAL. Telegram Passport data
-  PassportData passport_data;
+  std::shared_ptr<PassportData> passport_data;
 
   // OPTIONAL. Service message. A user in the chat triggered
   // another user's proximity alert while sharing Live Location
-  ProximityAlertTriggered proximity_alert_triggered;
+  std::shared_ptr<ProximityAlertTriggered> proximity_alert_triggered;
 
   // OPTIONAL. Service message: voice chat scheduled
-  VoiceChatScheduled voice_chat_scheduled;
+  std::shared_ptr<VoiceChatScheduled> voice_chat_scheduled;
 
   // OPTIONAL. Service message: voice chat started
-  VoiceChatStarted voice_chat_started;
+  std::shared_ptr<VoiceChatStarted> voice_chat_started;
 
   // OPTIONAL. Service message: voice chat ended
-  VoiceChatEnded voice_chat_ended;
+  std::shared_ptr<VoiceChatEnded> voice_chat_ended;
 
   // OPTIONAL. Service message: new participants invited to a voice chat
-  VoiceChatParticipantsInvited voice_chat_participants_invited;
+  std::shared_ptr<VoiceChatParticipantsInvited> voice_chat_participants_invited;
 
   // OPTIONAL. Inline keyboard attached to the message.
   // login_url buttons are represented as ordinary url buttons
-  InlineKeyboardMarkup reply_markup;
+  std::shared_ptr<InlineKeyboardMarkup> reply_markup;
 };
 
 #endif  // MESSAGE_H_
