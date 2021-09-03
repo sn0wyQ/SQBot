@@ -43,7 +43,7 @@ class Audio {
   int32_t file_size{};
 
   // OPTIONAL. Thumbnail of the album cover to which the music file belongs
-  PhotoSize thumb;
+  std::shared_ptr<PhotoSize> thumb;
 };
 
 #endif  // AUDIO_H_

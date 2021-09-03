@@ -1,6 +1,7 @@
 #ifndef ANIMATION_H_
 #define ANIMATION_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -34,7 +35,7 @@ class Animation {
   int32_t duration{};
 
   // OPTIONAL. Animation thumbnail as defined by sender
-  PhotoSize thumb;
+  std::shared_ptr<PhotoSize> thumb;
 
   // OPTIONAL. Original animation filename as defined by sender
   std::string file_name;

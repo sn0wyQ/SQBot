@@ -39,7 +39,7 @@ class Chat {
   std::string last_name;
 
   // OPTIONAL. Chat photo. Returned only in getChat
-  ChatPhoto chat_photo;
+  std::shared_ptr<ChatPhoto> chat_photo;
 
   // OPTIONAL. Bio of the other party in a private chat.
   // Returned only in getChat
@@ -59,7 +59,7 @@ class Chat {
 
   // OPTIONAL. Default chat member permissions, for groups and supergroups.
   // Returned only in getChat
-  ChatPermissions chat_permissions;
+  std::shared_ptr<ChatPermissions> chat_permissions;
 
   // OPTIONAL. For supergroups, the minimum allowed delay
   // between consecutive messages sent by each unprivileged user.
@@ -85,7 +85,7 @@ class Chat {
 
   // OPTIONAL. For supergroups, the location to which the supergroup
   // is connected. Returned only in getChat.
-  ChatLocation location;
+  std::shared_ptr<ChatLocation> location;
 };
 
 #endif  // CHAT_H_

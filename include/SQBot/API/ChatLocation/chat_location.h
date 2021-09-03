@@ -16,7 +16,7 @@ class ChatLocation {
   explicit ChatLocation(const Json& chat_location);
 
   // The location to which the supergroup is connected. Can't be a live location
-  Location location;
+  std::shared_ptr<Location> location;
 
   // Location address; 1-64 characters, as defined by the chat owner
   std::string address;
