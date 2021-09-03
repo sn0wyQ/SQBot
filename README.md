@@ -1,2 +1,2 @@
 # SQBot
-Telegram Bot written in Modern C++
+C++20 Library for Telegrm Bot API
