@@ -36,7 +36,7 @@ Message::Message(const Json& message)
     venue(Utils::GetValue<Json>(message, "venue")),
     location(Utils::GetValue<Json>(message, "location")),
     left_chat_member(Utils::GetValue<Json>(message, "left_chat_member")),
-    new_chat_title(Utils::GetValue<Json>(message, "new_chat_title")),
+    new_chat_title(Utils::GetValue<std::string>(message, "new_chat_title")),
     delete_chat_photo(Utils::GetValue<bool>(message, "delete_chat_photo")),
     group_chat_created(Utils::GetValue<bool>(message, "group_chat_created")),
     supergroup_chat_created(

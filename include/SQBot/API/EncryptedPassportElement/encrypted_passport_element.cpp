@@ -10,7 +10,7 @@ EncryptedPassportElement::EncryptedPassportElement(
     front_side(Utils::GetValue<Json>(encrypted_passport_element, "front_side")),
     reverse_side(
         Utils::GetValue<Json>(encrypted_passport_element, "reverse_side")),
-    selfie(Utils::GetValue<std::string>(encrypted_passport_element, "selfie")),
+    selfie(Utils::GetValue<Json>(encrypted_passport_element, "selfie")),
     hash(Utils::GetValue<std::string>(encrypted_passport_element, "hash")) {
   // TODO(sn0wyQ): set 'std::vector<PassportFile> files'
   // TODO(sn0wyQ): set 'std::vector<PassportFile> translation'

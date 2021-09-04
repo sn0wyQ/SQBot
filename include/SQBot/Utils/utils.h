@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_UTILS_UTILS_H_
 #define INCLUDE_SQBOT_UTILS_UTILS_H_
 
+#include <memory>
 #include <string>
 
 #include "json.h"
@@ -18,6 +19,11 @@ T GetValue(const Json& sender, const std::string& key) {
   } catch (std::exception& e) {
     throw e;
   }
+}
+
+template<typename T>
+std::shared_ptr<T> Default() {
+  return std::make_shared<T>();
 }
 
 }  // namespace Utils

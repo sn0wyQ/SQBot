@@ -16,6 +16,14 @@ class MessageEntity {
  public:
   MessageEntity() = default;
   explicit MessageEntity(const Json& message_entity);
+  MessageEntity(std::string type,
+                int32_t offset,
+                int32_t length,
+                std::string url = "",
+                std::shared_ptr<User> user = {},
+                std::string language = "");
+
+  Json ToJson() const;
 
   // Type of the entity. Can be “mention” (@username), “hashtag” (#hashtag),
   // “cashtag” ($USD), “bot_command” (/start@jobs_bot),

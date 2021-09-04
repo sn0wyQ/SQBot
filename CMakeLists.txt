@@ -51,9 +51,10 @@ set(SOURCES
         include/SQBot/API/VoiceChatStarted/voice_chat_started.cpp
         include/SQBot/API/Voice/voice.cpp
         include/SQBot/API/Venue/venue.cpp
+        include/SQBot/AbstractReplyMarkup/abstract_reply_markup.h
         include/SQBot/Bot/bot.cpp
         include/SQBot/Utils/utils.h
-        )
+        include/SQBot/API/Update/update.cpp include/SQBot/API/Update/update.h)
 
 set(LIBS
         ${CURL_LIBRARY})

@@ -13,6 +13,8 @@ class User {
   User() = default;
   explicit User(const Json& user);
 
+  Json ToJson() const;
+
   // Unique identifier for this user or bot
   int64_t id{};
 

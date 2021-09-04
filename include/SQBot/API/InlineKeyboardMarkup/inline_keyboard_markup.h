@@ -8,12 +8,16 @@
 
 #include "../InlineKeyboardButton/inline_keyboard_button.h"
 
+#include "../../AbstractReplyMarkup/abstract_reply_markup.h"
+
 // This object represents an inline keyboard
 // that appears right next to the message it belongs to
-class InlineKeyboardMarkup {
+class InlineKeyboardMarkup : public AbstractReplyMarkup {
  public:
   InlineKeyboardMarkup() = default;
   explicit InlineKeyboardMarkup(const Json& inline_keyboard_markup);
+
+  Json ToJson() const override = 0;
 
   // Array of button rows, each represented by an Array
   // of InlineKeyboardButton objects
