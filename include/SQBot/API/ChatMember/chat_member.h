@@ -1,5 +1,5 @@
-#ifndef CHAT_MEMBER_H_
-#define CHAT_MEMBER_H_
+#ifndef INCLUDE_SQBOT_API_CHATMEMBER_CHAT_MEMBER_H_
+#define INCLUDE_SQBOT_API_CHATMEMBER_CHAT_MEMBER_H_
 
 #include <memory>
 #include <string>
@@ -36,4 +36,4 @@ class ChatMember {
   std::string custom_title;
 };
 
-#endif  // CHAT_MEMBER_H_
+#endif  // INCLUDE_SQBOT_API_CHATMEMBER_CHAT_MEMBER_H_

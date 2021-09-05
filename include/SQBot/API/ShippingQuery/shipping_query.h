@@ -1,5 +1,5 @@
-#ifndef SHIPPING_QUERY_H_
-#define SHIPPING_QUERY_H_
+#ifndef INCLUDE_SQBOT_API_SHIPPINGQUERY_SHIPPING_QUERY_H_
+#define INCLUDE_SQBOT_API_SHIPPINGQUERY_SHIPPING_QUERY_H_
 
 #include <memory>
 #include <string>
@@ -30,4 +30,4 @@ class ShippingQuery {
   std::shared_ptr<ShippingAddress> shipping_address;
 };
 
-#endif  // SHIPPING_QUERY_H_
+#endif  // INCLUDE_SQBOT_API_SHIPPINGQUERY_SHIPPING_QUERY_H_

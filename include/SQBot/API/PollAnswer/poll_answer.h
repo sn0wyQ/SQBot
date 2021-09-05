@@ -1,5 +1,5 @@
-#ifndef POLL_ANSWER_H_
-#define POLL_ANSWER_H_
+#ifndef INCLUDE_SQBOT_API_POLLANSWER_POLL_ANSWER_H_
+#define INCLUDE_SQBOT_API_POLLANSWER_POLL_ANSWER_H_
 
 #include <memory>
 #include <string>
@@ -28,4 +28,4 @@ class PollAnswer {
   std::vector<int32_t> option_ids;
 };
 
-#endif  // POLL_ANSWER_H_
+#endif  // INCLUDE_SQBOT_API_POLLANSWER_POLL_ANSWER_H_

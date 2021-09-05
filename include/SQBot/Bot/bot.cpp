@@ -132,7 +132,7 @@ void Bot::HandleUpdates() {
     if (updates.empty()) {
       updates_offset_ = 0;
     } else {
-      for (const auto& update: updates) {
+      for (const auto& update : updates) {
         auto current_update = std::make_shared<Update>(update);
         HandleUpdate(current_update);
         updates_offset_ = current_update->update_id + 1;

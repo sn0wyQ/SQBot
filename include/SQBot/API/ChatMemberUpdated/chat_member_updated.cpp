@@ -8,4 +8,5 @@ ChatMemberUpdated::ChatMemberUpdated(const Json& chat_member_updated)
         Utils::GetPtr<ChatMember>(chat_member_updated, "old_chat_member")),
     new_chat_member(
         Utils::GetPtr<ChatMember>(chat_member_updated, "new_chat_member")),
-    invite_link(Utils::GetPtr<ChatInviteLink>(chat_member_updated, "invite_link")) {}
+    invite_link(
+        Utils::GetPtr<ChatInviteLink>(chat_member_updated, "invite_link")) {}

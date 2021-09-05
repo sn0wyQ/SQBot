@@ -1,5 +1,5 @@
-#ifndef INLINE_QUERY_H_
-#define INLINE_QUERY_H_
+#ifndef INCLUDE_SQBOT_API_INLINEQUERY_INLINE_QUERY_H_
+#define INCLUDE_SQBOT_API_INLINEQUERY_INLINE_QUERY_H_
 
 #include <memory>
 #include <string>
@@ -42,4 +42,4 @@ class InlineQuery {
   std::shared_ptr<Location> location;
 };
 
-#endif  // INLINE_QUERY_H_
+#endif  // INCLUDE_SQBOT_API_INLINEQUERY_INLINE_QUERY_H_

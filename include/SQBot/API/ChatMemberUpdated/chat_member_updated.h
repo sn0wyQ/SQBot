@@ -1,5 +1,5 @@
-#ifndef CHAT_MEMBER_UPDATED_H_
-#define CHAT_MEMBER_UPDATED_H_
+#ifndef INCLUDE_SQBOT_API_CHATMEMBERUPDATED_CHAT_MEMBER_UPDATED_H_
+#define INCLUDE_SQBOT_API_CHATMEMBERUPDATED_CHAT_MEMBER_UPDATED_H_
 
 #include <memory>
 
@@ -38,4 +38,4 @@ class ChatMemberUpdated {
   std::shared_ptr<ChatInviteLink> invite_link;
 };
 
-#endif  // CHAT_MEMBER_UPDATED_H_
+#endif  // INCLUDE_SQBOT_API_CHATMEMBERUPDATED_CHAT_MEMBER_UPDATED_H_

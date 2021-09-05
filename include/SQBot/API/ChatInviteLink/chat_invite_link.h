@@ -1,5 +1,5 @@
-#ifndef CHAT_INVITE_LINK_H_
-#define CHAT_INVITE_LINK_H_
+#ifndef INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_
+#define INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_
 
 #include <memory>
 #include <string>
@@ -38,4 +38,4 @@ class ChatInviteLink {
   int32_t member_limit{};
 };
 
-#endif  // CHAT_INVITE_LINK_H_
+#endif  // INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_

@@ -1,5 +1,5 @@
-#ifndef PRE_CHECKOUT_QUERY_H_
-#define PRE_CHECKOUT_QUERY_H_
+#ifndef INCLUDE_SQBOT_API_PRECHECKOUTQUERY_PRE_CHECKOUT_QUERY_H_
+#define INCLUDE_SQBOT_API_PRECHECKOUTQUERY_PRE_CHECKOUT_QUERY_H_
 
 #include <memory>
 #include <string>
@@ -45,4 +45,4 @@ class PreCheckoutQuery {
   std::shared_ptr<OrderInfo> order_info;
 };
 
-#endif  // PRE_CHECKOUT_QUERY_H_
+#endif  // INCLUDE_SQBOT_API_PRECHECKOUTQUERY_PRE_CHECKOUT_QUERY_H_
