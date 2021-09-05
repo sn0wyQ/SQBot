@@ -1,0 +1,22 @@
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.so.*
+*.dll
+*.dylib
+
+# Clion
+.idea/
+
+# Cmake
+CMakeFiles/
+Build/
+.cmake/
+cmake/
+cmake-build*
+CMakeLists.txt.user
