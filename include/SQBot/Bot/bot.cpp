@@ -2,18 +2,74 @@
 
 namespace SQBot {
 
-Bot::Bot(std::string token) : token_(std::move(token)) {}
-
-void Bot::ProcessUpdates() {}
+Bot::Bot(std::string token,
+         int32_t delay_between_updates,
+         int32_t updates_timeout)
+  : token_(std::move(token)),
+    delay_between_updates_(delay_between_updates),
+    updates_timeout_(updates_timeout) {}
 
 bool Bot::IsLastRequestSuccessful() const {
   return is_last_request_successful_;
 }
 
+void Bot::StartReceivingUpdates() {
+  // We want only one thread receiving updates
+  if (is_receiving_updates_) {
+    // TODO(sn0wyQ): throw some error instead
+    throw;
+  }
+
+  is_receiving_updates_ = true;
+  while (is_receiving_updates_) {
+    HandleUpdates();
+    std::this_thread::sleep_for(delay_between_updates_);
+  }
+}
+
+std::shared_ptr<std::thread> Bot::StartReceivingUpdatesInDedicatedThread() {
+  // We want only one thread receiving updates
+  if (is_receiving_updates_) {
+    // TODO(sn0wyQ): throw some error instead
+    throw;
+  }
+
+  dedicated_updates_thread_ =
+      std::make_shared<std::thread>(&Bot::StartReceivingUpdates, this);
+  dedicated_updates_thread_->detach();
+  return dedicated_updates_thread_;
+}
+
+void Bot::StopReceivingUpdates(bool safe_stop) {
+  is_receiving_updates_ = false;
+  if (safe_stop && dedicated_updates_thread_) {
+    if (!dedicated_updates_thread_->joinable()) {
+      // We try to StopReceivingUpdates from dedicated thread itself which makes
+      // impossible to safely stop receiving updates
+      // TODO(sn0wyQ): throw some error instead
+      throw;
+    }
+    dedicated_updates_thread_->join();
+    dedicated_updates_thread_.reset();
+  }
+}
+
+bool Bot::IsReceivingUpdates() const {
+  return is_receiving_updates_;
+}
+
 std::shared_ptr<User> Bot::GetMe() {
   try {
-    return std::make_shared<User>(Utils::GetValue<Json>(
-        Request("getMe"), "result"));
+    return Utils::GetPtr<User>(Request("getMe"), "result");
+  } catch (std::exception& e) {
+    throw e;
+  }
+}
+
+std::shared_ptr<Chat> Bot::GetChat(int64_t chat_id) {
+  try {
+    return Utils::GetPtr<Chat>(
+        Request("getChat", {{"chat_id", chat_id}}), "result");
   } catch (std::exception& e) {
     throw e;
   }
@@ -52,8 +108,41 @@ Bot::SendMessage(const std::string& chat_id,
   }
   // TODO(sn0wyQ): add params["reply_markup"] = reply_markup->ToJson();
   try {
-    return std::make_shared<Message>(Utils::GetValue<Json>(
-        Request("sendMessage", params), "result"));
+    return Utils::GetPtr<Message>(Request("sendMessage", params), "result");
+  } catch (std::exception& e) {
+    throw e;
+  }
+}
+
+void Bot::HandleUpdate(const std::shared_ptr<Update>& update) {
+  // TODO(sn0wyQ): finish
+}
+
+void Bot::HandleUpdates() {
+  Json params;
+  if (updates_offset_) {
+    params["offset"] = updates_offset_;
+  }
+  params["timeout"] = updates_timeout_;
+  params["allowed_updates"] = allowed_updates_;
+
+  try {
+    Json response = Request("getUpdates", params);
+    const auto& updates = response.at("result");
+    if (updates.empty()) {
+      updates_offset_ = 0;
+    } else {
+      for (const auto& update: updates) {
+        auto current_update = std::make_shared<Update>(update);
+        HandleUpdate(current_update);
+        updates_offset_ = current_update->update_id + 1;
+      }
+    }
+
+    if (!is_receiving_updates_) {
+      // Delete handled updates from Telegram server
+      Request("getUpdates", {{"offset", updates_offset_}});
+    }
   } catch (std::exception& e) {
     throw e;
   }
@@ -85,7 +174,6 @@ Json Bot::Request(const std::string& request, const Json& params) {
   auto result = curl_easy_perform(curl);
   curl_easy_cleanup(curl);
   if (result != CURLE_OK) {
-    std::cout << "curl error " << result << std::endl;
     // TODO(sn0wyQ): throw some error instead
     return {};
   }

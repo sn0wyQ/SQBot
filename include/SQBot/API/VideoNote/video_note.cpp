@@ -6,5 +6,5 @@ VideoNote::VideoNote(const Json& video_note)
           Utils::GetValue<std::string>(video_note, "file_unique_id")),
       length(Utils::GetValue<int32_t>(video_note, "length")),
       duration(Utils::GetValue<int32_t>(video_note, "duration")),
-      thumb(Utils::GetValue<Json>(video_note, "thumb")),
+      thumb(Utils::GetPtr<PhotoSize>(video_note, "thumb")),
       file_size(Utils::GetValue<int32_t>(video_note, "file_size")) {}

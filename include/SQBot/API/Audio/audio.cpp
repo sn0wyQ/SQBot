@@ -9,4 +9,4 @@ Audio::Audio(const Json& audio)
     file_name(Utils::GetValue<std::string>(audio, "file_name")),
     mime_type(Utils::GetValue<std::string>(audio, "mime_type")),
     file_size(Utils::GetValue<int32_t>(audio, "file_size")),
-    thumb(Utils::GetValue<Json>(audio, "thumb")) {}
+    thumb(Utils::GetPtr<PhotoSize>(audio, "thumb")) {}

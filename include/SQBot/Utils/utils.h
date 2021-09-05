@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_UTILS_UTILS_H_
 #define INCLUDE_SQBOT_UTILS_UTILS_H_
 
+#include <iostream>
 #include <memory>
 #include <string>
 
@@ -9,21 +10,29 @@
 namespace Utils {
 
 template<typename T>
-T GetValue(const Json& sender, const std::string& key) {
-  if (!sender.contains(key)) {
+T GetValue(const Json& json, const std::string& key) {
+  if (!json.contains(key)) {
     return T();
   }
 
   try {
-    return sender.at(key);
+    return json.at(key);
   } catch (std::exception& e) {
     throw e;
   }
 }
 
 template<typename T>
-std::shared_ptr<T> Default() {
-  return std::make_shared<T>();
+std::shared_ptr<T> GetPtr(const Json& json, const std::string& key) {
+  if (!json.contains(key)) {
+    return {};
+  }
+
+  try {
+    return std::make_shared<T>(json.at(key));
+  } catch (std::exception& e) {
+    throw e;
+  }
 }
 
 }  // namespace Utils

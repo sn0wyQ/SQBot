@@ -5,7 +5,7 @@ MessageEntity::MessageEntity(const Json& message_entity)
     offset(Utils::GetValue<int32_t>(message_entity, "offset")),
     length(Utils::GetValue<int32_t>(message_entity, "length")),
     url(Utils::GetValue<std::string>(message_entity, "url")),
-    user(Utils::GetValue<Json>(message_entity, "user")),
+    user(Utils::GetPtr<User>(message_entity, "user")),
     language(Utils::GetValue<std::string>(message_entity, "language")) {}
 
 MessageEntity::MessageEntity(std::string type,

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.19)
 project(SQBot_example)
 
 set(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_compile_options(
         "$<$<CONFIG:RELEASE>:-O3>"
         "$<$<CONFIG:DEBUG>:-O0>"
@@ -13,10 +14,15 @@ find_package(CURL REQUIRED)
 set(SOURCES
         include/SQBot/API/Animation/animation.cpp
         include/SQBot/API/Audio/audio.cpp
+        include/SQBot/API/CallbackQuery/callback_query.cpp
+        include/SQBot/API/ChatInviteLink/chat_invite_link.cpp
         include/SQBot/API/ChatLocation/chat_location.cpp
+        include/SQBot/API/ChatMemberUpdated/chat_member_updated.cpp
+        include/SQBot/API/ChatMember/chat_member.cpp
         include/SQBot/API/ChatPermissions/chat_permissions.cpp
         include/SQBot/API/ChatPhoto/chat_photo.cpp
         include/SQBot/API/Chat/chat.cpp
+        include/SQBot/API/ChosenInlineResult/chosen_inline_result.cpp
         include/SQBot/API/Contact/contact.cpp
         include/SQBot/API/Dice/dice.cpp
         include/SQBot/API/Document/document.cpp
@@ -25,6 +31,7 @@ set(SOURCES
         include/SQBot/API/Game/game.cpp
         include/SQBot/API/InlineKeyboardButton/inline_keyboard_button.cpp
         include/SQBot/API/InlineKeyboardMarkup/inline_keyboard_markup.cpp
+        include/SQBot/API/InlineQuery/inline_query.cpp
         include/SQBot/API/Invoice/invoice.cpp
         include/SQBot/API/Location/location.cpp
         include/SQBot/API/MaskPosition/mask_position.cpp
@@ -36,12 +43,16 @@ set(SOURCES
         include/SQBot/API/PassportData/passport_data.cpp
         include/SQBot/API/PassportFile/passport_file.cpp
         include/SQBot/API/PhotoSize/photo_size.cpp
+        include/SQBot/API/PollAnswer/poll_answer.cpp
         include/SQBot/API/PollOption/poll_option.cpp
         include/SQBot/API/Poll/poll.cpp
+        include/SQBot/API/PreCheckoutQuery/pre_checkout_query.cpp
         include/SQBot/API/ProximityAlertTriggered/proximity_alert_triggered.cpp
         include/SQBot/API/ShippingAddress/shipping_address.cpp
+        include/SQBot/API/ShippingQuery/shipping_query.cpp
         include/SQBot/API/Sticker/sticker.cpp
         include/SQBot/API/SuccessfulPayment/successful_payment.cpp
+        include/SQBot/API/Update/update.cpp
         include/SQBot/API/User/user.cpp
         include/SQBot/API/Video/video.cpp
         include/SQBot/API/VideoNote/video_note.cpp
@@ -54,7 +65,7 @@ set(SOURCES
         include/SQBot/AbstractReplyMarkup/abstract_reply_markup.h
         include/SQBot/Bot/bot.cpp
         include/SQBot/Utils/utils.h
-        include/SQBot/API/Update/update.cpp include/SQBot/API/Update/update.h)
+        )
 
 set(LIBS
         ${CURL_LIBRARY})

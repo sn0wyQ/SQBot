@@ -17,7 +17,7 @@ class InlineKeyboardMarkup : public AbstractReplyMarkup {
   InlineKeyboardMarkup() = default;
   explicit InlineKeyboardMarkup(const Json& inline_keyboard_markup);
 
-  Json ToJson() const override = 0;
+  Json ToJson() const override;
 
   // Array of button rows, each represented by an Array
   // of InlineKeyboardButton objects

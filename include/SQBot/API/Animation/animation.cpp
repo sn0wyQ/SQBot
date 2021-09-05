@@ -6,7 +6,7 @@ Animation::Animation(const Json& animation)
     width(Utils::GetValue<int32_t>(animation, "width")),
     height(Utils::GetValue<int32_t>(animation, "height")),
     duration(Utils::GetValue<int32_t>(animation, "duration")),
-    thumb(Utils::GetValue<Json>(animation, "thumb")),
+    thumb(Utils::GetPtr<PhotoSize>(animation, "thumb")),
     file_name(Utils::GetValue<std::string>(animation, "file_name")),
     mime_type(Utils::GetValue<std::string>(animation, "mime_type")),
     file_size(Utils::GetValue<int32_t>(animation, "file_size")) {}

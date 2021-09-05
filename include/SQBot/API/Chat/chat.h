@@ -17,6 +17,7 @@ class Message;
 // This object represents a chat
 class Chat {
  public:
+  Chat() = default;
   explicit Chat(const Json& chat);
 
   // Unique identifier for this chat

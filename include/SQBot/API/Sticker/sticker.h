@@ -35,7 +35,7 @@ class Sticker {
   bool is_animated{};
 
   // OPTIONAL. Sticker thumbnail in the .WEBP or .JPG format
-  PhotoSize thumb;
+  std::shared_ptr<PhotoSize> thumb;
 
   // OPTIONAL. Emoji associated with the sticker
   std::string emoji;

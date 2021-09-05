@@ -1,7 +1,7 @@
 #include "venue.h"
 
 Venue::Venue(const Json& venue)
-  : location(Utils::GetValue<Json>(venue, "location")),
+  : location(Utils::GetPtr<Location>(venue, "location")),
     title(Utils::GetValue<std::string>(venue, "title")),
     address(Utils::GetValue<std::string>(venue, "address")),
     foursquare_id(Utils::GetValue<std::string>(venue, "foursquare_id")),

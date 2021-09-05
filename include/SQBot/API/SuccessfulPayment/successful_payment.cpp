@@ -7,7 +7,7 @@ SuccessfulPayment::SuccessfulPayment(const Json& successful_payment)
         Utils::GetValue<std::string>(successful_payment, "invoice_payload")),
     shipping_option_id(
         Utils::GetValue<std::string>(successful_payment, "shipping_option_id")),
-    order_info(Utils::GetValue<Json>(successful_payment, "order_info")),
+    order_info(Utils::GetPtr<OrderInfo>(successful_payment, "order_info")),
     telegram_payment_charge_id(
         Utils::GetValue<std::string>(
             successful_payment, "telegram_payment_charge_id")),
