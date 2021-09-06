@@ -64,21 +64,15 @@ set(SOURCES
         include/SQBot/API/Venue/venue.cpp
         include/SQBot/AbstractReplyMarkup/abstract_reply_markup.h
         include/SQBot/Bot/bot.cpp
-        include/SQBot/Utils/utils.h
+        include/SQBot/EventManager/event_manager.cpp
+        include/SQBot/Utils/utils.cpp
         )
 
 set(LIBS
         ${CURL_LIBRARY})
 
-add_executable(SQBot_example example.cpp ${SOURCES})
-target_link_libraries(SQBot_example ${LIBS})
+add_executable(EchoBotExample examples/echo_bot.cpp ${SOURCES})
+target_link_libraries(EchoBotExample ${LIBS})
 
-target_include_directories(SQBot_example PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/SQBot>
-        $<INSTALL_INTERFACE:include/SQBot>
-        )
-target_include_directories(SQBot_example PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/nlohmann>
-        $<INSTALL_INTERFACE:include/nlohmann>
-        )
 include_directories(${CURL_INCLUDE_DIR})
+include_directories(include)

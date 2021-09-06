@@ -14,7 +14,7 @@
 #include <vector>
 
 #include "curl/curl.h"
-#include "json.h"
+#include "../../nlohmann/json.h"
 
 #include "../API/Chat/chat.h"
 #include "../API/MessageEntity/message_entity.h"
@@ -23,6 +23,8 @@
 #include "../API/User/user.h"
 
 #include "../AbstractReplyMarkup/abstract_reply_markup.h"
+
+class EventManager;
 
 namespace SQBot {
 
@@ -56,6 +58,8 @@ class Bot {
 
   // Returns true if bot is receiving new updates
   bool IsReceivingUpdates() const;
+
+  std::shared_ptr<EventManager> GetEventManager();
 
   // Method to manually send requests. Avoid using it as it returns JSON instead
   // of basic type or one of Telegram API specified types
@@ -120,6 +124,7 @@ class Bot {
  private:
   void HandleUpdates();
 
+  std::shared_ptr<EventManager> event_manager_;
   std::string token_;
   bool is_receiving_updates_{false};
   std::chrono::milliseconds delay_between_updates_;

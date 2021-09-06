@@ -1,11 +1,14 @@
 #include "bot.h"
 
+#include "../EventManager/event_manager.h"
+
 namespace SQBot {
 
 Bot::Bot(std::string token,
          int32_t delay_between_updates,
          int32_t updates_timeout)
-  : token_(std::move(token)),
+  : event_manager_(std::make_shared<EventManager>()),
+    token_(std::move(token)),
     delay_between_updates_(delay_between_updates),
     updates_timeout_(updates_timeout) {}
 
@@ -58,10 +61,14 @@ bool Bot::IsReceivingUpdates() const {
   return is_receiving_updates_;
 }
 
+std::shared_ptr<EventManager> Bot::GetEventManager() {
+  return event_manager_;
+}
+
 std::shared_ptr<User> Bot::GetMe() {
   try {
     return Utils::GetPtr<User>(Request("getMe"), "result");
-  } catch (std::exception& e) {
+  } catch (const std::exception& e) {
     throw e;
   }
 }
@@ -70,7 +77,7 @@ std::shared_ptr<Chat> Bot::GetChat(int64_t chat_id) {
   try {
     return Utils::GetPtr<Chat>(
         Request("getChat", {{"chat_id", chat_id}}), "result");
-  } catch (std::exception& e) {
+  } catch (const std::exception& e) {
     throw e;
   }
 }
@@ -109,13 +116,13 @@ Bot::SendMessage(const std::string& chat_id,
   // TODO(sn0wyQ): add params["reply_markup"] = reply_markup->ToJson();
   try {
     return Utils::GetPtr<Message>(Request("sendMessage", params), "result");
-  } catch (std::exception& e) {
+  } catch (const std::exception& e) {
     throw e;
   }
 }
 
 void Bot::HandleUpdate(const std::shared_ptr<Update>& update) {
-  // TODO(sn0wyQ): finish
+  event_manager_->CallCallbackFor(this, update);
 }
 
 void Bot::HandleUpdates() {
@@ -143,7 +150,7 @@ void Bot::HandleUpdates() {
       // Delete handled updates from Telegram server
       Request("getUpdates", {{"offset", updates_offset_}});
     }
-  } catch (std::exception& e) {
+  } catch (const std::exception& e) {
     throw e;
   }
 }

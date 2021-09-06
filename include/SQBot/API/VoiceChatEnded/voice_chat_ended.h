@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_
 #define INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"
 

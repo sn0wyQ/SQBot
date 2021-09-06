@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_VOICECHATSCHEDULED_VOICE_CHAT_SCHEDULED_H_
 #define INCLUDE_SQBOT_API_VOICECHATSCHEDULED_VOICE_CHAT_SCHEDULED_H_
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"
 

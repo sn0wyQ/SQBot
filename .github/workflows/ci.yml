@@ -13,22 +13,10 @@ jobs:
       run: sudo apt update
       
     - name: Install packages
-      run: sudo apt install cppcheck python3-pip -y
+      run: sudo apt install python3-pip -y
       
     - name: Install cpplint
       run: pip3 install cpplint
-
-    - name: Run cppcheck (unused functions)
-      working-directory: ${{runner.workspace}}/${{github.event.repository.name}}
-      shell: bash
-      run: cppcheck --enable=unusedFunction --language=c++ $(find -name "*.h" -o -name "*.cpp")
-      continue-on-error: true
-
-    - name: Run cppcheck (warnings and preformance issues)
-      working-directory: ${{runner.workspace}}/${{github.event.repository.name}}
-      shell: bash
-      run: cppcheck --enable=warning,performance --language=c++ $(find -name "*.h" -o -name "*.cpp")
-      continue-on-error: true
 
     - name: Run cpplint
       working-directory: ${{runner.workspace}}/${{github.event.repository.name}}
