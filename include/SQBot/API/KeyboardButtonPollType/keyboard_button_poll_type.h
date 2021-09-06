@@ -15,6 +15,8 @@ class KeyboardButtonPollType {
   KeyboardButtonPollType() = default;
   explicit KeyboardButtonPollType(const Json& keyboard_button_poll_type);
 
+  Json ToJson() const;
+
   // OPTIONAL. If quiz is passed, the user will be allowed to create only polls
   // in the quiz mode. If regular is passed, only regular polls will be allowed.
   // Otherwise, the user will be allowed to create a poll of any type

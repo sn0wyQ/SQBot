@@ -19,6 +19,8 @@ class KeyboardButton {
   KeyboardButton() = default;
   explicit KeyboardButton(const Json& keyboard_button);
 
+  Json ToJson() const;
+
   // Text of the button. If none of the optional fields are used,
   // it will be sent as a message when the button is pressed
   std::string text;

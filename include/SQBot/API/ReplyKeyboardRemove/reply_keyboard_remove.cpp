@@ -5,9 +5,12 @@ ReplyKeyboardRemove::ReplyKeyboardRemove(const Json& reply_keyboard_remove)
 
 Json ReplyKeyboardRemove::ToJson() const {
   Json reply_keyboard_remove;
+
   reply_keyboard_remove["remove_keyboard"] = remove_keyboard;
+
   if (selective) {
     reply_keyboard_remove["selective"] = selective;
   }
+
   return reply_keyboard_remove;
 }

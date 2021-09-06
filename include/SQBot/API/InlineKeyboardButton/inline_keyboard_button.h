@@ -18,6 +18,8 @@ class InlineKeyboardButton {
   InlineKeyboardButton() = default;
   explicit InlineKeyboardButton(const Json& inline_keyboard_button);
 
+  Json ToJson() const;
+
   // Label text on the button
   std::string text;
 

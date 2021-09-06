@@ -145,25 +145,35 @@ MessagePtr Bot::InternalSendMessage(
     const std::vector<MessageEntityPtr>& entities,
     const AbstractReplyMarkupPtr& reply_markup) {
   params["text"] = text;
+
   if (disable_notification) {
     params["disable_notification"] = disable_notification;
   }
+
   if (disable_web_page_preview) {
     params["disable_web_page_preview"] = disable_web_page_preview;
   }
+
   if (reply_to_message_id != 0) {
     params["reply_to_message_id"] = reply_to_message_id;
   }
+
   if (allow_sending_without_reply) {
     params["allow_sending_without_reply"] = allow_sending_without_reply;
   }
+
   if (!parse_mode.empty()) {
     params["parse_mode"] = parse_mode;
   }
+
   for (const auto& entity : entities) {
     params["entities"].push_back(entity->ToJson());
   }
-  // TODO(sn0wyQ): add params["reply_markup"] = reply_markup->ToJson();
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
   try {
     return Utils::GetPtr<Message>(Request("sendMessage", params), "result");
   } catch (const std::exception& e) {

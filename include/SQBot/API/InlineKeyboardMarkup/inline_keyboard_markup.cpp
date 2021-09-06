@@ -15,6 +15,17 @@ InlineKeyboardMarkup::InlineKeyboardMarkup(const Json& inline_keyboard_markup) {
 }
 
 Json InlineKeyboardMarkup::ToJson() const {
-  // TODO(sn0wyQ): finish this
-  return {};
+  Json inline_keyboard_markup;
+
+  Json inline_keyboard_json;
+  for (const auto& row : inline_keyboard) {
+    Json current_row;
+    for (const auto& button : row) {
+      current_row.push_back(button->ToJson());
+    }
+    inline_keyboard_json.push_back(current_row);
+  }
+  inline_keyboard_markup["inline_keyboard"] = inline_keyboard_json;
+
+  return inline_keyboard_markup;
 }
