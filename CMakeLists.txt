@@ -65,6 +65,7 @@ set(SOURCES
         include/SQBot/AbstractReplyMarkup/abstract_reply_markup.h
         include/SQBot/Bot/bot.cpp
         include/SQBot/EventManager/event_manager.cpp
+        include/SQBot/Exception/exception.cpp
         include/SQBot/Utils/utils.cpp
         )
 
