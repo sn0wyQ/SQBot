@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
 #define INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -30,5 +31,7 @@ class PhotoSize {
   // OPTIONAL. File size
   int32_t file_size{};
 };
+
+using PhotoSizePtr = std::shared_ptr<PhotoSize>;
 
 #endif  // INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_

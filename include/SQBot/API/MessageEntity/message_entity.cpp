@@ -12,7 +12,7 @@ MessageEntity::MessageEntity(std::string type,
                              int32_t offset,
                              int32_t length,
                              std::string url,
-                             std::shared_ptr<User> user,
+                             UserPtr user,
                              std::string language)
     : type(std::move(type)),
       offset(offset),
@@ -23,17 +23,22 @@ MessageEntity::MessageEntity(std::string type,
 
 Json MessageEntity::ToJson() const {
   Json message_entity;
+
   message_entity["type"] = type;
   message_entity["offset"] = offset;
   message_entity["length"] = length;
+
   if (!url.empty()) {
     message_entity["url"] = url;
   }
+
   if (user) {
     message_entity["user"] = user->ToJson();
   }
+
   if (!language.empty()) {
     message_entity["language"] = language;
   }
+
   return message_entity;
 }

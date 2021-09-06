@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
 #define INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -31,5 +32,7 @@ class MaskPosition {
   // Mask scaling coefficient. For example, 2.0 means double size
   float scale{};
 };
+
+using MaskPositionPtr = std::shared_ptr<MaskPosition>;
 
 #endif  // INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_

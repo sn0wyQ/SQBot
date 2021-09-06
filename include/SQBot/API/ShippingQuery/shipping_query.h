@@ -21,13 +21,15 @@ class ShippingQuery {
   std::string id;
 
   // User who sent the query
-  std::shared_ptr<User> from;
+  UserPtr from;
 
   // Bot specified invoice payload
   std::string invoice_payload;
 
   // User specified shipping address
-  std::shared_ptr<ShippingAddress> shipping_address;
+  ShippingAddressPtr shipping_address;
 };
+
+using ShippingQueryPtr = std::shared_ptr<ShippingQuery>;
 
 #endif  // INCLUDE_SQBOT_API_SHIPPINGQUERY_SHIPPING_QUERY_H_

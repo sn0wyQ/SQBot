@@ -16,17 +16,19 @@ class OrderInfo {
   OrderInfo() = default;
   explicit OrderInfo(const Json& order_info);
 
-  // Optional. User's name
+  // OPTIONAL. User's name
   std::string name;
 
-  // Optional. User's phone number
+  // OPTIONAL. User's phone number
   std::string phone_number;
 
-  // Optional. User's email
+  // OPTIONAL. User's email
   std::string email;
 
-  // Optional. User's shipping address
-  std::shared_ptr<ShippingAddress> shipping_address;
+  // OPTIONAL. User's shipping address
+  ShippingAddressPtr shipping_address;
 };
+
+using OrderInfoPtr = std::shared_ptr<OrderInfo>;
 
 #endif  // INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_

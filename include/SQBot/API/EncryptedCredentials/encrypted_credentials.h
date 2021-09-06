@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
 #define INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -28,5 +29,7 @@ class EncryptedCredentials {
   // required for data decryption
   std::string secret;
 };
+
+using EncryptedCredentialsPtr = std::shared_ptr<EncryptedCredentials>;
 
 #endif  // INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_

@@ -28,12 +28,16 @@ set(SOURCES
         include/SQBot/API/Document/document.cpp
         include/SQBot/API/EncryptedCredentials/encrypted_credentials.cpp
         include/SQBot/API/EncryptedPassportElement/encrypted_passport_element.cpp
+        include/SQBot/API/File/file.cpp
         include/SQBot/API/Game/game.cpp
         include/SQBot/API/InlineKeyboardButton/inline_keyboard_button.cpp
         include/SQBot/API/InlineKeyboardMarkup/inline_keyboard_markup.cpp
         include/SQBot/API/InlineQuery/inline_query.cpp
         include/SQBot/API/Invoice/invoice.cpp
+        include/SQBot/API/KeyboardButtonPollType/keyboard_button_poll_type.cpp
+        include/SQBot/API/KeyboardButton/keyboard_button.cpp
         include/SQBot/API/Location/location.cpp
+        include/SQBot/API/LoginUrl/login_url.cpp
         include/SQBot/API/MaskPosition/mask_position.cpp
         include/SQBot/API/MessageAutoDeleteTimerChanged/message_auto_delete_timer_changed.cpp
         include/SQBot/API/MessageEntity/message_entity.cpp
@@ -48,11 +52,14 @@ set(SOURCES
         include/SQBot/API/Poll/poll.cpp
         include/SQBot/API/PreCheckoutQuery/pre_checkout_query.cpp
         include/SQBot/API/ProximityAlertTriggered/proximity_alert_triggered.cpp
+        include/SQBot/API/ReplyKeyboardMarkup/reply_keyboard_markup.cpp
+        include/SQBot/API/ReplyKeyboardRemove/reply_keyboard_remove.cpp
         include/SQBot/API/ShippingAddress/shipping_address.cpp
         include/SQBot/API/ShippingQuery/shipping_query.cpp
         include/SQBot/API/Sticker/sticker.cpp
         include/SQBot/API/SuccessfulPayment/successful_payment.cpp
         include/SQBot/API/Update/update.cpp
+        include/SQBot/API/UserProfilePhotos/user_profile_photos.cpp
         include/SQBot/API/User/user.cpp
         include/SQBot/API/Video/video.cpp
         include/SQBot/API/VideoNote/video_note.cpp
@@ -67,7 +74,7 @@ set(SOURCES
         include/SQBot/EventManager/event_manager.cpp
         include/SQBot/Exception/exception.cpp
         include/SQBot/Utils/utils.cpp
-        )
+        include/SQBot/API/ForceReply/force_reply.cpp include/SQBot/API/ForceReply/force_reply.h include/SQBot/API/CallbackGame/callback_game.cpp include/SQBot/API/CallbackGame/callback_game.h)
 
 set(LIBS
         ${CURL_LIBRARY})

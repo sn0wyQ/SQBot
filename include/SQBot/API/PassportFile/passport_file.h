@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_
 #define INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -29,5 +30,7 @@ class PassportFile {
   // Unix time when the file was uploaded
   int32_t file_date{};
 };
+
+using PassportFilePtr = std::shared_ptr<PassportFile>;
 
 #endif  // INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_

@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
 #define INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -33,5 +34,7 @@ class ChatPhoto {
   // Can't be used to download or reuse the file.
   std::string big_file_unique_id;
 };
+
+using ChatPhotoPtr = std::shared_ptr<ChatPhoto>;
 
 #endif  // INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_

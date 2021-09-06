@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_INVOICE_INVOICE_H_
 #define INCLUDE_SQBOT_API_INVOICE_INVOICE_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -35,5 +36,7 @@ class Invoice {
   // https://core.telegram.org/bots/payments/currencies.json
   int32_t total_amount{};
 };
+
+using InvoicePtr = std::shared_ptr<Invoice>;
 
 #endif  // INCLUDE_SQBOT_API_INVOICE_INVOICE_H_

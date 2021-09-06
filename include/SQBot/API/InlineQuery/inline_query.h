@@ -22,7 +22,7 @@ class InlineQuery {
   std::string id;
 
   // Sender
-  std::shared_ptr<User> from;
+  UserPtr from;
 
   // Text of the query (up to 256 characters)
   std::string query;
@@ -39,7 +39,9 @@ class InlineQuery {
   std::string chat_type;
 
   // OPTIONAL. Sender location, only for bots that request user location
-  std::shared_ptr<Location> location;
+  LocationPtr location;
 };
+
+using InlineQueryPtr = std::shared_ptr<InlineQuery>;
 
 #endif  // INCLUDE_SQBOT_API_INLINEQUERY_INLINE_QUERY_H_

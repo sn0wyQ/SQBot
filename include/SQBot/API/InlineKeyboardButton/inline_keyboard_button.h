@@ -6,6 +6,9 @@
 
 #include "../../../nlohmann/json.h"
 
+#include "../CallbackGame/callback_game.h"
+#include "../LoginUrl/login_url.h"
+
 #include "../../Utils/utils.h"
 
 // This object represents one button of an inline keyboard.
@@ -15,16 +18,17 @@ class InlineKeyboardButton {
   InlineKeyboardButton() = default;
   explicit InlineKeyboardButton(const Json& inline_keyboard_button);
 
+  Json ToJson() const;
+
   // Label text on the button
   std::string text;
 
   // OPTIONAL. HTTP or tg:// url to be opened when button is pressed
   std::string url;
 
-  // TODO(sn0wyQ): Add LoginUrl class
   // OPTIONAL. An HTTP URL used to automatically authorize the user.
   // Can be used as a replacement for the Telegram Login Widget
-  // std::shared_ptr<LoginUrl> login_url;
+  LoginUrlPtr login_url;
 
   // OPTIONAL. Data to be sent in a callback query to the bot
   // when button is pressed, 1-64 bytes
@@ -48,16 +52,17 @@ class InlineKeyboardButton {
   // same chat – good for selecting something from multiple options
   std::string switch_inline_query_current_chat;
 
-  // TODO(sn0wyQ): Add CallbackGame class
   // OPTIONAL. Description of the game that will be launched when the user
   // presses the button.
   // NOTE: This type of button MUST always be the first button in the first row
-  // std::shared_ptr<CallbackGame> callback_game;
+  CallbackGamePtr callback_game;
 
-  // Optional. Specify True, to send a Pay button
+  // OPTIONAL. Specify True, to send a Pay button
   // (https://core.telegram.org/bots/api#payments)
   // NOTE: This type of button must always be the first button in the first row
   bool pay{false};
 };
+
+using InlineKeyboardButtonPtr = std::shared_ptr<InlineKeyboardButton>;
 
 #endif  // INCLUDE_SQBOT_API_INLINEKEYBOARDBUTTON_INLINE_KEYBOARD_BUTTON_H_

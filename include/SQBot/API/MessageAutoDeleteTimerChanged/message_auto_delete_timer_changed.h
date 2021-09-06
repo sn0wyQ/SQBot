@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SQBOT_API_MESSAGEAUTODELETETIMERCHANGED_MESSAGE_AUTO_DELETE_TIMER_CHANGED_H_
 #define INCLUDE_SQBOT_API_MESSAGEAUTODELETETIMERCHANGED_MESSAGE_AUTO_DELETE_TIMER_CHANGED_H_
 
+#include <memory>
+
 #include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"
@@ -16,5 +18,8 @@ class MessageAutoDeleteTimerChanged {
   // New auto-delete time for messages in the chat
   int32_t message_auto_delete_time{};
 };
+
+using MessageAutoDeleteTimerChangedPtr =
+    std::shared_ptr<MessageAutoDeleteTimerChanged>;
 
 #endif  // INCLUDE_SQBOT_API_MESSAGEAUTODELETETIMERCHANGED_MESSAGE_AUTO_DELETE_TIMER_CHANGED_H_

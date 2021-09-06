@@ -18,24 +18,25 @@ class ChatMemberUpdated {
   ChatMemberUpdated() = default;
   explicit ChatMemberUpdated(const Json& chat_member_updated);
 
-  // Chat the user belongs to
-  std::shared_ptr<Chat> chat;
+  ChatPtr chat;
 
   // Performer of the action, which resulted in the change
-  std::shared_ptr<User> from;
+  UserPtr from;
 
   // Date the change was done in Unix time
   int32_t date{};
 
   // Previous information about the chat member
-  std::shared_ptr<ChatMember> old_chat_member;
+  ChatMemberPtr old_chat_member;
 
   // New information about the chat member
-  std::shared_ptr<ChatMember> new_chat_member;
+  ChatMemberPtr new_chat_member;
 
   // OPTIONAL. Chat invite link, which was used by the user to join the chat;
   // for joining by invite link events only
-  std::shared_ptr<ChatInviteLink> invite_link;
+  ChatInviteLinkPtr invite_link;
 };
+
+using ChatMemberUpdatedPtr = std::shared_ptr<ChatMemberUpdated>;
 
 #endif  // INCLUDE_SQBOT_API_CHATMEMBERUPDATED_CHAT_MEMBER_UPDATED_H_

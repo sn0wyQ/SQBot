@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SQBOT_API_LOCATION_LOCATION_H_
 #define INCLUDE_SQBOT_API_LOCATION_LOCATION_H_
 
+#include <memory>
+
 #include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"
@@ -35,5 +37,7 @@ class Location {
   // For sent live locations only
   int32_t proximity_alert_radius{};
 };
+
+using LocationPtr = std::shared_ptr<Location>;
 
 #endif  // INCLUDE_SQBOT_API_LOCATION_LOCATION_H_

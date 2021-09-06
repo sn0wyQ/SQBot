@@ -26,7 +26,7 @@ class Document {
   std::string file_unique_id;
 
   // OPTIONAL. Document thumbnail as defined by sender
-  std::shared_ptr<PhotoSize> thumb;
+  PhotoSizePtr thumb;
 
   // OPTIONAL. Original filename as defined by sender
   std::string file_name;
@@ -37,5 +37,7 @@ class Document {
   // OPTIONAL. File size
   int32_t file_size{};
 };
+
+using DocumentPtr = std::shared_ptr<Document>;
 
 #endif  // INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_

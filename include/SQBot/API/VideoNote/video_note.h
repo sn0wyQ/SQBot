@@ -32,10 +32,12 @@ class VideoNote {
   int32_t duration{};
 
   // OPTIONAL. Video thumbnail
-  std::shared_ptr<PhotoSize> thumb{};
+  PhotoSizePtr thumb{};
 
   // OPTIONAL. File size
   int32_t file_size{};
 };
+
+using VideoNotePtr = std::shared_ptr<VideoNote>;
 
 #endif  // INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_

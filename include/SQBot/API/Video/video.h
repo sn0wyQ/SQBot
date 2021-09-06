@@ -34,7 +34,7 @@ class Video {
   int32_t duration{};
 
   // OPTIONAL. Video thumbnail
-  std::shared_ptr<PhotoSize> thumb;
+  PhotoSizePtr thumb;
 
   // OPTIONAL. Original filename as defined by sender
   std::string file_name;
@@ -45,5 +45,7 @@ class Video {
   // OPTIONAL. File size
   int32_t file_size{};
 };
+
+using VideoPtr = std::shared_ptr<Video>;
 
 #endif  // INCLUDE_SQBOT_API_VIDEO_VIDEO_H_

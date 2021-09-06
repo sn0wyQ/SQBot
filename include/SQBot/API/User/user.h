@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_USER_USER_H_
 #define INCLUDE_SQBOT_API_USER_USER_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -43,5 +44,7 @@ class User {
   // OPTIONAL. True, if the bot supports inline queries. Returned only in getMe
   bool supports_inline_queries{};
 };
+
+using UserPtr = std::shared_ptr<User>;
 
 #endif  // INCLUDE_SQBOT_API_USER_USER_H_

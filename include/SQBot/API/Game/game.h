@@ -27,7 +27,7 @@ class Game {
   std::string description;
 
   // Photo that will be displayed in the game message in chats
-  std::vector<std::shared_ptr<PhotoSize>> photo;
+  std::vector<PhotoSizePtr> photo;
 
   // OPTIONAL. Brief description of the game or high scores included
   // in the game message. Can be automatically edited to include current
@@ -37,11 +37,13 @@ class Game {
 
   // OPTIONAL. Special entities that appear in text, such as usernames,
   // URLs, bot commands, etc.
-  std::vector<std::shared_ptr<MessageEntity>> text_entities;
+  std::vector<MessageEntityPtr> text_entities;
 
   // OPTIONAL. Animation that will be displayed in the game message in chats.
   // Upload via BotFather
-  std::shared_ptr<Animation> animation;
+  AnimationPtr animation;
 };
+
+using GamePtr = std::shared_ptr<Game>;
 
 #endif  // INCLUDE_SQBOT_API_GAME_GAME_H_

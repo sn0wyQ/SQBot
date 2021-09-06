@@ -36,7 +36,7 @@ class SuccessfulPayment {
   std::string shipping_option_id;
 
   // OPTIONAL. Order info provided by the user
-  std::shared_ptr<OrderInfo> order_info;
+  OrderInfoPtr order_info;
 
   // Telegram payment identifier
   std::string telegram_payment_charge_id;
@@ -44,5 +44,7 @@ class SuccessfulPayment {
   // Provider payment identifier
   std::string provider_payment_charge_id;
 };
+
+using SuccessfulPaymentPtr = std::shared_ptr<SuccessfulPayment>;
 
 #endif  // INCLUDE_SQBOT_API_SUCCESSFULPAYMENT_SUCCESSFUL_PAYMENT_H_

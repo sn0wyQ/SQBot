@@ -20,10 +20,12 @@ class PassportData {
 
   // Array with information about documents and other Telegram Passport elements
   // that was shared with the bot
-  std::vector<std::shared_ptr<EncryptedPassportElement>> data;
+  std::vector<EncryptedPassportElementPtr> data;
 
   // Encrypted credentials required to decrypt the data
-  std::shared_ptr<EncryptedCredentials> credentials;
+  EncryptedCredentialsPtr credentials;
 };
+
+using PassportDataPtr = std::shared_ptr<PassportData>;
 
 #endif  // INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_

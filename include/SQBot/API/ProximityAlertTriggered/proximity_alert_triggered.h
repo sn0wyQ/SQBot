@@ -17,13 +17,15 @@ class ProximityAlertTriggered {
   explicit ProximityAlertTriggered(const Json& proximity_alert_triggered);
 
   // User that triggered the alert
-  std::shared_ptr<User> traveler;
+  UserPtr traveler;
 
   // User that set the alert
-  std::shared_ptr<User> watcher;
+  UserPtr watcher;
 
   // The distance between the users
   int32_t distance{};
 };
+
+using ProximityAlertTriggeredPtr = std::shared_ptr<ProximityAlertTriggered>;
 
 #endif  // INCLUDE_SQBOT_API_PROXIMITYALERTTRIGGERED_PROXIMITY_ALERT_TRIGGERED_H_

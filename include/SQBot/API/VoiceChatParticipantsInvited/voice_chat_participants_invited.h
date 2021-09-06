@@ -19,7 +19,10 @@ class VoiceChatParticipantsInvited {
       const Json& voice_chat_participants_invited);
 
   // OPTIONAL. New members that were invited to the voice chat
-  std::vector<std::shared_ptr<User>> users;
+  std::vector<UserPtr> users;
 };
+
+using VoiceChatParticipantsInvitedPtr =
+    std::shared_ptr<VoiceChatParticipantsInvited>;
 
 #endif  // INCLUDE_SQBOT_API_VOICECHATPARTICIPANTSINVITED_VOICE_CHAT_PARTICIPANTS_INVITED_H_

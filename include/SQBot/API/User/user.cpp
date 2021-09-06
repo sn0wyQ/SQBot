@@ -15,26 +15,36 @@ User::User(const Json& user)
 
 Json User::ToJson() const {
   Json user;
+
   user["id"] = id;
+
   user["is_bot"] = is_bot;
+
   user["first_name"] = first_name;
+
   if (!last_name.empty()) {
     user["last_name"] = last_name;
   }
+
   if (!username.empty()) {
     user["username"] = username;
   }
+
   if (!language_code.empty()) {
     user["language_code"] = language_code;
   }
+
   if (can_join_groups) {
     user["can_join_groups"] = can_join_groups;
   }
+
   if (can_read_all_group_messages) {
     user["can_read_all_group_messages"] = can_read_all_group_messages;
   }
+
   if (supports_inline_queries) {
     user["supports_inline_queries"] = supports_inline_queries;
   }
+
   return user;
 }

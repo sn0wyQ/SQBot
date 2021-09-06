@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_
 #define INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_
 
+#include <memory>
+
 #include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"
@@ -14,5 +16,7 @@ class VoiceChatEnded {
   // Voice chat duration; in seconds
   int32_t duration;
 };
+
+using VoiceChatEndedPtr = std::shared_ptr<VoiceChatEnded>;
 
 #endif  // INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_

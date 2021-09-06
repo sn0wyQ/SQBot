@@ -2,8 +2,7 @@
 
 #include "../Bot/bot.h"
 
-void EventManager::CallCallbackFor(SQBot::Bot* bot,
-                                   const std::shared_ptr<Update>& update) {
+void EventManager::CallCallbackFor(SQBot::Bot* bot, const UpdatePtr& update) {
   if (update->message) {
     auto message = update->message;
 
@@ -104,84 +103,76 @@ void EventManager::CallCallbackFor(SQBot::Bot* bot,
 }
 
 void EventManager::SetCallbackForBotCommand(const std::string& command,
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func) {
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callbacks_to_bot_commands_[command] = std::move(func);
 }
 
 void EventManager::SetCallbackForMessageStartsWith(const std::string& prefix,
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func) {
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callbacks_to_message_starts_with_[prefix] = std::move(func);
 }
 
 void EventManager::SetCallbackForMessage(
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func) {
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callback_to_message_ = std::move(func);
 }
 
 void EventManager::SetCallbackForEditedMessage(
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func) {
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callback_to_edited_message_ = std::move(func);
 }
 
 void EventManager::SetCallbackForChannelPost(
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func) {
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callback_to_channel_post_ = std::move(func);
 }
 
 void EventManager::SetCallbackForEditedChannelPost(
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func) {
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callback_to_edited_channel_post_ = std::move(func);
 }
 
 void EventManager::SetCallbackForInlineQuery(
-    std::function<void(SQBot::Bot*,
-        const std::shared_ptr<InlineQuery>&)> func) {
+    std::function<void(SQBot::Bot*, const InlineQueryPtr&)> func) {
   callback_to_inline_query_ = std::move(func);
 }
 
 void EventManager::SetCallbackForChosenInlineResult(
-    std::function<void(SQBot::Bot*,
-        const std::shared_ptr<ChosenInlineResult>&)> func) {
+    std::function<void(SQBot::Bot*, const ChosenInlineResultPtr&)> func) {
   callback_to_chosen_inline_result_ = std::move(func);
 }
 
 void EventManager::SetCallbackForCallbackQuery(
-    std::function<void(SQBot::Bot*,
-        const std::shared_ptr<CallbackQuery>&)> func) {
+    std::function<void(SQBot::Bot*, const CallbackQueryPtr&)> func) {
   callback_to_callback_query_ = std::move(func);
 }
 
 void EventManager::SetCallbackForShippingQuery(
-    std::function<void(SQBot::Bot*,
-        const std::shared_ptr<ShippingQuery>&)> func) {
+    std::function<void(SQBot::Bot*, const ShippingQueryPtr&)> func) {
   callback_to_shipping_query_ = std::move(func);
 }
 
 void EventManager::SetCallbackForPreCheckoutQuery(
-    std::function<void(SQBot::Bot*,
-        const std::shared_ptr<PreCheckoutQuery>&)> func) {
+    std::function<void(SQBot::Bot*, const PreCheckoutQueryPtr&)> func) {
   callback_to_pre_checkout_query_ = std::move(func);
 }
 
 void EventManager::SetCallbackForPoll(
-    std::function<void(SQBot::Bot*, const std::shared_ptr<Poll>&)> func) {
+    std::function<void(SQBot::Bot*, const PollPtr&)> func) {
   callback_to_poll_ = std::move(func);
 }
 
 void EventManager::SetCallbackForPollAnswer(
-    std::function<void(SQBot::Bot*,
-                       const std::shared_ptr<PollAnswer>&)> func) {
+    std::function<void(SQBot::Bot*, const PollAnswerPtr&)> func) {
   callback_to_poll_answer_ = std::move(func);
 }
 
 void EventManager::SetCallbackForMyChatMember(
-    std::function<void(SQBot::Bot*,
-                       const std::shared_ptr<ChatMemberUpdated>&)> func) {
+    std::function<void(SQBot::Bot*, const ChatMemberUpdatedPtr&)> func) {
   callback_to_my_chat_member_ = std::move(func);
 }
 
 void EventManager::SetCallbackForChatMember(
-    std::function<void(SQBot::Bot*,
-                       const std::shared_ptr<ChatMemberUpdated>&)> func) {
+    std::function<void(SQBot::Bot*, const ChatMemberUpdatedPtr&)> func) {
   callback_to_chat_member_ = std::move(func);
 }

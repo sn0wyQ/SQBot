@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_SHIPPINGADDRESS_SHIPPING_ADDRESS_H_
 #define INCLUDE_SQBOT_API_SHIPPINGADDRESS_SHIPPING_ADDRESS_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"
@@ -31,5 +32,7 @@ class ShippingAddress {
   // Address post code
   std::string post_code;
 };
+
+using ShippingAddressPtr = std::shared_ptr<ShippingAddress>;
 
 #endif  // INCLUDE_SQBOT_API_SHIPPINGADDRESS_SHIPPING_ADDRESS_H_
