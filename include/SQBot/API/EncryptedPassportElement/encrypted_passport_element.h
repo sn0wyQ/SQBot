@@ -42,25 +42,25 @@ class EncryptedPassportElement {
   // “passport_registration” and “temporary_registration” types.
   // Files can be decrypted and verified using
   // the accompanyingEncryptedCredentials
-  std::vector<PassportFile> files;
+  std::vector<PassportFilePtr> files;
 
   // OPTIONAL. Encrypted file with the front side of the document,
   // provided by the user. Available for “passport”, “driver_license”,
   // “identity_card” and “internal_passport”. The file can be decrypted
   // and verified using the accompanying EncryptedCredentials
-  std::shared_ptr<PassportFile> front_side;
+  PassportFilePtr front_side;
 
   // OPTIONAL. Encrypted file with the reverse side of the document,
   // provided by the user. Available for “driver_license” and “identity_card”.
   // The file can be decrypted and verified using
   // the accompanying EncryptedCredentials.
-  std::shared_ptr<PassportFile> reverse_side;
+  PassportFilePtr reverse_side;
 
   // OPTIONAL. Encrypted file with the selfie of the user holding a document,
   // provided by the user; available for “passport”, “driver_license”,
   // “identity_card” and “internal_passport”. The file can be decrypted
   // and verified using the accompanying EncryptedCredentials
-  std::shared_ptr<PassportFile> selfie;
+  PassportFilePtr selfie;
 
   // OPTIONAL. Array of encrypted files with translated versions of documents
   // provided by the user. Available if requested for “passport”,
@@ -68,10 +68,12 @@ class EncryptedPassportElement {
   // “bank_statement”, “rental_agreement”, “passport_registration”
   // and “temporary_registration” types. Files can be decrypted
   // and verified using the accompanying EncryptedCredentials
-  std::vector<std::shared_ptr<PassportFile>> translation;
+  std::vector<PassportFilePtr> translation;
 
   // Base64-encoded element hash for using in PassportElementErrorUnspecified
   std::string hash;
 };
+
+using EncryptedPassportElementPtr = std::shared_ptr<EncryptedPassportElement>;
 
 #endif  // INCLUDE_SQBOT_API_ENCRYPTEDPASSPORTELEMENT_ENCRYPTED_PASSPORT_ELEMENT_H_

@@ -36,4 +36,6 @@ class Invoice {
   int32_t total_amount{};
 };
 
+using InvoicePtr = std::shared_ptr<Invoice>;
+
 #endif  // INCLUDE_SQBOT_API_INVOICE_INVOICE_H_

@@ -32,4 +32,6 @@ class MaskPosition {
   float scale{};
 };
 
+using MaskPositionPtr = std::shared_ptr<MaskPosition>;
+
 #endif  // INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_

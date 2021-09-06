@@ -21,11 +21,13 @@ class PollAnswer {
   std::string poll_id;
 
   // The user, who changed the answer to the poll
-  std::shared_ptr<User> user;
+  UserPtr user;
 
   // 0-based identifiers of answer options, chosen by the user.
   // May be empty if the user retracted their vote
   std::vector<int32_t> option_ids;
 };
+
+using PollAnswerPtr = std::shared_ptr<PollAnswer>;
 
 #endif  // INCLUDE_SQBOT_API_POLLANSWER_POLL_ANSWER_H_

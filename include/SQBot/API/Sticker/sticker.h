@@ -35,7 +35,7 @@ class Sticker {
   bool is_animated{};
 
   // OPTIONAL. Sticker thumbnail in the .WEBP or .JPG format
-  std::shared_ptr<PhotoSize> thumb;
+  PhotoSizePtr thumb;
 
   // OPTIONAL. Emoji associated with the sticker
   std::string emoji;
@@ -44,10 +44,12 @@ class Sticker {
   std::string set_name;
 
   // OPTIONAL. For mask stickers, the position where the mask should be placed
-  std::shared_ptr<MaskPosition> mask_position;
+  MaskPositionPtr mask_position;
 
   // OPTIONAL. File size
   int32_t file_size{};
 };
+
+using StickerPtr = std::shared_ptr<Sticker>;
 
 #endif  // INCLUDE_SQBOT_API_STICKER_STICKER_H_

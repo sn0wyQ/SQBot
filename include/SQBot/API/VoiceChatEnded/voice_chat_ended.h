@@ -15,4 +15,6 @@ class VoiceChatEnded {
   int32_t duration;
 };
 
+using VoiceChatEndedPtr = std::shared_ptr<VoiceChatEnded>;
+
 #endif  // INCLUDE_SQBOT_API_VOICECHATENDED_VOICE_CHAT_ENDED_H_

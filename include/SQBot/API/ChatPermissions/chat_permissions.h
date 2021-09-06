@@ -46,4 +46,6 @@ class ChatPermissions {
   bool can_pin_messages;
 };
 
+using ChatPermissionsPtr = std::shared_ptr<ChatPermissions>;
+
 #endif  // INCLUDE_SQBOT_API_CHATPERMISSIONS_CHAT_PERMISSIONS_H_

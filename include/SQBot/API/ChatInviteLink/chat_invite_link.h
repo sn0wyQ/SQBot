@@ -21,7 +21,7 @@ class ChatInviteLink {
   std::string invite_link;
 
   // Creator of the link
-  std::shared_ptr<User> creator;
+  UserPtr creator;
 
   // True, if the link is primary
   bool is_primary{false};
@@ -37,5 +37,7 @@ class ChatInviteLink {
   // simultaneously after joining the chat via this invite link; 1-99999
   int32_t member_limit{};
 };
+
+using ChatInviteLinkPtr = std::shared_ptr<ChatInviteLink>;
 
 #endif  // INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_

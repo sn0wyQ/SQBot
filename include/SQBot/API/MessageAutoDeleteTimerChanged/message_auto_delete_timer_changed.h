@@ -17,4 +17,7 @@ class MessageAutoDeleteTimerChanged {
   int32_t message_auto_delete_time{};
 };
 
+using MessageAutoDeleteTimerChangedPtr =
+    std::shared_ptr<MessageAutoDeleteTimerChanged>;
+
 #endif  // INCLUDE_SQBOT_API_MESSAGEAUTODELETETIMERCHANGED_MESSAGE_AUTO_DELETE_TIMER_CHANGED_H_

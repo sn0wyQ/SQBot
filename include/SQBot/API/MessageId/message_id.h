@@ -15,4 +15,6 @@ class MessageId {
   int32_t message_id;
 };
 
+using MessageIdPtr = std::shared_ptr<MessageId>;
+
 #endif  // INCLUDE_SQBOT_API_MESSAGEID_MESSAGE_ID_H_

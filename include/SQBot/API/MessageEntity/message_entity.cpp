@@ -12,7 +12,7 @@ MessageEntity::MessageEntity(std::string type,
                              int32_t offset,
                              int32_t length,
                              std::string url,
-                             std::shared_ptr<User> user,
+                             UserPtr user,
                              std::string language)
     : type(std::move(type)),
       offset(offset),

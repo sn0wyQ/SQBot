@@ -17,4 +17,6 @@ class VoiceChatScheduled {
   int32_t start_date;
 };
 
+using VoiceChatScheduledPtr = std::shared_ptr<VoiceChatScheduled>;
+
 #endif  // INCLUDE_SQBOT_API_VOICECHATSCHEDULED_VOICE_CHAT_SCHEDULED_H_

@@ -12,4 +12,6 @@ class AbstractReplyMarkup {
   virtual Json ToJson() const = 0;
 };
 
+using AbstractReplyMarkupPtr = std::shared_ptr<AbstractReplyMarkup>;
+
 #endif  // INCLUDE_SQBOT_ABSTRACTREPLYMARKUP_ABSTRACT_REPLY_MARKUP_H_

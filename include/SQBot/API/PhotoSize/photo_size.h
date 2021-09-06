@@ -31,4 +31,6 @@ class PhotoSize {
   int32_t file_size{};
 };
 
+using PhotoSizePtr = std::shared_ptr<PhotoSize>;
+
 #endif  // INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_

@@ -21,7 +21,7 @@ class PreCheckoutQuery {
   std::string id;
 
   // User who sent the query
-  std::shared_ptr<User> from;
+  UserPtr from;
 
   // Three-letter ISO 4217 currency code
   // https://core.telegram.org/bots/payments#supported-currencies
@@ -42,7 +42,9 @@ class PreCheckoutQuery {
   std::string shipping_option_id;
 
   // OPTIONAL. Order info provided by the user
-  std::shared_ptr<OrderInfo> order_info;
+  OrderInfoPtr order_info;
 };
+
+using PreCheckoutQueryPtr = std::shared_ptr<PreCheckoutQuery>;
 
 #endif  // INCLUDE_SQBOT_API_PRECHECKOUTQUERY_PRE_CHECKOUT_QUERY_H_

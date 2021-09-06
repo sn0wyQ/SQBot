@@ -4,7 +4,7 @@
 #include "SQBot/Bot/bot.h"
 #include "SQBot/EventManager/event_manager.h"
 
-void Echo(SQBot::Bot* bot, const std::shared_ptr<Message>& message) {
+void Echo(SQBot::Bot* bot, const MessagePtr& message) {
   bot->SendMessage(message->chat->id,
                    message->text,
                    true,
@@ -19,9 +19,9 @@ int main() {
   std::cout << "Bot ID: " << info->id << std::endl;
 
   bot.GetEventManager()->SetCallbackForMessage(Echo);
-  // Same thing using lambda:
+  // Or same thing using lambda:
   // bot.GetEventManager()->SetCallbackForMessage(
-  //     [](SQBot::Bot* bot, const std::shared_ptr<Message>& message) {
+  //     [](SQBot::Bot* bot, const MessagePtr& message) {
   //       bot->SendMessage(message->chat->id,
   //                        message->text,
   //                        true,

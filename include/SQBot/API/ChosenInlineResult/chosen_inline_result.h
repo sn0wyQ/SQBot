@@ -22,10 +22,10 @@ class ChosenInlineResult {
   std::string result_id;
 
   // The user that chose the result
-  std::shared_ptr<User> from;
+  UserPtr from;
 
   // OPTIONAL. Sender location, only for bots that require user location
-  std::shared_ptr<Location> location;
+  LocationPtr location;
 
   // OPTIONAL. Identifier of the sent inline message.
   // Available only if there is an inline keyboard attached to the message.
@@ -36,5 +36,7 @@ class ChosenInlineResult {
   // The query that was used to obtain the result
   std::string query;
 };
+
+using ChosenInlineResultPtr = std::shared_ptr<ChosenInlineResult>;
 
 #endif  // INCLUDE_SQBOT_API_CHOSENINLINERESULT_CHOSEN_INLINE_RESULT_H_

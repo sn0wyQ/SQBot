@@ -21,4 +21,6 @@ class Dice {
   int32_t value{};
 };
 
+using DicePtr = std::shared_ptr<Dice>;
+
 #endif  // INCLUDE_SQBOT_API_DICE_DICE_H_

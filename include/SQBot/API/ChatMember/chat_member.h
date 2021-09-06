@@ -27,7 +27,7 @@ class ChatMember {
   std::string status;
 
   // Information about the user
-  std::shared_ptr<User> user;
+  UserPtr user;
 
   // True, if the user's presence in the chat is hidden
   bool is_anonymous{false};
@@ -35,5 +35,7 @@ class ChatMember {
   // Optional. Custom title for this user
   std::string custom_title;
 };
+
+using ChatMemberPtr = std::shared_ptr<ChatMember>;
 
 #endif  // INCLUDE_SQBOT_API_CHATMEMBER_CHAT_MEMBER_H_

@@ -34,4 +34,6 @@ class ChatPhoto {
   std::string big_file_unique_id;
 };
 
+using ChatPhotoPtr = std::shared_ptr<ChatPhoto>;
+
 #endif  // INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_

@@ -26,12 +26,12 @@ class CallbackQuery {
   std::string id;
 
   // Sender
-  std::shared_ptr<User> from;
+  UserPtr from;
 
   // OPTIONAL. Message with the callback button that originated the query.
   // Note that message content and message date
   // will not be available if the message is too old
-  std::shared_ptr<Message> message;
+  MessagePtr message;
 
   // OPTIONAL. Identifier of the message sent via the bot in inline mode,
   // that originated the query
@@ -49,5 +49,7 @@ class CallbackQuery {
   // serves as the unique identifier for the game
   std::string game_short_name;
 };
+
+using CallbackQueryPtr = std::shared_ptr<CallbackQuery>;
 
 #endif  // INCLUDE_SQBOT_API_CALLBACKQUERY_CALLBACK_QUERY_H_

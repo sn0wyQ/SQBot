@@ -17,7 +17,7 @@ class Venue {
   explicit Venue(const Json& venue);
 
   // Venue location. Can't be a live location
-  std::shared_ptr<Location> location;
+  LocationPtr location;
 
   // Name of the venue
   std::string title;
@@ -40,5 +40,7 @@ class Venue {
   // https://developers.google.com/maps/documentation/places/web-service/supported_types
   std::string google_place_type;
 };
+
+using VenuePtr = std::shared_ptr<Venue>;
 
 #endif  // INCLUDE_SQBOT_API_VENUE_VENUE_H_

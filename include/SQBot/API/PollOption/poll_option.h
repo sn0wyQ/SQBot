@@ -20,4 +20,6 @@ class PollOption {
   int32_t voter_count{};
 };
 
+using PollOptionPtr = std::shared_ptr<PollOption>;
+
 #endif  // INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_

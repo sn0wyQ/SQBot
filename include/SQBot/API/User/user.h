@@ -44,4 +44,6 @@ class User {
   bool supports_inline_queries{};
 };
 
+using UserPtr = std::shared_ptr<User>;
+
 #endif  // INCLUDE_SQBOT_API_USER_USER_H_

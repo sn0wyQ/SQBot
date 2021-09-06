@@ -53,6 +53,7 @@ set(SOURCES
         include/SQBot/API/Sticker/sticker.cpp
         include/SQBot/API/SuccessfulPayment/successful_payment.cpp
         include/SQBot/API/Update/update.cpp
+        include/SQBot/API/UserProfilePhotos/user_profile_photos.cpp
         include/SQBot/API/User/user.cpp
         include/SQBot/API/Video/video.cpp
         include/SQBot/API/VideoNote/video_note.cpp

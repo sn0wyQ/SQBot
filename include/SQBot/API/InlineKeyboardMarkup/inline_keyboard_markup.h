@@ -22,8 +22,9 @@ class InlineKeyboardMarkup : public AbstractReplyMarkup {
 
   // Array of button rows, each represented by an Array
   // of InlineKeyboardButton objects
-  std::vector<std::vector<std::shared_ptr<InlineKeyboardButton>>>
-      inline_keyboard;
+  std::vector<std::vector<InlineKeyboardButtonPtr>> inline_keyboard;
 };
+
+using InlineKeyboardMarkupPtr = std::shared_ptr<InlineKeyboardMarkup>;
 
 #endif  // INCLUDE_SQBOT_API_INLINEKEYBOARDMARKUP_INLINE_KEYBOARD_MARKUP_H_

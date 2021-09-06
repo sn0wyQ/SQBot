@@ -44,7 +44,9 @@ class Audio {
   int32_t file_size{};
 
   // OPTIONAL. Thumbnail of the album cover to which the music file belongs
-  std::shared_ptr<PhotoSize> thumb;
+  PhotoSizePtr thumb;
 };
+
+using AudioPtr = std::shared_ptr<Audio>;
 
 #endif  // INCLUDE_SQBOT_API_AUDIO_AUDIO_H_

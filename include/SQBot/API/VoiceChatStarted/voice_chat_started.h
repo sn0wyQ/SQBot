@@ -11,4 +11,6 @@ class VoiceChatStarted {
   explicit VoiceChatStarted(const Json& voice_chat_started);
 };
 
+using VoiceChatStartedPtr = std::shared_ptr<VoiceChatStarted>;
+
 #endif  // INCLUDE_SQBOT_API_VOICECHATSTARTED_VOICE_CHAT_STARTED_H_

@@ -21,7 +21,7 @@ class MessageEntity {
                 int32_t offset,
                 int32_t length,
                 std::string url = "",
-                std::shared_ptr<User> user = {},
+                UserPtr user = {},
                 std::string language = "");
 
   Json ToJson() const;
@@ -47,10 +47,12 @@ class MessageEntity {
   std::string url;
 
   // OPTIONAL. For “text_mention” only, the mentioned user
-  std::shared_ptr<User> user;
+  UserPtr user;
 
   // OPTIONAL. For “pre” only, the programming language of the entity text
   std::string language;
 };
+
+using MessageEntityPtr = std::shared_ptr<MessageEntity>;
 
 #endif  // INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_

@@ -26,7 +26,9 @@ class OrderInfo {
   std::string email;
 
   // Optional. User's shipping address
-  std::shared_ptr<ShippingAddress> shipping_address;
+  ShippingAddressPtr shipping_address;
 };
+
+using OrderInfoPtr = std::shared_ptr<OrderInfo>;
 
 #endif  // INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_

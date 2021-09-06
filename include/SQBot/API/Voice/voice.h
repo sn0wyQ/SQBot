@@ -31,4 +31,6 @@ class Voice {
   int32_t file_size{};
 };
 
+using VoicePtr = std::shared_ptr<Voice>;
+
 #endif  // INCLUDE_SQBOT_API_VOICE_VOICE_H_

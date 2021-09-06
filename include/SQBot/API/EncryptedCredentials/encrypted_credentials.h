@@ -29,4 +29,6 @@ class EncryptedCredentials {
   std::string secret;
 };
 
+using EncryptedCredentialsPtr = std::shared_ptr<EncryptedCredentials>;
+
 #endif  // INCLUDE_SQBOT_API_ENCRYPTEDCREDENTIALS_ENCRYPTED_CREDENTIALS_H_

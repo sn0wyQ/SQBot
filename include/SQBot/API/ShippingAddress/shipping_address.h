@@ -32,4 +32,6 @@ class ShippingAddress {
   std::string post_code;
 };
 
+using ShippingAddressPtr = std::shared_ptr<ShippingAddress>;
+
 #endif  // INCLUDE_SQBOT_API_SHIPPINGADDRESS_SHIPPING_ADDRESS_H_

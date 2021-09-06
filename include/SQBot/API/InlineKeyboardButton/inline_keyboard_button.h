@@ -24,7 +24,7 @@ class InlineKeyboardButton {
   // TODO(sn0wyQ): Add LoginUrl class
   // OPTIONAL. An HTTP URL used to automatically authorize the user.
   // Can be used as a replacement for the Telegram Login Widget
-  // std::shared_ptr<LoginUrl> login_url;
+  // LoginUrlPtr login_url;
 
   // OPTIONAL. Data to be sent in a callback query to the bot
   // when button is pressed, 1-64 bytes
@@ -52,12 +52,14 @@ class InlineKeyboardButton {
   // OPTIONAL. Description of the game that will be launched when the user
   // presses the button.
   // NOTE: This type of button MUST always be the first button in the first row
-  // std::shared_ptr<CallbackGame> callback_game;
+  // CallbackGamePtr callback_game;
 
   // Optional. Specify True, to send a Pay button
   // (https://core.telegram.org/bots/api#payments)
   // NOTE: This type of button must always be the first button in the first row
   bool pay{false};
 };
+
+using InlineKeyboardButtonPtr = std::shared_ptr<InlineKeyboardButton>;
 
 #endif  // INCLUDE_SQBOT_API_INLINEKEYBOARDBUTTON_INLINE_KEYBOARD_BUTTON_H_

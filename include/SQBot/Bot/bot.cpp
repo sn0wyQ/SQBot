@@ -65,7 +65,7 @@ std::shared_ptr<EventManager> Bot::GetEventManager() {
   return event_manager_;
 }
 
-std::shared_ptr<User> Bot::GetMe() {
+UserPtr Bot::GetMe() {
   try {
     return Utils::GetPtr<User>(Request("getMe"), "result");
   } catch (const std::exception& e) {
@@ -73,7 +73,7 @@ std::shared_ptr<User> Bot::GetMe() {
   }
 }
 
-std::shared_ptr<Chat> Bot::GetChat(int64_t chat_id) {
+ChatPtr Bot::GetChat(int64_t chat_id) {
   try {
     return Utils::GetPtr<Chat>(
         Request("getChat", {{"chat_id", chat_id}}), "result");
@@ -82,16 +82,15 @@ std::shared_ptr<Chat> Bot::GetChat(int64_t chat_id) {
   }
 }
 
-std::shared_ptr<Message>
-Bot::SendMessage(const std::string& chat_id,
-                 const std::string& text,
-                 bool disable_notification,
-                 bool disable_web_page_preview,
-                 int32_t reply_to_message_id,
-                 bool allow_sending_without_reply,
-                 const std::string& parse_mode,
-                 const std::vector<std::shared_ptr<MessageEntity>>& entities,
-                 const std::shared_ptr<AbstractReplyMarkup>& reply_markup) {
+MessagePtr Bot::SendMessage(const std::string& chat_id,
+                            const std::string& text,
+                            bool disable_notification,
+                            bool disable_web_page_preview,
+                            int32_t reply_to_message_id,
+                            bool allow_sending_without_reply,
+                            const std::string& parse_mode,
+                            const std::vector<MessageEntityPtr>& entities,
+                            const AbstractReplyMarkupPtr& reply_markup) {
   Json params;
   params["chat_id"] = chat_id;
   params["text"] = text;
@@ -121,7 +120,7 @@ Bot::SendMessage(const std::string& chat_id,
   }
 }
 
-void Bot::HandleUpdate(const std::shared_ptr<Update>& update) {
+void Bot::HandleUpdate(const UpdatePtr& update) {
   event_manager_->CallCallbackFor(this, update);
 }
 

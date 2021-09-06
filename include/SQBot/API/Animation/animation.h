@@ -35,7 +35,7 @@ class Animation {
   int32_t duration{};
 
   // OPTIONAL. Animation thumbnail as defined by sender
-  std::shared_ptr<PhotoSize> thumb;
+  PhotoSizePtr thumb;
 
   // OPTIONAL. Original animation filename as defined by sender
   std::string file_name;
@@ -46,5 +46,7 @@ class Animation {
   // OPTIONAL. File size
   int32_t file_size{};
 };
+
+using AnimationPtr = std::shared_ptr<Animation>;
 
 #endif  // INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_

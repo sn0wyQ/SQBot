@@ -30,4 +30,6 @@ class PassportFile {
   int32_t file_date{};
 };
 
+using PassportFilePtr = std::shared_ptr<PassportFile>;
+
 #endif  // INCLUDE_SQBOT_API_PASSPORTFILE_PASSPORT_FILE_H_

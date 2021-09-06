@@ -67,26 +67,25 @@ class Bot {
 
   // A simple method for testing your bot's auth token.
   // Returns basic information about the bot in form of a User object
-  std::shared_ptr<User> GetMe();
+  UserPtr GetMe();
 
   // Use this method to get up-to-date information about the chat
   // (current name of the user for one-on-one conversations,
   // current username of a user, group or channel, etc.).
   // Returns a Chat object on success
-  std::shared_ptr<Chat> GetChat(int64_t chat_id);
+  ChatPtr GetChat(int64_t chat_id);
 
   // Use this method to send text messages.
   // On success, sent Message is returned
-  std::shared_ptr<Message>
-  SendMessage(int64_t chat_id,
-              const std::string& text,
-              bool disable_notification = false,
-              bool disable_web_page_preview = false,
-              int32_t reply_to_message_id = 0,
-              bool allow_sending_without_reply = false,
-              const std::string& parse_mode = "",
-              const std::vector<std::shared_ptr<MessageEntity>>& entities = {},
-              const std::shared_ptr<AbstractReplyMarkup>& reply_markup = {}) {
+  MessagePtr SendMessage(int64_t chat_id,
+                         const std::string& text,
+                         bool disable_notification = false,
+                         bool disable_web_page_preview = false,
+                         int32_t reply_to_message_id = 0,
+                         bool allow_sending_without_reply = false,
+                         const std::string& parse_mode = "",
+                         const std::vector<MessageEntityPtr>& entities = {},
+                         const AbstractReplyMarkupPtr& reply_markup = {}) {
     return SendMessage(std::to_string(chat_id),
                        text,
                        disable_notification,
@@ -100,16 +99,15 @@ class Bot {
 
   // Use this method to send text messages.
   // On success, sent Message is returned
-  std::shared_ptr<Message>
-  SendMessage(const std::string& chat_id,
-              const std::string& text,
-              bool disable_notification = false,
-              bool disable_web_page_preview = false,
-              int32_t reply_to_message_id = 0,
-              bool allow_sending_without_reply = false,
-              const std::string& parse_mode = "",
-              const std::vector<std::shared_ptr<MessageEntity>>& entities = {},
-              const std::shared_ptr<AbstractReplyMarkup>& reply_markup = {});
+  MessagePtr SendMessage(const std::string& chat_id,
+                         const std::string& text,
+                         bool disable_notification = false,
+                         bool disable_web_page_preview = false,
+                         int32_t reply_to_message_id = 0,
+                         bool allow_sending_without_reply = false,
+                         const std::string& parse_mode = "",
+                         const std::vector<MessageEntityPtr>& entities = {},
+                         const AbstractReplyMarkupPtr& reply_markup = {});
 
  protected:
   // This method is called every time when response from Telegram API has
