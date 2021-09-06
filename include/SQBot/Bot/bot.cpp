@@ -19,8 +19,8 @@ bool Bot::IsLastRequestSuccessful() const {
 void Bot::StartReceivingUpdates() {
   // We want only one thread receiving updates
   if (is_receiving_updates_) {
-    // TODO(sn0wyQ): throw some error instead
-    throw;
+    throw Exception(ExceptionType::kUndefinedBehaviour,
+                    "Bot is already receiving updates");
   }
 
   is_receiving_updates_ = true;
@@ -33,8 +33,8 @@ void Bot::StartReceivingUpdates() {
 std::shared_ptr<std::thread> Bot::StartReceivingUpdatesInDedicatedThread() {
   // We want only one thread receiving updates
   if (is_receiving_updates_) {
-    // TODO(sn0wyQ): throw some error instead
-    throw;
+    throw Exception(ExceptionType::kUndefinedBehaviour,
+                    "Bot is already receiving updates");
   }
 
   dedicated_updates_thread_ =
@@ -49,8 +49,8 @@ void Bot::StopReceivingUpdates(bool safe_stop) {
     if (!dedicated_updates_thread_->joinable()) {
       // We try to StopReceivingUpdates from dedicated thread itself which makes
       // impossible to safely stop receiving updates
-      // TODO(sn0wyQ): throw some error instead
-      throw;
+      throw Exception(ExceptionType::kImpossibleToStopSafely,
+                      "Can't join dedicated updates thread to the current one");
     }
     dedicated_updates_thread_->join();
     dedicated_updates_thread_.reset();
@@ -178,21 +178,21 @@ Json Bot::Request(const std::string& request, const Json& params) {
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteFunction);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
 
+  // If request is successful we will set this variable to 'true' before return
+  is_last_request_successful_ = false;
   auto result = curl_easy_perform(curl);
   curl_easy_cleanup(curl);
+
   if (result != CURLE_OK) {
-    // TODO(sn0wyQ): throw some error instead
-    return {};
+    throw Exception(ExceptionType::kCurlError,
+                    "code " + std::to_string(result));
   }
 
   Json response = Json::parse(response_string);
 
-  // If request is successful we will set this variable to 'true' before return
-  is_last_request_successful_ = false;
-
   if (!response.contains("ok")) {
-    // TODO(sn0wyQ): throw some error instead
-    return {};
+    throw Exception(ExceptionType::kRequestError,
+                    "Telegram API response doesn't contain field 'ok'");
   }
 
   if (response.at("ok") == false) {

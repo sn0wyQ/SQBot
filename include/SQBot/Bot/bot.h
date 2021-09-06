@@ -2,13 +2,10 @@
 #define INCLUDE_SQBOT_BOT_BOT_H_
 
 #include <algorithm>
-#include <cassert>
 #include <chrono>
-#include <exception>
 #include <iostream>
 #include <memory>
 #include <string>
-#include <sstream>
 #include <thread>
 #include <utility>
 #include <vector>
@@ -23,6 +20,7 @@
 #include "../API/User/user.h"
 
 #include "../AbstractReplyMarkup/abstract_reply_markup.h"
+#include "../Exception/exception.h"
 
 class EventManager;
 
