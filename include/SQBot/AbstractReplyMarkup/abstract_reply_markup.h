@@ -3,8 +3,8 @@
 
 #include "../../nlohmann/json.h"
 
-// Children: InlineKeyboardMarkup
-// TODO(sn0wyQ): add ReplyKeyboardMarkup, ReplyKeyboardRemove and ForceReply
+// Children: InlineKeyboardMarkup, ReplyKeyboardMarkup,
+// ReplyKeyboardRemove and ForceReply
 class AbstractReplyMarkup {
  public:
   AbstractReplyMarkup() = default;

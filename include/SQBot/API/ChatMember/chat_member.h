@@ -32,7 +32,7 @@ class ChatMember {
   // True, if the user's presence in the chat is hidden
   bool is_anonymous{false};
 
-  // Optional. Custom title for this user
+  // OPTIONAL. Custom title for this user
   std::string custom_title;
 };
 
