@@ -5,7 +5,7 @@ bool Utils::StartsWith(const std::string& text, const std::string& prefix) {
     return false;
   }
 
-  for (int i = 0; i < prefix.length(); ++i) {
+  for (size_t i = 0; i < prefix.length(); ++i) {
     if (text[i] != prefix[i]) {
       return false;
     }

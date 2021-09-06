@@ -18,7 +18,7 @@ enum class ExceptionType {
 };
 
 const std::array<std::string,
-                  static_cast<int>(ExceptionType::kNumberOfExceptionTypes)>
+                  static_cast<int32_t>(ExceptionType::kNumberOfExceptionTypes)>
     exception_types_strings {
   "Curl error",
   "Impossible to stop safely",
