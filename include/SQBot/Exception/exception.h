@@ -1,5 +1,5 @@
-#ifndef EXCEPTION_H_
-#define EXCEPTION_H_
+#ifndef INCLUDE_SQBOT_EXCEPTION_EXCEPTION_H_
+#define INCLUDE_SQBOT_EXCEPTION_EXCEPTION_H_
 
 #include <array>
 #include <cassert>
@@ -39,4 +39,4 @@ class Exception : std::exception {
 
 }  // namespace SQBot
 
-#endif  // EXCEPTION_H_
+#endif  // INCLUDE_SQBOT_EXCEPTION_EXCEPTION_H_
