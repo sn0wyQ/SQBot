@@ -14,6 +14,7 @@ find_package(CURL REQUIRED)
 set(SOURCES
         include/SQBot/API/Animation/animation.cpp
         include/SQBot/API/Audio/audio.cpp
+        include/SQBot/API/CallbackGame/callback_game.cpp
         include/SQBot/API/CallbackQuery/callback_query.cpp
         include/SQBot/API/ChatInviteLink/chat_invite_link.cpp
         include/SQBot/API/ChatLocation/chat_location.cpp
@@ -29,6 +30,7 @@ set(SOURCES
         include/SQBot/API/EncryptedCredentials/encrypted_credentials.cpp
         include/SQBot/API/EncryptedPassportElement/encrypted_passport_element.cpp
         include/SQBot/API/File/file.cpp
+        include/SQBot/API/ForceReply/force_reply.cpp
         include/SQBot/API/Game/game.cpp
         include/SQBot/API/InlineKeyboardButton/inline_keyboard_button.cpp
         include/SQBot/API/InlineKeyboardMarkup/inline_keyboard_markup.cpp
@@ -74,7 +76,7 @@ set(SOURCES
         include/SQBot/EventManager/event_manager.cpp
         include/SQBot/Exception/exception.cpp
         include/SQBot/Utils/utils.cpp
-        include/SQBot/API/ForceReply/force_reply.cpp include/SQBot/API/ForceReply/force_reply.h include/SQBot/API/CallbackGame/callback_game.cpp include/SQBot/API/CallbackGame/callback_game.h)
+        )
 
 set(LIBS
         ${CURL_LIBRARY})
