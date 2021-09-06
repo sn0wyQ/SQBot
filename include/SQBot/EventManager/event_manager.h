@@ -1,5 +1,5 @@
-#ifndef EVENT_LISTENER_H_
-#define EVENT_LISTENER_H_
+#ifndef INCLUDE_SQBOT_EVENTMANAGER_EVENT_MANAGER_H_
+#define INCLUDE_SQBOT_EVENTMANAGER_EVENT_MANAGER_H_
 
 #include <functional>
 #include <map>
@@ -142,4 +142,4 @@ class EventManager {
       callback_to_chat_member_;
 };
 
-#endif  // EVENT_LISTENER_H_
+#endif  // INCLUDE_SQBOT_EVENTMANAGER_EVENT_MANAGER_H_
