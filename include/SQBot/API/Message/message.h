@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../Animation/animation.h"
 #include "../Audio/audio.h"
@@ -111,7 +111,7 @@ class Message {
 
   // OPTIONAL. For text messages, special entities like usernames, URLs,
   // bot commands, etc. that appear in the text
-  std::vector<MessageEntity> entities;
+  std::vector<std::shared_ptr<MessageEntity>> entities;
 
   // OPTIONAL. Message is an animation, information about the animation.
   // For backward compatibility, when this field is set,

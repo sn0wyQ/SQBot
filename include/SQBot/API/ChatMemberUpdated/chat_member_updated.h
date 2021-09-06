@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../ChatInviteLink/chat_invite_link.h"
 #include "../ChatMember/chat_member.h"

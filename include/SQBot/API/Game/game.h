@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../Animation/animation.h"
 #include "../MessageEntity/message_entity.h"

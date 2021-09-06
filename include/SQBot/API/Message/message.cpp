@@ -21,22 +21,28 @@ Message::Message(const Json& message)
     media_group_id(Utils::GetValue<std::string>(message, "media_group_id")),
     author_signature(Utils::GetValue<std::string>(message, "author_signature")),
     text(Utils::GetValue<std::string>(message, "text")),
+    entities(Utils::GetPtrsArray<MessageEntity>(message, "entities")),
     animation(Utils::GetPtr<Animation>(message, "animation")),
     audio(Utils::GetPtr<Audio>(message, "audio")),
     document(Utils::GetPtr<Document>(message, "document")),
+    photo(Utils::GetPtrsArray<PhotoSize>(message, "photo")),
     sticker(Utils::GetPtr<Sticker>(message, "sticker")),
     video(Utils::GetPtr<Video>(message, "video")),
     video_note(Utils::GetPtr<VideoNote>(message, "video_note")),
     voice(Utils::GetPtr<Voice>(message, "voice")),
     caption(Utils::GetValue<std::string>(message, "caption")),
+    caption_entities(
+        Utils::GetPtrsArray<MessageEntity>(message, "caption_entities")),
     contact(Utils::GetPtr<Contact>(message, "contact")),
     dice(Utils::GetPtr<Dice>(message, "dice")),
     game(Utils::GetPtr<Game>(message, "game")),
     poll(Utils::GetPtr<Poll>(message, "poll")),
     venue(Utils::GetPtr<Venue>(message, "venue")),
     location(Utils::GetPtr<Location>(message, "location")),
+    new_chat_members(Utils::GetPtrsArray<User>(message, "new_chat_members")),
     left_chat_member(Utils::GetPtr<User>(message, "left_chat_member")),
     new_chat_title(Utils::GetValue<std::string>(message, "new_chat_title")),
+    new_chat_photo(Utils::GetPtrsArray<PhotoSize>(message, "new_chat_photo")),
     delete_chat_photo(Utils::GetValue<bool>(message, "delete_chat_photo")),
     group_chat_created(Utils::GetValue<bool>(message, "group_chat_created")),
     supergroup_chat_created(
@@ -68,10 +74,5 @@ Message::Message(const Json& message)
     voice_chat_participants_invited(
         Utils::GetPtr<VoiceChatParticipantsInvited>(
             message, "voice_chat_participants_invited")),
-    reply_markup(Utils::GetPtr<InlineKeyboardMarkup>(message, "reply_markup")) {
-  // TODO(sn0wyQ): set 'std::vector<MessageEntity> entities'
-  // TODO(sn0wyQ): set 'std::vector<PhotoSize> photo'
-  // TODO(sn0wyQ): set 'std::vector<MessageEntity> caption_entities'
-  // TODO(sn0wyQ): set 'std::vector<User> new_chat_members'
-  // TODO(sn0wyQ): set 'std::vector<PhotoSize> new_chat_photo'
-}
+    reply_markup(
+        Utils::GetPtr<InlineKeyboardMarkup>(message, "reply_markup")) {}

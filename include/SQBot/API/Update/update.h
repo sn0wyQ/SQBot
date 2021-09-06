@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../CallbackQuery/callback_query.h"
 #include "../ChatMemberUpdated/chat_member_updated.h"

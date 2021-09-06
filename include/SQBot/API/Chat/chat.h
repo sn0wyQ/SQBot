@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../ChatLocation/chat_location.h"
 #include "../ChatPermissions/chat_permissions.h"

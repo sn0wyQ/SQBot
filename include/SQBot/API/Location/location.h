@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_LOCATION_LOCATION_H_
 #define INCLUDE_SQBOT_API_LOCATION_LOCATION_H_
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"
 

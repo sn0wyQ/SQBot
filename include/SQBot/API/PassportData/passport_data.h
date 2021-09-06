@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "json.h"
+#include "../../../nlohmann/json.h"
 
 #include "../EncryptedCredentials/encrypted_credentials.h"
 #include "../EncryptedPassportElement/encrypted_passport_element.h"
