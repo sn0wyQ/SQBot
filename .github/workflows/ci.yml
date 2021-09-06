@@ -21,13 +21,13 @@ jobs:
     - name: Run cppcheck (unused functions)
       working-directory: ${{runner.workspace}}/${{github.event.repository.name}}
       shell: bash
-      run: cppcheck --enable=unusedFunction --language=c++ $(find -name "*.h" -o -name "*.cpp")
+      run: cppcheck --enable=unusedFunction --language=c++ $(find -name "*.h" -o -name "*.cpp") --suppressions-list=suppressions.txt -iinclude/nlohmann
       continue-on-error: true
 
     - name: Run cppcheck (warnings and preformance issues)
       working-directory: ${{runner.workspace}}/${{github.event.repository.name}}
       shell: bash
-      run: cppcheck --enable=warning,performance --language=c++ $(find -name "*.h" -o -name "*.cpp")
+      run: cppcheck --enable=warning,performance --language=c++ $(find -name "*.h" -o -name "*.cpp") --suppressions-list=suppressions.txt -iinclude/nlohmann
       continue-on-error: true
 
     - name: Run cpplint
