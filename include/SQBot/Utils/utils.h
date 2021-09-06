@@ -65,7 +65,7 @@ std::vector<std::shared_ptr<T>> GetPtrsArray(const Json& json,
     std::vector<std::shared_ptr<T>> result;
     const auto& array_in_json = json.at(key);
     for (const auto& object : array_in_json) {
-      result.push_back(std::make_shared<T>(object));
+      result.emplace_back(object);
     }
     return result;
   } catch (const std::exception& e) {

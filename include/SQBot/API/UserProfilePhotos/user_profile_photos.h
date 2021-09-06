@@ -1,7 +1,8 @@
-#ifndef USER_PROFILE_PHOTOTS_H_
-#define USER_PROFILE_PHOTOTS_H_
+#ifndef INCLUDE_SQBOT_API_USERPROFILEPHOTOS_USER_PROFILE_PHOTOS_H_
+#define INCLUDE_SQBOT_API_USERPROFILEPHOTOS_USER_PROFILE_PHOTOS_H_
 
 #include <memory>
+#include <utility>
 #include <vector>
 
 #include "../../../nlohmann/json.h"
@@ -25,4 +26,4 @@ class UserProfilePhotos {
 
 using UserProfilePhotosPtr = std::shared_ptr<UserProfilePhotos>;
 
-#endif  // USER_PROFILE_PHOTOTS_H_
+#endif  // INCLUDE_SQBOT_API_USERPROFILEPHOTOS_USER_PROFILE_PHOTOS_H_

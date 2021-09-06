@@ -17,7 +17,7 @@ class ProximityAlertTriggered {
   explicit ProximityAlertTriggered(const Json& proximity_alert_triggered);
 
   // User that triggered the alert
- UserPtr traveler;
+  UserPtr traveler;
 
   // User that set the alert
   UserPtr watcher;

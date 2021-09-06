@@ -1,5 +1,5 @@
-#ifndef REPLY_KEYBOARD_REMOVE_H_
-#define REPLY_KEYBOARD_REMOVE_H_
+#ifndef INCLUDE_SQBOT_API_REPLYKEYBOARDREMOVE_REPLY_KEYBOARD_REMOVE_H_
+#define INCLUDE_SQBOT_API_REPLYKEYBOARDREMOVE_REPLY_KEYBOARD_REMOVE_H_
 
 #include <memory>
 
@@ -37,4 +37,4 @@ class ReplyKeyboardRemove : public AbstractReplyMarkup {
 
 using ReplyKeyboardRemovePtr = std::shared_ptr<ReplyKeyboardRemove>;
 
-#endif  // REPLY_KEYBOARD_REMOVE_H_
+#endif  // INCLUDE_SQBOT_API_REPLYKEYBOARDREMOVE_REPLY_KEYBOARD_REMOVE_H_

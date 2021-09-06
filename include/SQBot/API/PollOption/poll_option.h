@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
 #define INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"

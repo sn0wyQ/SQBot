@@ -30,7 +30,7 @@ Json ReplyKeyboardMarkup::ToJson() const {
     for (const auto& button : row) {
       current_row.push_back(button->ToJson());
     }
-    reply_keyboard_json.push_back(current_row);
+    reply_keyboard_json.push_back(std::move(current_row));
   }
   reply_keyboard_markup["keyboard"] = reply_keyboard_json;
 

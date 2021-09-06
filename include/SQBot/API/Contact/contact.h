@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
 #define INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"

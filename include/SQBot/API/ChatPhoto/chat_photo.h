@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
 #define INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"

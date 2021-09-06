@@ -1,5 +1,5 @@
-#ifndef FORCE_REPLY_H_
-#define FORCE_REPLY_H_
+#ifndef INCLUDE_SQBOT_API_FORCEREPLY_FORCE_REPLY_H_
+#define INCLUDE_SQBOT_API_FORCEREPLY_FORCE_REPLY_H_
 
 #include <memory>
 #include <string>
@@ -38,4 +38,4 @@ class ForceReply : public AbstractReplyMarkup {
 
 using ForceReplyPtr = std::shared_ptr<ForceReply>;
 
-#endif  // FORCE_REPLY_H_
+#endif  // INCLUDE_SQBOT_API_FORCEREPLY_FORCE_REPLY_H_

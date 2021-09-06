@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_API_DICE_DICE_H_
 #define INCLUDE_SQBOT_API_DICE_DICE_H_
 
+#include <memory>
 #include <string>
 
 #include "../../../nlohmann/json.h"

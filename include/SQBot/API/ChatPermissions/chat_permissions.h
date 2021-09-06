@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SQBOT_API_CHATPERMISSIONS_CHAT_PERMISSIONS_H_
 #define INCLUDE_SQBOT_API_CHATPERMISSIONS_CHAT_PERMISSIONS_H_
 
+#include <memory>
+
 #include "../../../nlohmann/json.h"
 
 #include "../../Utils/utils.h"

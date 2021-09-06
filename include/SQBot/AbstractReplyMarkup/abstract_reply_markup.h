@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SQBOT_ABSTRACTREPLYMARKUP_ABSTRACT_REPLY_MARKUP_H_
 #define INCLUDE_SQBOT_ABSTRACTREPLYMARKUP_ABSTRACT_REPLY_MARKUP_H_
 
+#include <memory>
+
 #include "../../nlohmann/json.h"
 
 // Children: InlineKeyboardMarkup, ReplyKeyboardMarkup,
