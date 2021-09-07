@@ -2,7 +2,8 @@
 
 Audio::Audio(const Json& audio)
   : file_id(SQBot::Utils::GetValue<std::string>(audio, "file_id")),
-    file_unique_id(SQBot::Utils::GetValue<std::string>(audio, "file_unique_id")),
+    file_unique_id(SQBot::Utils::GetValue<std::string>(
+        audio, "file_unique_id")),
     duration(SQBot::Utils::GetValue<int32_t>(audio, "duration")),
     performer(SQBot::Utils::GetValue<std::string>(audio, "performer")),
     title(SQBot::Utils::GetValue<std::string>(audio, "title")),

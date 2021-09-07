@@ -2,7 +2,8 @@
 
 Animation::Animation(const Json& animation)
   : file_id(SQBot::Utils::GetValue<std::string>(animation, "file_id")),
-    file_unique_id(SQBot::Utils::GetValue<std::string>(animation, "file_unique_id")),
+    file_unique_id(SQBot::Utils::GetValue<std::string>(
+        animation, "file_unique_id")),
     width(SQBot::Utils::GetValue<int32_t>(animation, "width")),
     height(SQBot::Utils::GetValue<int32_t>(animation, "height")),
     duration(SQBot::Utils::GetValue<int32_t>(animation, "duration")),

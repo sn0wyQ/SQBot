@@ -1,7 +1,8 @@
 #include "reply_keyboard_remove.h"
 
 ReplyKeyboardRemove::ReplyKeyboardRemove(const Json& reply_keyboard_remove)
-  : selective(SQBot::Utils::GetValue<bool>(reply_keyboard_remove, "selective")) {}
+  : selective(SQBot::Utils::GetValue<bool>(
+      reply_keyboard_remove, "selective")) {}
 
 Json ReplyKeyboardRemove::ToJson() const {
   Json reply_keyboard_remove;

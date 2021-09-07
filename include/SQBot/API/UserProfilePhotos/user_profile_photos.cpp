@@ -1,7 +1,8 @@
 #include "user_profile_photos.h"
 
 UserProfilePhotos::UserProfilePhotos(const Json& user_profile_photos)
-  : total_count(SQBot::Utils::GetValue<int32_t>(user_profile_photos, "total_count")) {
+  : total_count(SQBot::Utils::GetValue<int32_t>(
+        user_profile_photos, "total_count")) {
   if (user_profile_photos.contains("photos")) {
     const Json& photos_json = user_profile_photos.at("photos");
     for (const auto& row : photos_json) {

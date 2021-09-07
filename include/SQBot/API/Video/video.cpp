@@ -2,7 +2,8 @@
 
 Video::Video(const Json& video)
     : file_id(SQBot::Utils::GetValue<std::string>(video, "file_id")),
-      file_unique_id(SQBot::Utils::GetValue<std::string>(video, "file_unique_id")),
+      file_unique_id(SQBot::Utils::GetValue<std::string>(
+          video, "file_unique_id")),
       width(SQBot::Utils::GetValue<int32_t>(video, "width")),
       height(SQBot::Utils::GetValue<int32_t>(video, "height")),
       duration(SQBot::Utils::GetValue<int32_t>(video, "duration")),
