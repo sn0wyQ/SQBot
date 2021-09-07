@@ -1,14 +1,14 @@
 #include "reply_keyboard_markup.h"
 
 ReplyKeyboardMarkup::ReplyKeyboardMarkup(const Json& reply_keyboard_markup)
-  : resize_keyboard(
-      Utils::GetValue<bool>(reply_keyboard_markup, "resize_keyboard")),
-    one_time_keyboard(
-        Utils::GetValue<bool>(reply_keyboard_markup, "resize_keyboard")),
-    input_field_placeholder(
-        Utils::GetValue<std::string>(
+  : resize_keyboard(SQBot::Utils::GetValue<bool>(
+        reply_keyboard_markup, "resize_keyboard")),
+    one_time_keyboard(SQBot::Utils::GetValue<bool>(
+        reply_keyboard_markup, "resize_keyboard")),
+    input_field_placeholder(SQBot::Utils::GetValue<std::string>(
             reply_keyboard_markup, "input_field_placeholder")),
-    selective(Utils::GetValue<bool>(reply_keyboard_markup, "selective")) {
+    selective(SQBot::Utils::GetValue<bool>(
+        reply_keyboard_markup, "selective")) {
   if (reply_keyboard_markup.contains("keyboard")) {
     const Json& keyboard_json = reply_keyboard_markup.at("keyboard");
     for (const auto& row : keyboard_json) {

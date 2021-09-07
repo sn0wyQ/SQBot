@@ -1,12 +1,12 @@
 #include "message_entity.h"
 
 MessageEntity::MessageEntity(const Json& message_entity)
-  : type(Utils::GetValue<std::string>(message_entity, "type")),
-    offset(Utils::GetValue<int32_t>(message_entity, "offset")),
-    length(Utils::GetValue<int32_t>(message_entity, "length")),
-    url(Utils::GetValue<std::string>(message_entity, "url")),
-    user(Utils::GetPtr<User>(message_entity, "user")),
-    language(Utils::GetValue<std::string>(message_entity, "language")) {}
+  : type(SQBot::Utils::GetValue<std::string>(message_entity, "type")),
+    offset(SQBot::Utils::GetValue<int32_t>(message_entity, "offset")),
+    length(SQBot::Utils::GetValue<int32_t>(message_entity, "length")),
+    url(SQBot::Utils::GetValue<std::string>(message_entity, "url")),
+    user(SQBot::Utils::GetPtr<User>(message_entity, "user")),
+    language(SQBot::Utils::GetValue<std::string>(message_entity, "language")) {}
 
 MessageEntity::MessageEntity(std::string type,
                              int32_t offset,

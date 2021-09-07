@@ -36,15 +36,21 @@ class EventManager {
   void SetCallbackForBotCommand(const std::string& command,
       std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func);
 
+  // Sets |func| a callback for update with message.
+  // NOTE! Priority of this callback is lower than priority of callbacks for
+  // BotCommand
+  void SetCallbackForMessageFirstWordIs(const std::string& first_word,
+      std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func);
+
   // Sets |func| a callback for messages starting with |prefix|.
-  // NOTE! Priority of this callback is lower than priority of callback for
-  // kBotCommand event that has a callback
+  // NOTE! Priority of this callback is lower than priority of callbacks for
+  // BotCommand and MessageFirstWordIs
   void SetCallbackForMessageStartsWith(const std::string& prefix,
       std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func);
 
   // Sets |func| a callback for update with message.
   // NOTE! Priority of this callback is lower than priority of callbacks for
-  // kBotCommand and kMessageStartsWith events
+  // BotCommand, MessageFirstWordIs and MessageStartsWith
   void SetCallbackForMessage(
       std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)> func);
 
@@ -109,6 +115,11 @@ class EventManager {
                      std::function<void(SQBot::Bot*,
                                         const std::shared_ptr<Message>&)>>
       callbacks_to_bot_commands_;
+
+  std::unordered_map<std::string,
+                     std::function<void(SQBot::Bot*,
+                                        const std::shared_ptr<Message>&)>>
+      callbacks_to_message_first_word_is_;
 
   std::map<std::string,
            std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)>>

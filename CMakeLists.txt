@@ -11,7 +11,7 @@ add_compile_options(
 # libcurl
 find_package(CURL REQUIRED)
 
-set(SOURCES
+set(BOT_SOURCES
         include/SQBot/API/Animation/animation.cpp
         include/SQBot/API/Audio/audio.cpp
         include/SQBot/API/CallbackGame/callback_game.cpp
@@ -81,7 +81,7 @@ set(SOURCES
 set(LIBS
         ${CURL_LIBRARY})
 
-add_executable(EchoBotExample examples/echo_bot.cpp ${SOURCES})
+add_executable(EchoBotExample examples/echo_bot.cpp ${BOT_SOURCES})
 target_link_libraries(EchoBotExample ${LIBS})
 
 include_directories(${CURL_INCLUDE_DIR})

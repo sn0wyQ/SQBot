@@ -37,17 +37,28 @@ void EventManager::CallCallbackFor(SQBot::Bot* bot, const UpdatePtr& update) {
       }
     }
 
-    // Next we check for kMessageStartsWith
+    // Next we check for MessageFirstWordIs
+    const auto& callback_to_message_first_word_is =
+        callbacks_to_message_first_word_is_.find(
+            SQBot::Utils::GetFirstWord(message->text));
+    if (callback_to_message_first_word_is
+        != callbacks_to_message_first_word_is_.end()) {
+      callback_to_message_first_word_is->second(bot, message);
+      return;
+    }
+
+    // Next we check for MessageStartsWith
     auto upper_bound =
         callbacks_to_message_starts_with_.upper_bound(message->text);
     if (upper_bound != callbacks_to_message_starts_with_.begin()) {
       --upper_bound;
-      if (Utils::StartsWith(message->text, upper_bound->first)) {
+      if (SQBot::Utils::StartsWith(message->text, upper_bound->first)) {
         upper_bound->second(bot, message);
         return;
       }
     }
 
+    // And if nothing called earlier we call callback to any message
     if (callback_to_message_) {
       callback_to_message_(bot, message);
     }
@@ -105,6 +116,12 @@ void EventManager::CallCallbackFor(SQBot::Bot* bot, const UpdatePtr& update) {
 void EventManager::SetCallbackForBotCommand(const std::string& command,
     std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
   callbacks_to_bot_commands_[command] = std::move(func);
+}
+
+void EventManager::SetCallbackForMessageFirstWordIs(
+    const std::string& first_word,
+    std::function<void(SQBot::Bot*, const MessagePtr&)> func) {
+  callbacks_to_message_first_word_is_[first_word] = std::move(func);
 }
 
 void EventManager::SetCallbackForMessageStartsWith(const std::string& prefix,
