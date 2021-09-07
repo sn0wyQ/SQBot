@@ -134,16 +134,15 @@ void Bot::HandleUpdate(const UpdatePtr& update) {
   event_manager_->CallCallbackFor(this, update);
 }
 
-MessagePtr Bot::InternalSendMessage(
-    Json params,
-    const std::string& text,
-    bool disable_notification,
-    bool disable_web_page_preview,
-    int32_t reply_to_message_id,
-    bool allow_sending_without_reply,
-    const std::string& parse_mode,
-    const std::vector<MessageEntityPtr>& entities,
-    const AbstractReplyMarkupPtr& reply_markup) {
+MessagePtr Bot::SendMessage_(Json params,
+                             const std::string& text,
+                             bool disable_notification,
+                             bool disable_web_page_preview,
+                             int32_t reply_to_message_id,
+                             bool allow_sending_without_reply,
+                             const std::string& parse_mode,
+                             const std::vector<MessageEntityPtr>& entities,
+                             const AbstractReplyMarkupPtr& reply_markup) {
   params["text"] = text;
 
   if (disable_notification) {
@@ -154,7 +153,7 @@ MessagePtr Bot::InternalSendMessage(
     params["disable_web_page_preview"] = disable_web_page_preview;
   }
 
-  if (reply_to_message_id != 0) {
+  if (reply_to_message_id) {
     params["reply_to_message_id"] = reply_to_message_id;
   }
 
@@ -181,12 +180,127 @@ MessagePtr Bot::InternalSendMessage(
   }
 }
 
+MessagePtr Bot::ForwardMessage_(Json params,
+                                int32_t message_id,
+                                bool disable_notification) {
+  params["message_id"] = message_id;
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  try {
+    return Utils::GetPtr<Message>(Request("forwardMessage", params), "result");
+  } catch (const std::exception& e) {
+    throw e;
+  }
+}
+
+MessageIdPtr Bot::CopyMessage_(
+    Json params,
+    int32_t message_id,
+    bool disable_notification,
+    const std::string& caption,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  params["message_id"] = message_id;
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["caption"] = reply_markup->ToJson();
+  }
+
+  try {
+    return Utils::GetPtr<MessageId>(Request("copyMessage", params), "result");
+  } catch (const std::exception& e) {
+    throw e;
+  }
+}
+
+MessagePtr Bot::SendPhoto_(
+    Json params,
+    const std::string& photo,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!photo.empty()) {
+    params["photo"] = photo;
+  }
+
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  try {
+    return Utils::GetPtr<Message>(Request("sendPhoto", params), "result");
+  } catch (const std::exception& e) {
+    throw e;
+  }
+}
+
 void Bot::HandleUpdates() {
   Json params;
+
   if (updates_offset_) {
     params["offset"] = updates_offset_;
   }
+
   params["timeout"] = updates_timeout_;
+
   params["allowed_updates"] = allowed_updates_;
 
   try {

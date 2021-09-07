@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -15,6 +16,7 @@
 
 #include "../API/Chat/chat.h"
 #include "../API/MessageEntity/message_entity.h"
+#include "../API/MessageId/message_id.h"
 #include "../API/Message/message.h"
 #include "../API/Update/update.h"
 #include "../API/User/user.h"
@@ -29,6 +31,8 @@ namespace SQBot {
 class Bot {
  public:
   // token - your bot token received from BotFather
+  // max_request_retries - max allowed request retries
+  //    before throwing kCurlError exception
   // delay_between_updates - delay between "getUpdate" requests in milliseconds
   // update_timeout - timeout for long polling in seconds
   Bot(std::string token,
@@ -61,38 +65,39 @@ class Bot {
 
   // Method to manually send requests. Avoid using it as it returns JSON instead
   // of basic type or one of Telegram API specified types
-  // request - name of method as specified in Telegram API
+  // method - name of method as specified in Telegram API
   // params - JSON file with params (names as specified in Telegram API)
-  Json Request(const std::string& request, const Json& params = {});
+  Json Request(const std::string& method, const Json& params = {});
 
   // A simple method for testing your bot's auth token.
   //
   // Return value:
   // Returns basic information about the bot in form of a User object
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#getme
   UserPtr GetMe();
 
   // Use this method to get up-to-date information about the chat
   // (current name of the user for one-on-one conversations,
   // current username of a user, group or channel, etc.).
   //
-  // Params:
-  // chat_id - Unique identifier for the target chat or username of the target
-  //    supergroup or channel (in the format @channelusername)
-  //
   // Return value:
   // Returns a Chat object on success
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#getchat
   ChatPtr GetChat(int64_t chat_id);
 
   // Use this method to send text messages.
   //
-  // Params:
-  // chat_id - Unique identifier for the target chat or username of the target
-  //    channel (in the format @channelusername)
-  //
   // Return value:
   // On success, sent Message is returned
-  template<typename T>
-  MessagePtr SendMessage(const T& chat_id,
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendmessage
+  template<typename ChatIdType>
+  MessagePtr SendMessage(const ChatIdType& chat_id,
                          const std::string& text,
                          bool disable_notification = false,
                          bool disable_web_page_preview = false,
@@ -101,15 +106,101 @@ class Bot {
                          const std::string& parse_mode = "",
                          const std::vector<MessageEntityPtr>& entities = {},
                          const AbstractReplyMarkupPtr& reply_markup = {}) {
-    return InternalSendMessage({{"chat_id", chat_id}},
-                               text,
-                               disable_notification,
-                               disable_web_page_preview,
-                               reply_to_message_id,
-                               allow_sending_without_reply,
-                               parse_mode,
-                               entities,
-                               reply_markup);
+    return SendMessage_({{"chat_id", chat_id}},
+                        text,
+                        disable_notification,
+                        disable_web_page_preview,
+                        reply_to_message_id,
+                        allow_sending_without_reply,
+                        parse_mode,
+                        entities,
+                        reply_markup);
+  }
+
+  // Use this method to forward messages of any kind.
+  // Service messages can't be forwarded
+  //
+  // Return value:
+  // On success, sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#forwardmessage
+  template<typename ChatIdType, typename FromChatIdType>
+  MessagePtr ForwardMessage(const ChatIdType& chat_id,
+                            const FromChatIdType& from_chat_id,
+                            int32_t message_id,
+                            bool disable_notification = false) {
+    return ForwardMessage_({{"chat_id", chat_id},
+                            {"from_chat_id", from_chat_id}},
+                           message_id,
+                           disable_notification);
+  }
+
+  // Use this method to copy messages of any kind. Service messages and invoice
+  // messages can't be copied. The method is analogous to the method
+  // forwardMessage, but the copied message doesn't have a link to the original
+  // message
+  //
+  // Return value:
+  // Returns the MessageId of sent message on success
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#copymessage
+  template<typename ChatIdType, typename FromChatIdType>
+  MessageIdPtr CopyMessage(
+      const ChatIdType& chat_id,
+      const FromChatIdType& from_chat_id,
+      int32_t message_id,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    return CopyMessage_({{"chat_id", chat_id},
+                         {"from_chat_id", from_chat_id}},
+                        message_id,
+                        disable_notification,
+                        caption,
+                        reply_to_message_id,
+                        allow_sending_without_reply,
+                        parse_mode,
+                        caption_entities,
+                        reply_markup);
+  }
+
+  // Use this method to send photos
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendphoto
+  template<typename ChatIdType>
+  MessagePtr SendPhoto(
+      const ChatIdType& chat_id,
+      const std::string& photo,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    return SendPhoto_(params,
+                      photo,
+                      caption,
+                      disable_notification,
+                      reply_to_message_id,
+                      allow_sending_without_reply,
+                      parse_mode,
+                      caption_entities,
+                      reply_markup);
   }
 
  protected:
@@ -121,15 +212,40 @@ class Bot {
   virtual void HandleUpdate(const std::shared_ptr<Update>& update);
 
  private:
-  MessagePtr InternalSendMessage(
+  MessagePtr SendMessage_(Json params,
+                          const std::string& text,
+                          bool disable_notification,
+                          bool disable_web_page_preview,
+                          int32_t reply_to_message_id,
+                          bool allow_sending_without_reply,
+                          const std::string& parse_mode,
+                          const std::vector<MessageEntityPtr>& entities,
+                          const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr ForwardMessage_(Json params,
+                             int32_t message_id,
+                             bool disable_notification);
+
+  MessageIdPtr CopyMessage_(
       Json params,
-      const std::string& text,
+      int32_t message_id,
       bool disable_notification,
-      bool disable_web_page_preview,
+      const std::string& caption,
       int32_t reply_to_message_id,
       bool allow_sending_without_reply,
       const std::string& parse_mode,
-      const std::vector<MessageEntityPtr>& entities,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendPhoto_(
+      Json params,
+      const std::string& photo,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
       const AbstractReplyMarkupPtr& reply_markup);
 
   void HandleUpdates();

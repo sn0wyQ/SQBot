@@ -31,3 +31,20 @@ std::string SQBot::Utils::GetFirstWord(const std::string& text) {
   return result;
 }
 
+std::string SQBot::Utils::GetMimeType(std::string extension) {
+  if (extension.empty()) {
+    return "text/plain";
+  }
+
+  if (extension.at(0) == '.') {
+    extension.erase(extension.begin());
+  }
+
+  const auto& mime_type_iter = kExtensionToMimeType.find(extension);
+
+  if (mime_type_iter == kExtensionToMimeType.end()) {
+    return "text/plain";
+  }
+
+  return mime_type_iter->second;
+}

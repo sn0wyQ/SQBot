@@ -1,5 +1,4 @@
 #include <iostream>
-#include <memory>
 
 #include "SQBot/Bot/bot.h"
 #include "SQBot/EventManager/event_manager.h"
@@ -13,7 +12,7 @@ void Echo(SQBot::Bot* bot, const MessagePtr& message) {
 }
 
 int main() {
-  SQBot::Bot bot("YOUR_BOT_TOKEN");
+  SQBot::Bot bot("YOUR_TOKEN_HERE");
 
   auto info = bot.GetMe();
   std::cout << "Bot ID: " << info->id << std::endl;
