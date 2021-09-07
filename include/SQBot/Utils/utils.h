@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SQBOT_UTILS_UTILS_H_
 #define INCLUDE_SQBOT_UTILS_UTILS_H_
 
+#include <cctype>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -8,7 +9,7 @@
 
 #include "../../nlohmann/json.h"
 
-namespace Utils {
+namespace SQBot::Utils {
 
 template<typename T>
 T GetValue(const Json& json, const std::string& key) {
@@ -65,7 +66,7 @@ std::vector<std::shared_ptr<T>> GetPtrsArray(const Json& json,
     std::vector<std::shared_ptr<T>> result;
     const auto& array_in_json = json.at(key);
     for (const auto& object : array_in_json) {
-      result.emplace_back(object);
+      result.push_back(std::make_shared<T>(object));
     }
     return result;
   } catch (const std::exception& e) {
@@ -74,7 +75,8 @@ std::vector<std::shared_ptr<T>> GetPtrsArray(const Json& json,
 }
 
 bool StartsWith(const std::string& text, const std::string& prefix);
+std::string GetFirstWord(const std::string& text);
 
-}  // namespace Utils
+}  // namespace SQBot::Utils
 
 #endif  // INCLUDE_SQBOT_UTILS_UTILS_H_

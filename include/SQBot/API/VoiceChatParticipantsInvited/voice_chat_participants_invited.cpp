@@ -2,5 +2,5 @@
 
 VoiceChatParticipantsInvited::VoiceChatParticipantsInvited(
     const Json& voice_chat_participants_invited)
-  : users(Utils::GetPtrsArray<User>(
+  : users(SQBot::Utils::GetPtrsArray<User>(
       voice_chat_participants_invited, "users")) {}

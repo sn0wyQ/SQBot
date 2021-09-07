@@ -13,10 +13,11 @@ void Echo(SQBot::Bot* bot, const MessagePtr& message) {
 }
 
 int main() {
-  SQBot::Bot bot("1288397319:AAGFIVRIRteHLIIF8X95kPTjz8uNHVJmHA4");
+  SQBot::Bot bot("YOUR_BOT_TOKEN");
 
   auto info = bot.GetMe();
   std::cout << "Bot ID: " << info->id << std::endl;
+
 
   bot.GetEventManager()->SetCallbackForMessage(Echo);
   // Or same thing using lambda:

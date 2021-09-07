@@ -1,6 +1,7 @@
 #include "utils.h"
 
-bool Utils::StartsWith(const std::string& text, const std::string& prefix) {
+bool SQBot::Utils::StartsWith(
+    const std::string& text, const std::string& prefix) {
   if (text.length() < prefix.length()) {
     return false;
   }
@@ -13,3 +14,20 @@ bool Utils::StartsWith(const std::string& text, const std::string& prefix) {
 
   return true;
 }
+
+std::string SQBot::Utils::GetFirstWord(const std::string& text) {
+  std::string result;
+
+  for (auto character : text) {
+    if (std::isspace(character)) {
+      if (!result.empty()) {
+        return result;
+      }
+    } else {
+      result += character;
+    }
+  }
+
+  return result;
+}
+

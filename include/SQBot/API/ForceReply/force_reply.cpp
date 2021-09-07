@@ -1,9 +1,9 @@
 #include "force_reply.h"
 
 ForceReply::ForceReply(const Json& force_reply)
-  : input_text_placeholder(
-      Utils::GetValue<std::string>(force_reply, "input_text_placeholder")),
-    selective(Utils::GetValue<bool>(force_reply, "selective")) {}
+  : input_text_placeholder(SQBot::Utils::GetValue<std::string>(
+      force_reply, "input_text_placeholder")),
+    selective(SQBot::Utils::GetValue<bool>(force_reply, "selective")) {}
 
 Json ForceReply::ToJson() const {
   Json force_reply_json;

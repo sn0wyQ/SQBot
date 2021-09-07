@@ -2,7 +2,8 @@
 
 KeyboardButtonPollType::KeyboardButtonPollType(
     const Json& keyboard_button_poll_type)
-  : type(Utils::GetValue<std::string>(keyboard_button_poll_type, "type")) {}
+  : type(SQBot::Utils::GetValue<std::string>(
+        keyboard_button_poll_type, "type")) {}
 
 Json KeyboardButtonPollType::ToJson() const {
   Json keyboard_button_poll_type;

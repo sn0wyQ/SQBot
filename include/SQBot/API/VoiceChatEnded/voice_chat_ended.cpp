@@ -1,4 +1,4 @@
 #include "voice_chat_ended.h"
 
 VoiceChatEnded::VoiceChatEnded(const Json& voice_chat_ended)
-  : duration(Utils::GetValue<int32_t>(voice_chat_ended, "duration")) {}
+  : duration(SQBot::Utils::GetValue<int32_t>(voice_chat_ended, "duration")) {}
