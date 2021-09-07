@@ -114,43 +114,43 @@ class EventManager {
   std::unordered_map<std::string,
                      std::function<void(SQBot::Bot*,
                                         const std::shared_ptr<Message>&)>>
-      callbacks_to_bot_commands_;
+      callbacks_for_bot_commands_;
 
   std::unordered_map<std::string,
                      std::function<void(SQBot::Bot*,
                                         const std::shared_ptr<Message>&)>>
-      callbacks_to_message_first_word_is_;
+      callbacks_for_message_first_word_is_;
 
   std::map<std::string,
            std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)>>
-      callbacks_to_message_starts_with_;
+      callbacks_for_message_starts_with_;
 
   std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)>
-      callback_to_message_;
+      callback_for_message_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)>
-      callback_to_edited_message_;
+      callback_for_edited_message_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)>
-      callback_to_channel_post_;
+      callback_for_channel_post_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<Message>&)>
-      callback_to_edited_channel_post_;
+      callback_for_edited_channel_post_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<InlineQuery>&)>
-      callback_to_inline_query_;
+      callback_for_inline_query_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<ChosenInlineResult>&)>
-      callback_to_chosen_inline_result_;
+      callback_for_chosen_inline_result_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<CallbackQuery>&)>
-      callback_to_callback_query_;
+      callback_for_callback_query_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<ShippingQuery>&)>
-      callback_to_shipping_query_;
+      callback_for_shipping_query_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<PreCheckoutQuery>&)>
-      callback_to_pre_checkout_query_;
+      callback_for_pre_checkout_query_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<Poll>&)>
-      callback_to_poll_;
+      callback_for_poll_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<PollAnswer>&)>
-      callback_to_poll_answer_;
+      callback_for_poll_answer_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<ChatMemberUpdated>&)>
-      callback_to_my_chat_member_;
+      callback_for_my_chat_member_;
   std::function<void(SQBot::Bot*, const std::shared_ptr<ChatMemberUpdated>&)>
-      callback_to_chat_member_;
+      callback_for_chat_member_;
 };
 
 #endif  // INCLUDE_SQBOT_EVENTMANAGER_EVENT_MANAGER_H_
