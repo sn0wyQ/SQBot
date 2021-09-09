@@ -70,27 +70,47 @@ size_t WriteFunction(void* ptr, size_t size, size_t n, std::string* data) {
   return size * n;
 }
 
-Json Bot::Request(const std::string& request, const Json& params) {
+Json Bot::Request(const std::string& method, const Json& params) {
   CURL* curl = curl_easy_init();
+  curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 20);
+  curl_easy_setopt(curl, CURLOPT_TIMEOUT, 25);
   curl_easy_setopt(curl,
                    CURLOPT_URL,
                    ("https://api.telegram.org/bot" + token_ + "/"
-                       + request).c_str());
+                       + method).c_str());
+
+  struct curl_slist *headers = nullptr;
+  headers = curl_slist_append(headers, "Connection: close");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+  curl_mime* mime = curl_mime_init(curl);
+  curl_mimepart* part;
+
+  if (!params.empty()) {
+    for (const auto& [key, value] : params.items()) {
+      part = curl_mime_addpart(mime);
+      std::string value_in_str;
+      if (value.is_string()) {
+        // value.dump() for string_t value will return "<str>" instead of <str>
+        value_in_str = value;
+      } else {
+        value_in_str = value.dump();
+      }
+      curl_mime_data(part, value_in_str.c_str(), value_in_str.size());
+      curl_mime_name(part, key.c_str());
+    }
+    curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+  }
 
   std::string response_string;
-  struct curl_slist *headers = nullptr;
-  headers = curl_slist_append(headers, "Accept: application/json");
-  headers = curl_slist_append(headers, "Content-Type: application/json");
-
-  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, params.dump().c_str());
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteFunction);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
 
   // If request is successful we will set this variable to 'true' before return
   is_last_request_successful_ = false;
   auto result = curl_easy_perform(curl);
+  curl_mime_free(mime);
+  curl_slist_free_all(headers);
   curl_easy_cleanup(curl);
 
   if (result != CURLE_OK) {
@@ -114,36 +134,27 @@ Json Bot::Request(const std::string& request, const Json& params) {
 }
 
 UserPtr Bot::GetMe() {
-  try {
-    return Utils::GetPtr<User>(Request("getMe"), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<User>(Request("getMe").at("result"));
 }
 
 ChatPtr Bot::GetChat(int64_t chat_id) {
-  try {
-    return Utils::GetPtr<Chat>(
-        Request("getChat", {{"chat_id", chat_id}}), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<Chat>(
+      Request("getChat", {{"chat_id", chat_id}}).at("result"));
 }
 
 void Bot::HandleUpdate(const UpdatePtr& update) {
   event_manager_->CallCallbackFor(this, update);
 }
 
-MessagePtr Bot::InternalSendMessage(
-    Json params,
-    const std::string& text,
-    bool disable_notification,
-    bool disable_web_page_preview,
-    int32_t reply_to_message_id,
-    bool allow_sending_without_reply,
-    const std::string& parse_mode,
-    const std::vector<MessageEntityPtr>& entities,
-    const AbstractReplyMarkupPtr& reply_markup) {
+MessagePtr Bot::SendMessage_(Json params,
+                             const std::string& text,
+                             bool disable_notification,
+                             bool disable_web_page_preview,
+                             int32_t reply_to_message_id,
+                             bool allow_sending_without_reply,
+                             const std::string& parse_mode,
+                             const std::vector<MessageEntityPtr>& entities,
+                             const AbstractReplyMarkupPtr& reply_markup) {
   params["text"] = text;
 
   if (disable_notification) {
@@ -154,7 +165,7 @@ MessagePtr Bot::InternalSendMessage(
     params["disable_web_page_preview"] = disable_web_page_preview;
   }
 
-  if (reply_to_message_id != 0) {
+  if (reply_to_message_id) {
     params["reply_to_message_id"] = reply_to_message_id;
   }
 
@@ -174,40 +185,137 @@ MessagePtr Bot::InternalSendMessage(
     params["reply_markup"] = reply_markup->ToJson();
   }
 
-  try {
-    return Utils::GetPtr<Message>(Request("sendMessage", params), "result");
-  } catch (const std::exception& e) {
-    throw e;
+  return std::make_shared<Message>(Request("sendMessage", params).at("result"));
+}
+
+MessagePtr Bot::ForwardMessage_(Json params,
+                                int32_t message_id,
+                                bool disable_notification) {
+  params["message_id"] = message_id;
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
   }
+
+  return std::make_shared<Message>(
+      Request("forwardMessage", params).at("result"));
+}
+
+MessageIdPtr Bot::CopyMessage_(
+    Json params,
+    int32_t message_id,
+    bool disable_notification,
+    const std::string& caption,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  params["message_id"] = message_id;
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["caption"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<MessageId>(
+      Request("copyMessage", params).at("result"));
+}
+
+MessagePtr Bot::SendPhoto_(
+    Json params,
+    const std::string& photo,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!photo.empty()) {
+    params["photo"] = photo;
+  }
+
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(Request("sendPhoto", params).at("result"));
 }
 
 void Bot::HandleUpdates() {
   Json params;
+
   if (updates_offset_) {
     params["offset"] = updates_offset_;
   }
+
   params["timeout"] = updates_timeout_;
+
   params["allowed_updates"] = allowed_updates_;
 
-  try {
-    Json response = Request("getUpdates", params);
-    const auto& updates = response.at("result");
-    if (updates.empty()) {
-      updates_offset_ = 0;
-    } else {
-      for (const auto& update : updates) {
-        auto current_update = std::make_shared<Update>(update);
-        HandleUpdate(current_update);
-        updates_offset_ = current_update->update_id + 1;
-      }
+  Json response = Request("getUpdates", params);
+  const auto& updates = response.at("result");
+  if (updates.empty()) {
+    updates_offset_ = 0;
+  } else {
+    for (const auto& update : updates) {
+      auto current_update = std::make_shared<Update>(update);
+      HandleUpdate(current_update);
+      updates_offset_ = current_update->update_id + 1;
     }
+  }
 
-    if (!is_receiving_updates_) {
-      // Delete handled updates from Telegram server
-      Request("getUpdates", {{"offset", updates_offset_}});
-    }
-  } catch (const std::exception& e) {
-    throw e;
+  if (!is_receiving_updates_) {
+    // Delete handled updates from Telegram server
+    Request("getUpdates", {{"offset", updates_offset_}});
   }
 }
 
