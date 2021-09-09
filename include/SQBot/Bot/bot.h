@@ -23,10 +23,13 @@
 
 #include "../AbstractReplyMarkup/abstract_reply_markup.h"
 #include "../Exception/exception.h"
+#include "../InputFile/input_file.h"
 
 class EventManager;
 
 namespace SQBot {
+
+using InputFilesList = std::vector<std::pair<std::string, InputFile>>;
 
 class Bot {
  public:
@@ -67,7 +70,11 @@ class Bot {
   // of basic type or one of Telegram API specified types
   // method - name of method as specified in Telegram API
   // params - JSON file with params (names as specified in Telegram API)
-  Json Request(const std::string& method, const Json& params = {});
+  // input_files - vector of pair<string, InputFile>,
+  //    added to give possibility to send file as one of params
+  Json Request(const std::string& method,
+               const Json& params = {},
+               const InputFilesList& input_files = {});
 
   // A simple method for testing your bot's auth token.
   //
@@ -177,10 +184,10 @@ class Bot {
   //
   // Telegram API link:
   // https://core.telegram.org/bots/api#sendphoto
-  template<typename ChatIdType>
+  template<typename ChatIdType, typename PhotoType>
   MessagePtr SendPhoto(
       const ChatIdType& chat_id,
-      const std::string& photo,
+      const PhotoType& photo,
       const std::string& caption = "",
       bool disable_notification = false,
       int32_t reply_to_message_id = 0,
@@ -192,8 +199,15 @@ class Bot {
 
     params["chat_id"] = chat_id;
 
+    InputFilesList photo_with_key;
+    if constexpr (std::is_same_v<PhotoType, InputFile>) {
+      photo_with_key.push_back(std::make_pair("photo", photo));
+    } else {
+      params["photo"] = photo;
+    }
+
     return SendPhoto_(params,
-                      photo,
+                      photo_with_key,
                       caption,
                       disable_notification,
                       reply_to_message_id,
@@ -239,7 +253,7 @@ class Bot {
 
   MessagePtr SendPhoto_(
       Json params,
-      const std::string& photo,
+      const InputFilesList& photo,
       const std::string& caption,
       bool disable_notification,
       int32_t reply_to_message_id,
