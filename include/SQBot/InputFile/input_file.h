@@ -1,5 +1,5 @@
-#ifndef INPUT_FILE_H_
-#define INPUT_FILE_H_
+#ifndef INCLUDE_SQBOT_INPUTFILE_INPUT_FILE_H_
+#define INCLUDE_SQBOT_INPUTFILE_INPUT_FILE_H_
 
 #include <filesystem>
 #include <fstream>
@@ -41,4 +41,4 @@ class InputFile {
 
 }  // namespace SQBot
 
-#endif  // INPUT_FILE_H_
+#endif  // INCLUDE_SQBOT_INPUTFILE_INPUT_FILE_H_

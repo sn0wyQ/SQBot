@@ -88,7 +88,7 @@ Json Bot::Request(const std::string& method,
   curl_mime* mime = curl_mime_init(curl);
   curl_mimepart* part;
 
-  for (const auto&[key, value]: params.items()) {
+  for (const auto&[key, value] : params.items()) {
     part = curl_mime_addpart(mime);
     std::string value_in_str;
     if (value.is_string()) {
@@ -101,7 +101,7 @@ Json Bot::Request(const std::string& method,
     curl_mime_name(part, key.c_str());
   }
 
-  for (const auto&[key, file]: input_files) {
+  for (const auto&[key, file] : input_files) {
     part = curl_mime_addpart(mime);
     curl_mime_data(part, file.GetDataPtr(), file.GetSize());
     curl_mime_type(part, file.GetMimeType().c_str());
