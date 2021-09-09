@@ -76,7 +76,7 @@ set(BOT_SOURCES
         include/SQBot/EventManager/event_manager.cpp
         include/SQBot/Exception/exception.cpp
         include/SQBot/Utils/utils.cpp
-        )
+        include/SQBot/InputFile/input_file.cpp include/SQBot/InputFile/input_file.h)
 
 set(LIBS
         ${CURL_LIBRARY})

@@ -70,7 +70,9 @@ size_t WriteFunction(void* ptr, size_t size, size_t n, std::string* data) {
   return size * n;
 }
 
-Json Bot::Request(const std::string& method, const Json& params) {
+Json Bot::Request(const std::string& method,
+                  const Json& params,
+                  const InputFilesList& input_files) {
   CURL* curl = curl_easy_init();
   curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 20);
   curl_easy_setopt(curl, CURLOPT_TIMEOUT, 25);
@@ -79,32 +81,41 @@ Json Bot::Request(const std::string& method, const Json& params) {
                    ("https://api.telegram.org/bot" + token_ + "/"
                        + method).c_str());
 
-  struct curl_slist *headers = nullptr;
+  struct curl_slist* headers = nullptr;
   headers = curl_slist_append(headers, "Connection: close");
   curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
   curl_mime* mime = curl_mime_init(curl);
   curl_mimepart* part;
 
-  if (!params.empty()) {
-    for (const auto& [key, value] : params.items()) {
-      part = curl_mime_addpart(mime);
-      std::string value_in_str;
-      if (value.is_string()) {
-        // value.dump() for string_t value will return "<str>" instead of <str>
-        value_in_str = value;
-      } else {
-        value_in_str = value.dump();
-      }
-      curl_mime_data(part, value_in_str.c_str(), value_in_str.size());
-      curl_mime_name(part, key.c_str());
+  for (const auto&[key, value]: params.items()) {
+    part = curl_mime_addpart(mime);
+    std::string value_in_str;
+    if (value.is_string()) {
+      // value.dump() for string_t value will return "<str>" instead of <str>
+      value_in_str = value;
+    } else {
+      value_in_str = value.dump();
     }
+    curl_mime_data(part, value_in_str.c_str(), value_in_str.size());
+    curl_mime_name(part, key.c_str());
+  }
+
+  for (const auto&[key, file]: input_files) {
+    part = curl_mime_addpart(mime);
+    curl_mime_data(part, file.GetDataPtr(), file.GetSize());
+    curl_mime_type(part, file.GetMimeType().c_str());
+    curl_mime_filename(part, file.GetFileName().c_str());
+    curl_mime_name(part, key.c_str());
+  }
+
+  if (!params.empty() || !input_files.empty()) {
     curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
   }
 
   std::string response_string;
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteFunction);
-  curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
+  curl_easy_setopt(curl, CURLOPT_WRITEDATA, & response_string);
 
   // If request is successful we will set this variable to 'true' before return
   is_last_request_successful_ = false;
@@ -247,7 +258,7 @@ MessageIdPtr Bot::CopyMessage_(
 
 MessagePtr Bot::SendPhoto_(
     Json params,
-    const std::string& photo,
+    const InputFilesList& photo,
     const std::string& caption,
     bool disable_notification,
     int32_t reply_to_message_id,
@@ -255,10 +266,6 @@ MessagePtr Bot::SendPhoto_(
     const std::string& parse_mode,
     const std::vector<MessageEntityPtr>& caption_entities,
     const AbstractReplyMarkupPtr& reply_markup) {
-  if (!photo.empty()) {
-    params["photo"] = photo;
-  }
-
   if (!caption.empty()) {
     params["caption"] = caption;
   }
@@ -287,7 +294,8 @@ MessagePtr Bot::SendPhoto_(
     params["reply_markup"] = reply_markup->ToJson();
   }
 
-  return std::make_shared<Message>(Request("sendPhoto", params).at("result"));
+  return std::make_shared<Message>(
+      Request("sendPhoto", params, photo).at("result"));
 }
 
 void Bot::HandleUpdates() {
