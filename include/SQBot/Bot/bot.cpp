@@ -70,27 +70,47 @@ size_t WriteFunction(void* ptr, size_t size, size_t n, std::string* data) {
   return size * n;
 }
 
-Json Bot::Request(const std::string& request, const Json& params) {
+Json Bot::Request(const std::string& method, const Json& params) {
   CURL* curl = curl_easy_init();
+  curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 20);
+  curl_easy_setopt(curl, CURLOPT_TIMEOUT, 25);
   curl_easy_setopt(curl,
                    CURLOPT_URL,
                    ("https://api.telegram.org/bot" + token_ + "/"
-                       + request).c_str());
+                       + method).c_str());
+
+  struct curl_slist *headers = nullptr;
+  headers = curl_slist_append(headers, "Connection: close");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+  curl_mime* mime = curl_mime_init(curl);
+  curl_mimepart* part;
+
+  if (!params.empty()) {
+    for (const auto& [key, value] : params.items()) {
+      part = curl_mime_addpart(mime);
+      std::string value_in_str;
+      if (value.is_string()) {
+        // value.dump() for string_t value will return "<str>" instead of <str>
+        value_in_str = value;
+      } else {
+        value_in_str = value.dump();
+      }
+      curl_mime_data(part, value_in_str.c_str(), value_in_str.size());
+      curl_mime_name(part, key.c_str());
+    }
+    curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+  }
 
   std::string response_string;
-  struct curl_slist *headers = nullptr;
-  headers = curl_slist_append(headers, "Accept: application/json");
-  headers = curl_slist_append(headers, "Content-Type: application/json");
-
-  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, params.dump().c_str());
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteFunction);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
 
   // If request is successful we will set this variable to 'true' before return
   is_last_request_successful_ = false;
   auto result = curl_easy_perform(curl);
+  curl_mime_free(mime);
+  curl_slist_free_all(headers);
   curl_easy_cleanup(curl);
 
   if (result != CURLE_OK) {
@@ -114,20 +134,12 @@ Json Bot::Request(const std::string& request, const Json& params) {
 }
 
 UserPtr Bot::GetMe() {
-  try {
-    return Utils::GetPtr<User>(Request("getMe"), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<User>(Request("getMe").at("result"));
 }
 
 ChatPtr Bot::GetChat(int64_t chat_id) {
-  try {
-    return Utils::GetPtr<Chat>(
-        Request("getChat", {{"chat_id", chat_id}}), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<Chat>(
+      Request("getChat", {{"chat_id", chat_id}}).at("result"));
 }
 
 void Bot::HandleUpdate(const UpdatePtr& update) {
@@ -173,11 +185,7 @@ MessagePtr Bot::SendMessage_(Json params,
     params["reply_markup"] = reply_markup->ToJson();
   }
 
-  try {
-    return Utils::GetPtr<Message>(Request("sendMessage", params), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<Message>(Request("sendMessage", params).at("result"));
 }
 
 MessagePtr Bot::ForwardMessage_(Json params,
@@ -189,11 +197,8 @@ MessagePtr Bot::ForwardMessage_(Json params,
     params["disable_notification"] = disable_notification;
   }
 
-  try {
-    return Utils::GetPtr<Message>(Request("forwardMessage", params), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<Message>(
+      Request("forwardMessage", params).at("result"));
 }
 
 MessageIdPtr Bot::CopyMessage_(
@@ -236,11 +241,8 @@ MessageIdPtr Bot::CopyMessage_(
     params["caption"] = reply_markup->ToJson();
   }
 
-  try {
-    return Utils::GetPtr<MessageId>(Request("copyMessage", params), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<MessageId>(
+      Request("copyMessage", params).at("result"));
 }
 
 MessagePtr Bot::SendPhoto_(
@@ -285,11 +287,7 @@ MessagePtr Bot::SendPhoto_(
     params["reply_markup"] = reply_markup->ToJson();
   }
 
-  try {
-    return Utils::GetPtr<Message>(Request("sendPhoto", params), "result");
-  } catch (const std::exception& e) {
-    throw e;
-  }
+  return std::make_shared<Message>(Request("sendPhoto", params).at("result"));
 }
 
 void Bot::HandleUpdates() {
@@ -303,25 +301,21 @@ void Bot::HandleUpdates() {
 
   params["allowed_updates"] = allowed_updates_;
 
-  try {
-    Json response = Request("getUpdates", params);
-    const auto& updates = response.at("result");
-    if (updates.empty()) {
-      updates_offset_ = 0;
-    } else {
-      for (const auto& update : updates) {
-        auto current_update = std::make_shared<Update>(update);
-        HandleUpdate(current_update);
-        updates_offset_ = current_update->update_id + 1;
-      }
+  Json response = Request("getUpdates", params);
+  const auto& updates = response.at("result");
+  if (updates.empty()) {
+    updates_offset_ = 0;
+  } else {
+    for (const auto& update : updates) {
+      auto current_update = std::make_shared<Update>(update);
+      HandleUpdate(current_update);
+      updates_offset_ = current_update->update_id + 1;
     }
+  }
 
-    if (!is_receiving_updates_) {
-      // Delete handled updates from Telegram server
-      Request("getUpdates", {{"offset", updates_offset_}});
-    }
-  } catch (const std::exception& e) {
-    throw e;
+  if (!is_receiving_updates_) {
+    // Delete handled updates from Telegram server
+    Request("getUpdates", {{"offset", updates_offset_}});
   }
 }
 
