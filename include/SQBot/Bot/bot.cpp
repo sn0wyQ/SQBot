@@ -258,7 +258,7 @@ MessageIdPtr Bot::CopyMessage_(
 
 MessagePtr Bot::SendPhoto_(
     Json params,
-    const InputFilesList& photo,
+    const InputFilesList& input_files,
     const std::string& caption,
     bool disable_notification,
     int32_t reply_to_message_id,
@@ -295,7 +295,111 @@ MessagePtr Bot::SendPhoto_(
   }
 
   return std::make_shared<Message>(
-      Request("sendPhoto", params, photo).at("result"));
+      Request("sendPhoto", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendAudio_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    int32_t duration,
+    const std::string& performer,
+    const std::string& title,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (duration) {
+    params["duration"] = duration;
+  }
+
+  if (!performer.empty()) {
+    params["performer"] = performer;
+  }
+
+  if (!title.empty()) {
+    params["title"] = title;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendAudio", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendDocument_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    bool disable_content_type_detection,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (disable_content_type_detection) {
+    params["disable_content_type_detection"] = disable_content_type_detection;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendDocument", params, input_files).at("result"));
 }
 
 void Bot::HandleUpdates() {

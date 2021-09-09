@@ -78,8 +78,6 @@ std::vector<std::shared_ptr<T>> GetPtrsArray(const Json& json,
 bool StartsWith(const std::string& text, const std::string& prefix);
 std::string GetFirstWord(const std::string& text);
 
-std::string Base64Encode(const std::string& data);
-
 std::string GetMimeType(std::string extension);
 
 }  // namespace SQBot::Utils

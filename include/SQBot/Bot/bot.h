@@ -199,15 +199,17 @@ class Bot {
 
     params["chat_id"] = chat_id;
 
-    InputFilesList photo_with_key;
+    InputFilesList input_files;
     if constexpr (std::is_same_v<PhotoType, InputFile>) {
-      photo_with_key.push_back(std::make_pair("photo", photo));
+      input_files.push_back(std::make_pair("photo", photo));
+    } else if constexpr (std::is_same_v<PhotoType, PhotoSize>) {
+      params["photo"] = photo.file_id;
     } else {
       params["photo"] = photo;
     }
 
     return SendPhoto_(params,
-                      photo_with_key,
+                      input_files,
                       caption,
                       disable_notification,
                       reply_to_message_id,
@@ -215,6 +217,109 @@ class Bot {
                       parse_mode,
                       caption_entities,
                       reply_markup);
+  }
+
+  // Use this method to send audio files, if you want Telegram clients to
+  // display them in the music player. Your audio must be in the .MP3 or
+  // .M4A format. Bots can currently send audio files of up to 50 MB in size,
+  // this limit may be changed in the future. For sending voice messages,
+  // use the sendVoice method instead
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendaudio
+  template<typename ChatIdType, typename AudioType>
+  MessagePtr SendAudio(
+      const ChatIdType& chat_id,
+      const AudioType& audio,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      int32_t duration = 0,
+      const std::string& performer = {},
+      const std::string& title = {},
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList input_files;
+    if constexpr (std::is_same_v<AudioType, InputFile>) {
+      input_files.push_back(std::make_pair("audio", audio));
+    } else if constexpr (std::is_same_v<AudioType, Audio>) {
+      params["audio"] = audio.file_id;
+    } else {
+      params["audio"] = audio;
+    }
+
+    if (!thumb.first.empty()) {
+      input_files.push_back(thumb);
+    }
+
+    return SendAudio_(params,
+                      input_files,
+                      caption,
+                      disable_notification,
+                      reply_to_message_id,
+                      allow_sending_without_reply,
+                      duration,
+                      performer,
+                      title,
+                      parse_mode,
+                      caption_entities,
+                      reply_markup);
+  }
+
+  // Use this method to send general files. Bots can currently send files of
+  // any type of up to 50 MB in size, this limit may be changed in the future
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#senddocument
+  template<typename ChatIdType, typename DocumentType>
+  MessagePtr SendDocument(
+      const ChatIdType& chat_id,
+      const DocumentType& document,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      bool disable_content_type_detection = false,
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList document_with_key;
+    if constexpr (std::is_same_v<DocumentType, InputFile>) {
+      document_with_key.push_back(std::make_pair("document", document));
+    } else if constexpr (std::is_same_v<DocumentType, Audio>) {
+      params["document"] = document.file_id;
+    } else {
+      params["document"] = document;
+    }
+
+    return SendDocument_(params,
+                         document_with_key,
+                         caption,
+                         disable_notification,
+                         reply_to_message_id,
+                         allow_sending_without_reply,
+                         disable_content_type_detection,
+                         parse_mode,
+                         caption_entities,
+                         reply_markup);
   }
 
  protected:
@@ -253,11 +358,37 @@ class Bot {
 
   MessagePtr SendPhoto_(
       Json params,
-      const InputFilesList& photo,
+      const InputFilesList& input_files,
       const std::string& caption,
       bool disable_notification,
       int32_t reply_to_message_id,
       bool allow_sending_without_reply,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendAudio_(
+      Json params,
+      const InputFilesList& audio,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      int32_t duration,
+      const std::string& performer,
+      const std::string& title,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendDocument_(
+      Json params,
+      const InputFilesList& document,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      bool disable_content_type_detection,
       const std::string& parse_mode,
       const std::vector<MessageEntityPtr>& caption_entities,
       const AbstractReplyMarkupPtr& reply_markup);

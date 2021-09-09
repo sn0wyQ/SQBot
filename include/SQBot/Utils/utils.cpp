@@ -31,58 +31,6 @@ std::string SQBot::Utils::GetFirstWord(const std::string& text) {
   return result;
 }
 
-std::string SQBot::Utils::Base64Encode(const std::string& data) {
-  static const std::string kEncodingTable =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
-  std::string result;
-  int i = 0;
-  char char_array_3[3];
-  char char_array_4[4];
-
-  for (char next_character : data) {
-    char_array_3[i] = next_character;
-    ++i;
-
-    if (i == 3) {
-      char_array_4[0] = static_cast<char>((char_array_3[0] & 0xFC) >> 2);
-      char_array_4[1] = static_cast<char>(((char_array_3[0] & 0x03) << 4)
-                                            + ((char_array_3[1] & 0xF0) >> 4));
-      char_array_4[2] = static_cast<char>(((char_array_3[1] & 0x0F) << 2)
-                                            + ((char_array_3[2] & 0xC0) >> 6));
-      char_array_4[3] = static_cast<char>(char_array_3[2] & 0x3F);
-
-      for (char idx : char_array_4) {
-        result += kEncodingTable[idx];
-      }
-      i = 0;
-    }
-  }
-
-  if (i != 0) {
-    for (int j = i; j < 3; ++j) {
-      char_array_3[j] = '\0';
-    }
-
-    char_array_4[0] = static_cast<char>((char_array_3[0] & 0xFC) >> 2);
-    char_array_4[1] = static_cast<char>(((char_array_3[0] & 0x03) << 4)
-                                          + ((char_array_3[1] & 0xF0) >> 4));
-    char_array_4[2] = static_cast<char>(((char_array_3[1] & 0x0F) << 2)
-                                          + ((char_array_3[2] & 0xC0) >> 6));
-    char_array_4[3] = static_cast<char>(char_array_3[2] & 0x3F);
-
-    for (int j = 0; j < i + 1; ++j) {
-      result += kEncodingTable[char_array_4[j]];
-    }
-
-    while (i < 3) {
-      result += '=';
-      ++i;
-    }
-  }
-
-  return result;
-}
 
 std::string SQBot::Utils::GetMimeType(std::string extension) {
   static const std::unordered_map<std::string, std::string>
