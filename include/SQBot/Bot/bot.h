@@ -199,15 +199,17 @@ class Bot {
 
     params["chat_id"] = chat_id;
 
-    InputFilesList photo_with_key;
+    InputFilesList input_files;
     if constexpr (std::is_same_v<PhotoType, InputFile>) {
-      photo_with_key.push_back(std::make_pair("photo", photo));
+      input_files.push_back(std::make_pair("photo", photo));
+    } else if constexpr (std::is_same_v<PhotoType, PhotoSize>) {
+      params["photo"] = photo.file_id;
     } else {
       params["photo"] = photo;
     }
 
     return SendPhoto_(params,
-                      photo_with_key,
+                      input_files,
                       caption,
                       disable_notification,
                       reply_to_message_id,
@@ -215,6 +217,324 @@ class Bot {
                       parse_mode,
                       caption_entities,
                       reply_markup);
+  }
+
+  // Use this method to send audio files, if you want Telegram clients to
+  // display them in the music player. Your audio must be in the .MP3 or
+  // .M4A format. Bots can currently send audio files of up to 50 MB in size,
+  // this limit may be changed in the future. For sending voice messages,
+  // use the sendVoice method instead
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendaudio
+  template<typename ChatIdType, typename AudioType>
+  MessagePtr SendAudio(
+      const ChatIdType& chat_id,
+      const AudioType& audio,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      int32_t duration = 0,
+      const std::string& performer = {},
+      const std::string& title = {},
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList input_files;
+    if constexpr (std::is_same_v<AudioType, InputFile>) {
+      input_files.push_back(std::make_pair("audio", audio));
+    } else if constexpr (std::is_same_v<AudioType, Audio>) {
+      params["audio"] = audio.file_id;
+    } else {
+      params["audio"] = audio;
+    }
+
+    if (!thumb.first.empty()) {
+      input_files.push_back(thumb);
+    }
+
+    return SendAudio_(params,
+                      input_files,
+                      caption,
+                      disable_notification,
+                      reply_to_message_id,
+                      allow_sending_without_reply,
+                      duration,
+                      performer,
+                      title,
+                      parse_mode,
+                      caption_entities,
+                      reply_markup);
+  }
+
+  // Use this method to send general files. Bots can currently send files of
+  // any type of up to 50 MB in size, this limit may be changed in the future
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#senddocument
+  template<typename ChatIdType, typename DocumentType>
+  MessagePtr SendDocument(
+      const ChatIdType& chat_id,
+      const DocumentType& document,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      bool disable_content_type_detection = false,
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList document_with_key;
+    if constexpr (std::is_same_v<DocumentType, InputFile>) {
+      document_with_key.push_back(std::make_pair("document", document));
+    } else if constexpr (std::is_same_v<DocumentType, Audio>) {
+      params["document"] = document.file_id;
+    } else {
+      params["document"] = document;
+    }
+
+    return SendDocument_(params,
+                         document_with_key,
+                         caption,
+                         disable_notification,
+                         reply_to_message_id,
+                         allow_sending_without_reply,
+                         disable_content_type_detection,
+                         parse_mode,
+                         caption_entities,
+                         reply_markup);
+  }
+
+  // Use this method to send video files, Telegram clients support mp4 videos
+  // (other formats may be sent as Document). Bots can currently send video
+  // files of up to 50 MB in size, this limit may be changed in the future
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendvideo
+  template<typename ChatIdType, typename VideoType>
+  MessagePtr SendVideo(
+      const ChatIdType& chat_id,
+      const VideoType& video,
+      const std::string& caption = "",
+      bool supports_streaming = false,
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      int32_t duration = 0,
+      int32_t width = 0,
+      int32_t height = 0,
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList input_files;
+    if constexpr (std::is_same_v<VideoType, InputFile>) {
+      input_files.push_back(std::make_pair("video", video));
+    } else if constexpr (std::is_same_v<VideoType, Video>) {
+      params["video"] = video.file_id;
+    } else {
+      params["video"] = video;
+    }
+
+    if (!thumb.first.empty()) {
+      input_files.push_back(thumb);
+    }
+
+    return SendVideo_(params,
+                      input_files,
+                      caption,
+                      supports_streaming,
+                      disable_notification,
+                      reply_to_message_id,
+                      allow_sending_without_reply,
+                      duration,
+                      width,
+                      height,
+                      parse_mode,
+                      caption_entities,
+                      reply_markup);
+  }
+
+  // Use this method to send animation files (GIF or H.264/MPEG-4 AVC animation
+  // without sound). Bots can currently send animation files of up to 50 MB in
+  // size, this limit may be changed in the future
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendanimation
+  template<typename ChatIdType, typename AnimationType>
+  MessagePtr SendAnimation(
+      const ChatIdType& chat_id,
+      const AnimationType& animation,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      int32_t duration = 0,
+      int32_t width = 0,
+      int32_t height = 0,
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList input_files;
+    if constexpr (std::is_same_v<AnimationType, InputFile>) {
+      input_files.push_back(std::make_pair("animation", animation));
+    } else if constexpr (std::is_same_v<AnimationType, Video>) {
+      params["animation"] = animation.file_id;
+    } else {
+      params["animation"] = animation;
+    }
+
+    if (!thumb.first.empty()) {
+      input_files.push_back(thumb);
+    }
+
+    return SendAnimation_(params,
+                          input_files,
+                          caption,
+                          disable_notification,
+                          reply_to_message_id,
+                          allow_sending_without_reply,
+                          duration,
+                          width,
+                          height,
+                          parse_mode,
+                          caption_entities,
+                          reply_markup);
+  }
+
+  // Use this method to send voice files (GIF or H.264/MPEG-4 AVC voice
+  // without sound). Bots can currently send voice files of up to 50 MB in
+  // size, this limit may be changed in the future
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendvoice
+  template<typename ChatIdType, typename VoiceType>
+  MessagePtr SendVoice(
+      const ChatIdType& chat_id,
+      const VoiceType& voice,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      int32_t duration = 0,
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList input_files;
+    if constexpr (std::is_same_v<VoiceType, InputFile>) {
+      input_files.push_back(std::make_pair("voice", voice));
+    } else if constexpr (std::is_same_v<VoiceType, Video>) {
+      params["voice"] = voice.file_id;
+    } else {
+      params["voice"] = voice;
+    }
+
+    if (!thumb.first.empty()) {
+      input_files.push_back(thumb);
+    }
+
+    return SendVoice_(params,
+                      input_files,
+                      caption,
+                      disable_notification,
+                      reply_to_message_id,
+                      allow_sending_without_reply,
+                      duration,
+                      parse_mode,
+                      caption_entities,
+                      reply_markup);
+  }
+
+  // As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1
+  // minute long. Use this method to send video messages
+  //
+  // Return value:
+  // On success, the sent Message is returned
+  //
+  // Telegram API link:
+  // https://core.telegram.org/bots/api#sendvideonote
+  template<typename ChatIdType, typename VideoNoteType>
+  MessagePtr SendVideoNote(
+      const ChatIdType& chat_id,
+      const VideoNoteType& video_note,
+      const std::string& caption = "",
+      bool disable_notification = false,
+      int32_t reply_to_message_id = 0,
+      bool allow_sending_without_reply = false,
+      int32_t duration = 0,
+      int32_t length = 0,
+      const std::pair<std::string, InputFile>& thumb = {},
+      const std::string& parse_mode = "",
+      const std::vector<MessageEntityPtr>& caption_entities = {},
+      const AbstractReplyMarkupPtr& reply_markup = {}) {
+    Json params;
+
+    params["chat_id"] = chat_id;
+
+    InputFilesList input_files;
+    if constexpr (std::is_same_v<VideoNoteType, InputFile>) {
+      input_files.push_back(std::make_pair("video_note", video_note));
+    } else if constexpr (std::is_same_v<VideoNoteType, Video>) {
+      params["video_note"] = video_note.file_id;
+    } else {
+      params["video_note"] = video_note;
+    }
+
+    if (!thumb.first.empty()) {
+      input_files.push_back(thumb);
+    }
+
+    return SendVideoNote_(params,
+                          input_files,
+                          caption,
+                          disable_notification,
+                          reply_to_message_id,
+                          allow_sending_without_reply,
+                          duration,
+                          length,
+                          parse_mode,
+                          caption_entities,
+                          reply_markup);
   }
 
  protected:
@@ -226,6 +546,8 @@ class Bot {
   virtual void HandleUpdate(const std::shared_ptr<Update>& update);
 
  private:
+  void HandleUpdates();
+
   MessagePtr SendMessage_(Json params,
                           const std::string& text,
                           bool disable_notification,
@@ -253,7 +575,7 @@ class Bot {
 
   MessagePtr SendPhoto_(
       Json params,
-      const InputFilesList& photo,
+      const InputFilesList& input_files,
       const std::string& caption,
       bool disable_notification,
       int32_t reply_to_message_id,
@@ -262,7 +584,85 @@ class Bot {
       const std::vector<MessageEntityPtr>& caption_entities,
       const AbstractReplyMarkupPtr& reply_markup);
 
-  void HandleUpdates();
+  MessagePtr SendAudio_(
+      Json params,
+      const InputFilesList& audio,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      int32_t duration,
+      const std::string& performer,
+      const std::string& title,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendDocument_(
+      Json params,
+      const InputFilesList& document,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      bool disable_content_type_detection,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendVideo_(
+      Json params,
+      const InputFilesList& input_files,
+      const std::string& caption,
+      bool supports_streaming,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      int32_t duration,
+      int32_t width,
+      int32_t height,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendAnimation_(
+      Json params,
+      const InputFilesList& input_files,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      int32_t duration,
+      int32_t width,
+      int32_t height,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendVoice_(
+      Json params,
+      const InputFilesList& input_files,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      int32_t duration,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
+
+  MessagePtr SendVideoNote_(
+      Json params,
+      const InputFilesList& input_files,
+      const std::string& caption,
+      bool disable_notification,
+      int32_t reply_to_message_id,
+      bool allow_sending_without_reply,
+      int32_t duration,
+      int32_t length,
+      const std::string& parse_mode,
+      const std::vector<MessageEntityPtr>& caption_entities,
+      const AbstractReplyMarkupPtr& reply_markup);
 
   std::shared_ptr<EventManager> event_manager_;
   std::string token_;

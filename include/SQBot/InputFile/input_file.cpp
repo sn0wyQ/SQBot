@@ -12,6 +12,13 @@ SQBot::InputFile::InputFile(const std::filesystem::path& path_to_file) {
   file_name_ = path_to_file.filename();
 }
 
+SQBot::InputFile::InputFile(std::string data,
+                            std::string mime_type,
+                            std::string file_name)
+  : data_(std::move(data)),
+    mime_type_(std::move(mime_type)),
+    file_name_(std::move(file_name)) {}
+
 std::string SQBot::InputFile::GetData() const {
   return data_;
 }
@@ -30,4 +37,16 @@ std::string SQBot::InputFile::GetMimeType() const {
 
 std::string SQBot::InputFile::GetFileName() const {
   return file_name_;
+}
+
+void SQBot::InputFile::SetData(std::string data) {
+  data_ = std::move(data);
+}
+
+void SQBot::InputFile::SetMimeType(std::string mime_type) {
+  mime_type_ = std::move(mime_type);
+}
+
+void SQBot::InputFile::SetFileName(std::string file_name) {
+  file_name_ = std::move(file_name);
 }

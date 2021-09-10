@@ -157,6 +157,35 @@ void Bot::HandleUpdate(const UpdatePtr& update) {
   event_manager_->CallCallbackFor(this, update);
 }
 
+void Bot::HandleUpdates() {
+  Json params;
+
+  if (updates_offset_) {
+    params["offset"] = updates_offset_;
+  }
+
+  params["timeout"] = updates_timeout_;
+
+  params["allowed_updates"] = allowed_updates_;
+
+  Json response = Request("getUpdates", params);
+  const auto& updates = response.at("result");
+  if (updates.empty()) {
+    updates_offset_ = 0;
+  } else {
+    for (const auto& update : updates) {
+      auto current_update = std::make_shared<Update>(update);
+      HandleUpdate(current_update);
+      updates_offset_ = current_update->update_id + 1;
+    }
+  }
+
+  if (!is_receiving_updates_) {
+    // Delete handled updates from Telegram server manually
+    Request("getUpdates", {{"offset", updates_offset_}});
+  }
+}
+
 MessagePtr Bot::SendMessage_(Json params,
                              const std::string& text,
                              bool disable_notification,
@@ -258,7 +287,7 @@ MessageIdPtr Bot::CopyMessage_(
 
 MessagePtr Bot::SendPhoto_(
     Json params,
-    const InputFilesList& photo,
+    const InputFilesList& input_files,
     const std::string& caption,
     bool disable_notification,
     int32_t reply_to_message_id,
@@ -295,36 +324,329 @@ MessagePtr Bot::SendPhoto_(
   }
 
   return std::make_shared<Message>(
-      Request("sendPhoto", params, photo).at("result"));
+      Request("sendPhoto", params, input_files).at("result"));
 }
 
-void Bot::HandleUpdates() {
-  Json params;
-
-  if (updates_offset_) {
-    params["offset"] = updates_offset_;
+MessagePtr Bot::SendAudio_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    int32_t duration,
+    const std::string& performer,
+    const std::string& title,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
   }
 
-  params["timeout"] = updates_timeout_;
-
-  params["allowed_updates"] = allowed_updates_;
-
-  Json response = Request("getUpdates", params);
-  const auto& updates = response.at("result");
-  if (updates.empty()) {
-    updates_offset_ = 0;
-  } else {
-    for (const auto& update : updates) {
-      auto current_update = std::make_shared<Update>(update);
-      HandleUpdate(current_update);
-      updates_offset_ = current_update->update_id + 1;
-    }
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
   }
 
-  if (!is_receiving_updates_) {
-    // Delete handled updates from Telegram server
-    Request("getUpdates", {{"offset", updates_offset_}});
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
   }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (duration) {
+    params["duration"] = duration;
+  }
+
+  if (!performer.empty()) {
+    params["performer"] = performer;
+  }
+
+  if (!title.empty()) {
+    params["title"] = title;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendAudio", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendDocument_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    bool disable_content_type_detection,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (disable_content_type_detection) {
+    params["disable_content_type_detection"] = disable_content_type_detection;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendDocument", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendVideo_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool supports_streaming,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    int32_t duration,
+    int32_t width,
+    int32_t height,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (supports_streaming) {
+    params["supports_streaming"] = supports_streaming;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (duration) {
+    params["duration"] = duration;
+  }
+
+  if (width) {
+    params["width"] = width;
+  }
+
+  if (height) {
+    params["height"] = height;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendVideo", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendAnimation_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    int32_t duration,
+    int32_t width,
+    int32_t height,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (duration) {
+    params["duration"] = duration;
+  }
+
+  if (width) {
+    params["width"] = width;
+  }
+
+  if (height) {
+    params["height"] = height;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendAnimation", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendVoice_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    int32_t duration,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (duration) {
+    params["duration"] = duration;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendVoice", params, input_files).at("result"));
+}
+
+MessagePtr Bot::SendVideoNote_(
+    Json params,
+    const InputFilesList& input_files,
+    const std::string& caption,
+    bool disable_notification,
+    int32_t reply_to_message_id,
+    bool allow_sending_without_reply,
+    int32_t duration,
+    int32_t length,
+    const std::string& parse_mode,
+    const std::vector<MessageEntityPtr>& caption_entities,
+    const AbstractReplyMarkupPtr& reply_markup) {
+  if (!caption.empty()) {
+    params["caption"] = caption;
+  }
+
+  if (disable_notification) {
+    params["disable_notification"] = disable_notification;
+  }
+
+  if (reply_to_message_id) {
+    params["reply_to_message_id"] = reply_to_message_id;
+  }
+
+  if (allow_sending_without_reply) {
+    params["allow_sending_without_reply"] = allow_sending_without_reply;
+  }
+
+  if (duration) {
+    params["duration"] = duration;
+  }
+
+  if (length) {
+    params["length"] = length;
+  }
+
+  if (!parse_mode.empty()) {
+    params["parse_mode"] = parse_mode;
+  }
+
+  for (const auto& caption_entity : caption_entities) {
+    params["caption_entities"].push_back(caption_entity->ToJson());
+  }
+
+  if (reply_markup) {
+    params["reply_markup"] = reply_markup->ToJson();
+  }
+
+  return std::make_shared<Message>(
+      Request("sendAnimation", params, input_files).at("result"));
 }
 
 }  // namespace SQBot

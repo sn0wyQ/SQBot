@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <utility>
 
 #include "../Utils/utils.h"
 
@@ -17,21 +18,31 @@ class InputFile {
   // Constructs InputFile holding data from selected file.
   // file_name is set to file name of file ("/path/to/file.jpg" -> "file.jpg")
   explicit InputFile(const std::filesystem::path& path_to_file);
+  InputFile(std::string data, std::string mime_type, std::string file_name);
 
-  // returns data in base64 encoded string
+  // Returns data
   std::string GetData() const;
 
-  // returns pointer to base64 encoded data
+  // Returns pointer to data
   const char* GetDataPtr() const;
 
-  // returns size of base64 encoded data in bytes
+  // Returns size of data in bytes
   size_t GetSize() const;
 
-  // return MIME type of file
+  // Return MIME type of file
   std::string GetMimeType() const;
 
-  // returns file name
+  // Returns file name
   std::string GetFileName() const;
+
+  // Sets data
+  void SetData(std::string data);
+
+  // Sets MIME type
+  void SetMimeType(std::string mime_type);
+
+  // Sets file name
+  void SetFileName(std::string file_name);
 
  private:
   std::string data_;
