@@ -585,7 +585,7 @@ MessagePtr Bot::SendVoice_(
     params["parse_mode"] = parse_mode;
   }
 
-  for (const auto& caption_entity: caption_entities) {
+  for (const auto& caption_entity : caption_entities) {
     params["caption_entities"].push_back(caption_entity->ToJson());
   }
 
