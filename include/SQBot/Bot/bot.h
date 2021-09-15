@@ -14,12 +14,18 @@
 #include "curl/curl.h"
 #include "../../nlohmann/json.h"
 
-#include "../API/Chat/chat.h"
-#include "../API/MessageEntity/message_entity.h"
-#include "../API/MessageId/message_id.h"
-#include "../API/Message/message.h"
-#include "../API/Update/update.h"
-#include "../API/User/user.h"
+#include "../API/animation.h"
+#include "../API/audio.h"
+#include "../API/chat.h"
+#include "../API/message_entity.h"
+#include "../API/message_id.h"
+#include "../API/message.h"
+#include "../API/photo_size.h"
+#include "../API/update.h"
+#include "../API/user.h"
+#include "../API/video.h"
+#include "../API/video_note.h"
+#include "../API/voice.h"
 
 #include "../AbstractReplyMarkup/abstract_reply_markup.h"
 #include "../Exception/exception.h"
@@ -410,7 +416,7 @@ class Bot {
     InputFilesList input_files;
     if constexpr (std::is_same_v<AnimationType, InputFile>) {
       input_files.push_back(std::make_pair("animation", animation));
-    } else if constexpr (std::is_same_v<AnimationType, Video>) {
+    } else if constexpr (std::is_same_v<AnimationType, Animation>) {
       params["animation"] = animation.file_id;
     } else {
       params["animation"] = animation;
@@ -463,7 +469,7 @@ class Bot {
     InputFilesList input_files;
     if constexpr (std::is_same_v<VoiceType, InputFile>) {
       input_files.push_back(std::make_pair("voice", voice));
-    } else if constexpr (std::is_same_v<VoiceType, Video>) {
+    } else if constexpr (std::is_same_v<VoiceType, Voice>) {
       params["voice"] = voice.file_id;
     } else {
       params["voice"] = voice;
@@ -514,7 +520,7 @@ class Bot {
     InputFilesList input_files;
     if constexpr (std::is_same_v<VideoNoteType, InputFile>) {
       input_files.push_back(std::make_pair("video_note", video_note));
-    } else if constexpr (std::is_same_v<VideoNoteType, Video>) {
+    } else if constexpr (std::is_same_v<VideoNoteType, VideoNote>) {
       params["video_note"] = video_note.file_id;
     } else {
       params["video_note"] = video_note;
@@ -538,10 +544,6 @@ class Bot {
   }
 
  protected:
-  // This method is called every time when response from Telegram API has
-  // field "ok" set to false
-  virtual void HandleUnsuccessfulRequest(const Json& response) {}
-
   // This method is called for every new update received
   virtual void HandleUpdate(const std::shared_ptr<Update>& update);
 

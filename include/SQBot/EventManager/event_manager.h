@@ -8,16 +8,16 @@
 #include <unordered_map>
 #include <utility>
 
-#include "../API/CallbackQuery/callback_query.h"
-#include "../API/ChatMemberUpdated/chat_member_updated.h"
-#include "../API/ChosenInlineResult/chosen_inline_result.h"
-#include "../API/InlineQuery/inline_query.h"
-#include "../API/Message/message.h"
-#include "../API/PollAnswer/poll_answer.h"
-#include "../API/Poll/poll.h"
-#include "../API/PreCheckoutQuery/pre_checkout_query.h"
-#include "../API/ShippingQuery/shipping_query.h"
-#include "../API/Update/update.h"
+#include "../API/callback_query.h"
+#include "../API/chat_member_updated.h"
+#include "../API/chosen_inline_result.h"
+#include "../API/inline_query.h"
+#include "../API/message.h"
+#include "../API/poll_answer.h"
+#include "../API/poll.h"
+#include "../API/pre_checkout_query.h"
+#include "../API/shipping_query.h"
+#include "../API/update.h"
 
 #include "../Utils/utils.h"
 
