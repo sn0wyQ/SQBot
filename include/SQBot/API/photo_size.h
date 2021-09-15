@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
-#define INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
+#ifndef INCLUDE_SQBOT_API_PHOTO_SIZE_H_
+#define INCLUDE_SQBOT_API_PHOTO_SIZE_H_
 
 #include <memory>
 #include <string>
@@ -34,4 +34,4 @@ class PhotoSize {
 
 using PhotoSizePtr = std::shared_ptr<PhotoSize>;
 
-#endif  // INCLUDE_SQBOT_API_PHOTOSIZE_PHOTO_SIZE_H_
+#endif  // INCLUDE_SQBOT_API_PHOTO_SIZE_H_

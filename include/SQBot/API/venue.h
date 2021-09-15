@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_VENUE_VENUE_H_
-#define INCLUDE_SQBOT_API_VENUE_VENUE_H_
+#ifndef INCLUDE_SQBOT_API_VENUE_H_
+#define INCLUDE_SQBOT_API_VENUE_H_
 
 #include <memory>
 #include <string>
@@ -43,4 +43,4 @@ class Venue {
 
 using VenuePtr = std::shared_ptr<Venue>;
 
-#endif  // INCLUDE_SQBOT_API_VENUE_VENUE_H_
+#endif  // INCLUDE_SQBOT_API_VENUE_H_

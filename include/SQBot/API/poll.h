@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_POLL_POLL_H_
-#define INCLUDE_SQBOT_API_POLL_POLL_H_
+#ifndef INCLUDE_SQBOT_API_POLL_H_
+#define INCLUDE_SQBOT_API_POLL_H_
 
 #include <memory>
 #include <string>
@@ -65,4 +65,4 @@ class Poll {
 
 using PollPtr = std::shared_ptr<Poll>;
 
-#endif  // INCLUDE_SQBOT_API_POLL_POLL_H_
+#endif  // INCLUDE_SQBOT_API_POLL_H_

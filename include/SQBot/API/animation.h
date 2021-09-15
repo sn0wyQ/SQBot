@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_
-#define INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_
+#ifndef INCLUDE_SQBOT_API_ANIMATION_H_
+#define INCLUDE_SQBOT_API_ANIMATION_H_
 
 #include <memory>
 #include <string>
@@ -49,4 +49,4 @@ class Animation {
 
 using AnimationPtr = std::shared_ptr<Animation>;
 
-#endif  // INCLUDE_SQBOT_API_ANIMATION_ANIMATION_H_
+#endif  // INCLUDE_SQBOT_API_ANIMATION_H_

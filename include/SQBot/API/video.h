@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
-#define INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
+#ifndef INCLUDE_SQBOT_API_VIDEO_H_
+#define INCLUDE_SQBOT_API_VIDEO_H_
 
 #include <memory>
 #include <string>
@@ -48,4 +48,4 @@ class Video {
 
 using VideoPtr = std::shared_ptr<Video>;
 
-#endif  // INCLUDE_SQBOT_API_VIDEO_VIDEO_H_
+#endif  // INCLUDE_SQBOT_API_VIDEO_H_

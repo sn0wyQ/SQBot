@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_CALLBACKQUERY_CALLBACK_QUERY_H_
-#define INCLUDE_SQBOT_API_CALLBACKQUERY_CALLBACK_QUERY_H_
+#ifndef INCLUDE_SQBOT_API_CALLBACK_QUERY_H_
+#define INCLUDE_SQBOT_API_CALLBACK_QUERY_H_
 
 #include <memory>
 #include <string>
@@ -52,4 +52,4 @@ class CallbackQuery {
 
 using CallbackQueryPtr = std::shared_ptr<CallbackQuery>;
 
-#endif  // INCLUDE_SQBOT_API_CALLBACKQUERY_CALLBACK_QUERY_H_
+#endif  // INCLUDE_SQBOT_API_CALLBACK_QUERY_H_

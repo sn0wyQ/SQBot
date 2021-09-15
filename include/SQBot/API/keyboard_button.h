@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_KEYBOARDBUTTON_KEYBOARD_BUTTON_H_
-#define INCLUDE_SQBOT_API_KEYBOARDBUTTON_KEYBOARD_BUTTON_H_
+#ifndef INCLUDE_SQBOT_API_KEYBOARD_BUTTON_H_
+#define INCLUDE_SQBOT_API_KEYBOARD_BUTTON_H_
 
 #include <memory>
 #include <string>
@@ -42,4 +42,4 @@ class KeyboardButton {
 
 using KeyboardButtonPtr = std::shared_ptr<KeyboardButton>;
 
-#endif  // INCLUDE_SQBOT_API_KEYBOARDBUTTON_KEYBOARD_BUTTON_H_
+#endif  // INCLUDE_SQBOT_API_KEYBOARD_BUTTON_H_

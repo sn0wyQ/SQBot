@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_UPDATE_UPDATE_H_
-#define INCLUDE_SQBOT_API_UPDATE_UPDATE_H_
+#ifndef INCLUDE_SQBOT_API_UPDATE_H_
+#define INCLUDE_SQBOT_API_UPDATE_H_
 
 #include <memory>
 
@@ -85,4 +85,4 @@ class Update {
 
 using UpdatePtr = std::shared_ptr<Update>;
 
-#endif  // INCLUDE_SQBOT_API_UPDATE_UPDATE_H_
+#endif  // INCLUDE_SQBOT_API_UPDATE_H_

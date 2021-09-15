@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
-#define INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
+#ifndef INCLUDE_SQBOT_API_ORDER_INFO_H_
+#define INCLUDE_SQBOT_API_ORDER_INFO_H_
 
 #include <memory>
 #include <string>
@@ -31,4 +31,4 @@ class OrderInfo {
 
 using OrderInfoPtr = std::shared_ptr<OrderInfo>;
 
-#endif  // INCLUDE_SQBOT_API_ORDERINFO_ORDER_INFO_H_
+#endif  // INCLUDE_SQBOT_API_ORDER_INFO_H_

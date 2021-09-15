@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_STICKER_STICKER_H_
-#define INCLUDE_SQBOT_API_STICKER_STICKER_H_
+#ifndef INCLUDE_SQBOT_API_STICKER_H_
+#define INCLUDE_SQBOT_API_STICKER_H_
 
 #include <memory>
 #include <string>
@@ -52,4 +52,4 @@ class Sticker {
 
 using StickerPtr = std::shared_ptr<Sticker>;
 
-#endif  // INCLUDE_SQBOT_API_STICKER_STICKER_H_
+#endif  // INCLUDE_SQBOT_API_STICKER_H_

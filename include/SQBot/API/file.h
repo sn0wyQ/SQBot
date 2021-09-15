@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_FILE_FILE_H_
-#define INCLUDE_SQBOT_API_FILE_FILE_H_
+#ifndef INCLUDE_SQBOT_API_FILE_H_
+#define INCLUDE_SQBOT_API_FILE_H_
 
 #include <memory>
 #include <string>
@@ -34,4 +34,4 @@ class File {
 
 using FilePtr = std::shared_ptr<File>;
 
-#endif  // INCLUDE_SQBOT_API_FILE_FILE_H_
+#endif  // INCLUDE_SQBOT_API_FILE_H_

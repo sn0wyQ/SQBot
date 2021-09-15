@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_CHAT_CHAT_H_
-#define INCLUDE_SQBOT_API_CHAT_CHAT_H_
+#ifndef INCLUDE_SQBOT_API_CHAT_H_
+#define INCLUDE_SQBOT_API_CHAT_H_
 
 #include <memory>
 #include <string>
@@ -91,4 +91,4 @@ class Chat {
 
 using ChatPtr = std::shared_ptr<Chat>;
 
-#endif  // INCLUDE_SQBOT_API_CHAT_CHAT_H_
+#endif  // INCLUDE_SQBOT_API_CHAT_H_

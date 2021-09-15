@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
-#define INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
+#ifndef INCLUDE_SQBOT_API_MASK_POSITION_H_
+#define INCLUDE_SQBOT_API_MASK_POSITION_H_
 
 #include <memory>
 #include <string>
@@ -35,4 +35,4 @@ class MaskPosition {
 
 using MaskPositionPtr = std::shared_ptr<MaskPosition>;
 
-#endif  // INCLUDE_SQBOT_API_MASKPOSITION_MASK_POSITION_H_
+#endif  // INCLUDE_SQBOT_API_MASK_POSITION_H_

@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
-#define INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
+#ifndef INCLUDE_SQBOT_API_POLL_OPTION_H_
+#define INCLUDE_SQBOT_API_POLL_OPTION_H_
 
 #include <memory>
 #include <string>
@@ -23,4 +23,4 @@ class PollOption {
 
 using PollOptionPtr = std::shared_ptr<PollOption>;
 
-#endif  // INCLUDE_SQBOT_API_POLLOPTION_POLL_OPTION_H_
+#endif  // INCLUDE_SQBOT_API_POLL_OPTION_H_

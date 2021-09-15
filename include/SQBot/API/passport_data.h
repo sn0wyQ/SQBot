@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
-#define INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
+#ifndef INCLUDE_SQBOT_API_PASSPORT_DATA_H_
+#define INCLUDE_SQBOT_API_PASSPORT_DATA_H_
 
 #include <memory>
 #include <vector>
@@ -28,4 +28,4 @@ class PassportData {
 
 using PassportDataPtr = std::shared_ptr<PassportData>;
 
-#endif  // INCLUDE_SQBOT_API_PASSPORTDATA_PASSPORT_DATA_H_
+#endif  // INCLUDE_SQBOT_API_PASSPORT_DATA_H_

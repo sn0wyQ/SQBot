@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_USER_USER_H_
-#define INCLUDE_SQBOT_API_USER_USER_H_
+#ifndef INCLUDE_SQBOT_API_USER_H_
+#define INCLUDE_SQBOT_API_USER_H_
 
 #include <memory>
 #include <string>
@@ -47,4 +47,4 @@ class User {
 
 using UserPtr = std::shared_ptr<User>;
 
-#endif  // INCLUDE_SQBOT_API_USER_USER_H_
+#endif  // INCLUDE_SQBOT_API_USER_H_

@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
-#define INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
+#ifndef INCLUDE_SQBOT_API_MESSAGE_ENTITY_H_
+#define INCLUDE_SQBOT_API_MESSAGE_ENTITY_H_
 
 #include <memory>
 #include <string>
@@ -55,4 +55,4 @@ class MessageEntity {
 
 using MessageEntityPtr = std::shared_ptr<MessageEntity>;
 
-#endif  // INCLUDE_SQBOT_API_MESSAGEENTITY_MESSAGE_ENTITY_H_
+#endif  // INCLUDE_SQBOT_API_MESSAGE_ENTITY_H_

@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
-#define INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
+#ifndef INCLUDE_SQBOT_API_CHAT_PHOTO_H_
+#define INCLUDE_SQBOT_API_CHAT_PHOTO_H_
 
 #include <memory>
 #include <string>
@@ -37,4 +37,4 @@ class ChatPhoto {
 
 using ChatPhotoPtr = std::shared_ptr<ChatPhoto>;
 
-#endif  // INCLUDE_SQBOT_API_CHATPHOTO_CHAT_PHOTO_H_
+#endif  // INCLUDE_SQBOT_API_CHAT_PHOTO_H_

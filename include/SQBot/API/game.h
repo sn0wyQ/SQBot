@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_GAME_GAME_H_
-#define INCLUDE_SQBOT_API_GAME_GAME_H_
+#ifndef INCLUDE_SQBOT_API_GAME_H_
+#define INCLUDE_SQBOT_API_GAME_H_
 
 #include <memory>
 #include <string>
@@ -46,4 +46,4 @@ class Game {
 
 using GamePtr = std::shared_ptr<Game>;
 
-#endif  // INCLUDE_SQBOT_API_GAME_GAME_H_
+#endif  // INCLUDE_SQBOT_API_GAME_H_

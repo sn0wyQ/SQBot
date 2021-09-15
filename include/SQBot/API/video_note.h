@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
-#define INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
+#ifndef INCLUDE_SQBOT_API_VIDEO_NOTE_H_
+#define INCLUDE_SQBOT_API_VIDEO_NOTE_H_
 
 #include <memory>
 #include <string>
@@ -40,4 +40,4 @@ class VideoNote {
 
 using VideoNotePtr = std::shared_ptr<VideoNote>;
 
-#endif  // INCLUDE_SQBOT_API_VIDEONOTE_VIDEO_NOTE_H_
+#endif  // INCLUDE_SQBOT_API_VIDEO_NOTE_H_

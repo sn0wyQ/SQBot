@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_MESSAGEID_MESSAGE_ID_H_
-#define INCLUDE_SQBOT_API_MESSAGEID_MESSAGE_ID_H_
+#ifndef INCLUDE_SQBOT_API_MESSAGE_ID_H_
+#define INCLUDE_SQBOT_API_MESSAGE_ID_H_
 
 #include <memory>
 
@@ -19,4 +19,4 @@ class MessageId {
 
 using MessageIdPtr = std::shared_ptr<MessageId>;
 
-#endif  // INCLUDE_SQBOT_API_MESSAGEID_MESSAGE_ID_H_
+#endif  // INCLUDE_SQBOT_API_MESSAGE_ID_H_

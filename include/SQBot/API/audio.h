@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_AUDIO_AUDIO_H_
-#define INCLUDE_SQBOT_API_AUDIO_AUDIO_H_
+#ifndef INCLUDE_SQBOT_API_AUDIO_H_
+#define INCLUDE_SQBOT_API_AUDIO_H_
 
 #include <memory>
 #include <string>
@@ -49,4 +49,4 @@ class Audio {
 
 using AudioPtr = std::shared_ptr<Audio>;
 
-#endif  // INCLUDE_SQBOT_API_AUDIO_AUDIO_H_
+#endif  // INCLUDE_SQBOT_API_AUDIO_H_

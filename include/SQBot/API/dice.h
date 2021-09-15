@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_DICE_DICE_H_
-#define INCLUDE_SQBOT_API_DICE_DICE_H_
+#ifndef INCLUDE_SQBOT_API_DICE_H_
+#define INCLUDE_SQBOT_API_DICE_H_
 
 #include <memory>
 #include <string>
@@ -24,4 +24,4 @@ class Dice {
 
 using DicePtr = std::shared_ptr<Dice>;
 
-#endif  // INCLUDE_SQBOT_API_DICE_DICE_H_
+#endif  // INCLUDE_SQBOT_API_DICE_H_

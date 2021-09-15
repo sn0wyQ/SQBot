@@ -12,7 +12,7 @@ void Echo(SQBot::Bot* bot, const MessagePtr& message) {
 }
 
 int main() {
-  SQBot::Bot bot("1288397319:AAGmh9zKELzzq9QAHfc3eRtBfNBt_ugT9-0");
+  SQBot::Bot bot("YOUR_TOKEN_HERE");
 
   auto info = bot.GetMe();
   std::cout << "Bot ID: " << info->id << std::endl;

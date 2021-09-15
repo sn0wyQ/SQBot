@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
-#define INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
+#ifndef INCLUDE_SQBOT_API_CONTACT_H_
+#define INCLUDE_SQBOT_API_CONTACT_H_
 
 #include <memory>
 #include <string>
@@ -27,4 +27,4 @@ class Contact {
 
 using ContactPtr = std::shared_ptr<Contact>;
 
-#endif  // INCLUDE_SQBOT_API_CONTACT_CONTACT_H_
+#endif  // INCLUDE_SQBOT_API_CONTACT_H_

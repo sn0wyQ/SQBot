@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
-#define INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
+#ifndef INCLUDE_SQBOT_API_DOCUMENT_H_
+#define INCLUDE_SQBOT_API_DOCUMENT_H_
 
 #include <memory>
 #include <string>
@@ -40,4 +40,4 @@ class Document {
 
 using DocumentPtr = std::shared_ptr<Document>;
 
-#endif  // INCLUDE_SQBOT_API_DOCUMENT_DOCUMENT_H_
+#endif  // INCLUDE_SQBOT_API_DOCUMENT_H_

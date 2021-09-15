@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_REPLYKEYBOARDMARKUP_REPLY_KEYBOARD_MARKUP_H_
-#define INCLUDE_SQBOT_API_REPLYKEYBOARDMARKUP_REPLY_KEYBOARD_MARKUP_H_
+#ifndef INCLUDE_SQBOT_API_REPLY_KEYBOARD_MARKUP_H_
+#define INCLUDE_SQBOT_API_REPLY_KEYBOARD_MARKUP_H_
 
 #include <memory>
 #include <string>
@@ -55,4 +55,4 @@ class ReplyKeyboardMarkup : public AbstractReplyMarkup {
 
 using ReplyKeyboardMarkupPtr = std::shared_ptr<ReplyKeyboardMarkup>;
 
-#endif  // INCLUDE_SQBOT_API_REPLYKEYBOARDMARKUP_REPLY_KEYBOARD_MARKUP_H_
+#endif  // INCLUDE_SQBOT_API_REPLY_KEYBOARD_MARKUP_H_

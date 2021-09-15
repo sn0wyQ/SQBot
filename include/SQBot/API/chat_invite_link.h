@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_
-#define INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_
+#ifndef INCLUDE_SQBOT_API_CHAT_INVITE_LINK_H_
+#define INCLUDE_SQBOT_API_CHAT_INVITE_LINK_H_
 
 #include <memory>
 #include <string>
@@ -40,4 +40,4 @@ class ChatInviteLink {
 
 using ChatInviteLinkPtr = std::shared_ptr<ChatInviteLink>;
 
-#endif  // INCLUDE_SQBOT_API_CHATINVITELINK_CHAT_INVITE_LINK_H_
+#endif  // INCLUDE_SQBOT_API_CHAT_INVITE_LINK_H_

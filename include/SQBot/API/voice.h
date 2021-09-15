@@ -1,5 +1,5 @@
-#ifndef INCLUDE_SQBOT_API_VOICE_VOICE_H_
-#define INCLUDE_SQBOT_API_VOICE_VOICE_H_
+#ifndef INCLUDE_SQBOT_API_VOICE_H_
+#define INCLUDE_SQBOT_API_VOICE_H_
 
 #include <memory>
 #include <string>
@@ -34,4 +34,4 @@ class Voice {
 
 using VoicePtr = std::shared_ptr<Voice>;
 
-#endif  // INCLUDE_SQBOT_API_VOICE_VOICE_H_
+#endif  // INCLUDE_SQBOT_API_VOICE_H_
