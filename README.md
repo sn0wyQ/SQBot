@@ -1,3 +1,4 @@
+[![CI Checks](https://github.com/sn0wyQ/SQBot/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/sn0wyQ/SQBot/actions/workflows/ci.yml)
 # SQBot
 C++20 Library for Telegram Bot API
 
